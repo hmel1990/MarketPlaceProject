@@ -23,7 +23,7 @@ namespace Market_try
                 return;
             }
 
-            // Заполняем массив данными из файла
+            // Заполняем массив данными из файла (i = 1 т.к. первая строка в тхт файле это шапка таблицы)
             for (int i = 1; i<lines.Length; i++)
             {
                 goods.Add(new Goods(lines[i]));

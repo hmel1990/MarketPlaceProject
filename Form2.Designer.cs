@@ -49,7 +49,7 @@
             dataGridView1.Location = new Point(127, 147);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 82;
-            dataGridView1.Size = new Size(1738, 662);
+            dataGridView1.Size = new Size(1122, 662);
             dataGridView1.TabIndex = 1;
             // 
             // Form2
@@ -61,6 +61,7 @@
             Controls.Add(backToForm1);
             Name = "Form2";
             Text = "Form2";
+            Load += Form2_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }

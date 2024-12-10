@@ -19,15 +19,19 @@ namespace FormMarket
         {
             InitializeComponent();
         }
-        private void Form2_Load (object sender, EventArgs e)
+         private void Form2_Load(object sender, EventArgs e)
         {
             Shop shop = new Shop();
+
             DataTable table = new DataTable();
+
+
             table.Columns.Add("Brand", typeof(string));
             table.Columns.Add("Model", typeof(string));
             table.Columns.Add("Submodel", typeof(string));
             table.Columns.Add("Memory", typeof(int));
             table.Columns.Add("Quantity", typeof(int));
+
 
             shop.goodsToShop();
 
@@ -38,7 +42,6 @@ namespace FormMarket
 
             dataGridView1.DataSource = table;
         }
-
         private void buttonBack_Click(object sender, EventArgs e)
         {
             // Создаем экземпляр первой формы
@@ -50,5 +53,7 @@ namespace FormMarket
             // Закрываем текущую форму
             this.Close();
         }
+
+
     }
 }

@@ -1,0 +1,4 @@
+Brand	Model	Submodel	Memory	Quantity
+Samsung	Galaxy	Flip	124	4
+Apple	Iphone	ProMax	256	20
+Xiaomi	Redmi	Note	500	16

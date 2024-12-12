@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 
 using Market_try;
+using static System.Windows.Forms.DataFormats;
 
 namespace FormMarket
 {
@@ -44,14 +45,9 @@ namespace FormMarket
         }
         private void buttonBack_Click(object sender, EventArgs e)
         {
-            // Создаем экземпляр первой формы
-            Form1 form1 = new Form1();
 
-            // Показываем первую форму
-            form1.Show();
-
-            // Закрываем текущую форму
             this.Close();
+
         }
 
 

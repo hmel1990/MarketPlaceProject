@@ -15,23 +15,50 @@ namespace FormMarket
 {
     public partial class Form1 : Form
     {
+        private User user;
         public Form1()
         {
             InitializeComponent();
+            user = new User();
+
+        }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void buttonSwitch_Click(object sender, EventArgs e)
         {
-            // Создаем экземпляр второй формы
-            Form2 form2 = new Form2();
+            if (user.logPas.id != 0)
+            {
 
-            // Показываем вторую форму
-            form2.Show();
+                // Создаем экземпляр второй формы
+                Form2 form2 = new Form2();
+                form2.Show();
+            }
+            else 
+            {
+                MessageBox.Show("You are not authorized");
 
-            // Скрываем текущую форму (или закрываем, если нужно)
-            this.Hide();
+            }
+
         }
 
+        private void loginbutton_Click(object sender, EventArgs e)
+        {
+            string loginUser = loginField.Text;
+            string passwordUser = passwordField.Text;
+            //User user = new User();
+
+            if (user.Autorithation(loginUser, passwordUser))
+            {
+                MessageBox.Show("Ok!!");
+            }
+            else
+            {
+                MessageBox.Show("Not Ok!!");
+            }
+        }
 
 
     }

@@ -35,16 +35,18 @@
             // 
             // backToForm1
             // 
+            backToForm1.BackColor = Color.Goldenrod;
             backToForm1.Location = new Point(127, 74);
             backToForm1.Name = "backToForm1";
             backToForm1.Size = new Size(262, 46);
             backToForm1.TabIndex = 0;
             backToForm1.Text = "Back to main";
-            backToForm1.UseVisualStyleBackColor = true;
+            backToForm1.UseVisualStyleBackColor = false;
             backToForm1.Click += buttonBack_Click;
             // 
             // dataGridView1
             // 
+            dataGridView1.BackgroundColor = Color.Salmon;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(127, 147);
             dataGridView1.Name = "dataGridView1";
@@ -56,10 +58,13 @@
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1956, 870);
+            BackColor = Color.Salmon;
+            ClientSize = new Size(1974, 929);
             Controls.Add(dataGridView1);
             Controls.Add(backToForm1);
+            ForeColor = SystemColors.HotTrack;
             Name = "Form2";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form2";
             Load += Form2_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();

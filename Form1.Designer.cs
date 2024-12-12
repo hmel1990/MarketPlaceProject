@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             toForm2 = new Button();
+            loginField = new TextBox();
+            passwordField = new TextBox();
+            loginbutton = new Button();
             SuspendLayout();
             // 
             // toForm2
@@ -41,19 +44,53 @@
             toForm2.UseVisualStyleBackColor = true;
             toForm2.Click += buttonSwitch_Click;
             // 
+            // loginField
+            // 
+            loginField.Location = new Point(491, 81);
+            loginField.Name = "loginField";
+            loginField.Size = new Size(728, 39);
+            loginField.TabIndex = 1;
+            // 
+            // passwordField
+            // 
+            passwordField.Location = new Point(491, 219);
+            passwordField.Name = "passwordField";
+            passwordField.Size = new Size(728, 39);
+            passwordField.TabIndex = 1;
+            // 
+            // loginbutton
+            // 
+            loginbutton.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            loginbutton.Location = new Point(721, 323);
+            loginbutton.Name = "loginbutton";
+            loginbutton.Size = new Size(288, 46);
+            loginbutton.TabIndex = 2;
+            loginbutton.Text = "LogIn";
+            loginbutton.UseVisualStyleBackColor = true;
+            loginbutton.Click += loginbutton_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1974, 929);
+            Controls.Add(loginbutton);
+            Controls.Add(passwordField);
+            Controls.Add(loginField);
             Controls.Add(toForm2);
             Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
+            Load += Form1_Load;
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private Button toForm2;
+        private TextBox loginField;
+        private TextBox passwordField;
+        private Button loginbutton;
     }
 }

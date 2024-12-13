@@ -32,6 +32,9 @@
             loginField = new TextBox();
             passwordField = new TextBox();
             loginbutton = new Button();
+            dataGridView1 = new DataGridView();
+            buttonToBuy = new Button();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // toForm2
@@ -69,11 +72,32 @@
             loginbutton.UseVisualStyleBackColor = true;
             loginbutton.Click += loginbutton_Click;
             // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(381, 81);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 82;
+            dataGridView1.Size = new Size(1036, 514);
+            dataGridView1.TabIndex = 3;
+            // 
+            // buttonToBuy
+            // 
+            buttonToBuy.Location = new Point(85, 167);
+            buttonToBuy.Name = "buttonToBuy";
+            buttonToBuy.Size = new Size(233, 46);
+            buttonToBuy.TabIndex = 4;
+            buttonToBuy.Text = "buy";
+            buttonToBuy.UseVisualStyleBackColor = true;
+            buttonToBuy.Click += buttonToBuy_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1974, 929);
+            Controls.Add(buttonToBuy);
+            Controls.Add(dataGridView1);
             Controls.Add(loginbutton);
             Controls.Add(passwordField);
             Controls.Add(loginField);
@@ -82,6 +106,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             Load += Form1_Load;
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -92,5 +117,7 @@
         private TextBox loginField;
         private TextBox passwordField;
         private Button loginbutton;
+        private DataGridView dataGridView1;
+        private Button buttonToBuy;
     }
 }

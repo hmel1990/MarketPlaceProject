@@ -73,11 +73,11 @@ namespace Market_try
             }
                 return false;
         }
-        /*
-          public bool сheckOut()
+        
+          public bool сheckOut(string x, string y)
         {
-            loginSetter();
-            passwordSetter();
+            loginSetter(x);
+            passwordSetter(y);
 
             foreach (LoginPassword lp in data)
             {
@@ -92,23 +92,26 @@ namespace Market_try
             return true;
         }
 
-        public void Registration()
+        public bool Registration(string x, string y)
         {
-            while (!сheckOut()) 
-            {
-                Console.WriteLine("Попробуйте снова.");
-            }
- 
+            //while (!сheckOut(x,y)) 
+            //{
+            //    Console.WriteLine("Попробуйте снова.");
+            //}
 
-             data.Add(new LoginPassword());
-             logPas.id = data.Count();
-             data[(data.Count() - 1)].id = data.Count();
-             data[(data.Count() - 1)].login = logPas.login;
-             data[(data.Count() - 1)].password = logPas.password;
-             File.AppendAllText("loginPassword.txt", logPas.id + "\t" + logPas.login + "\t" + logPas.password + "\n");
-                
+            if (сheckOut(x, y))
+            {
+                data.Add(new LoginPassword()); // добавляем в список еще один объект
+                logPas.id = data.Count(); // устанавливаем id по количеству строк в массиве (нулевая строка єто шапка)
+                data[(data.Count() - 1)].id = data.Count();            //заполняем новый объект в массиве
+                data[(data.Count() - 1)].login = logPas.login;         //заполняем новый объект в массиве
+                data[(data.Count() - 1)].password = logPas.password;   //заполняем новый объект в массиве
+                File.AppendAllText("loginPassword.txt", logPas.id + "\t" + logPas.login + "\t" + logPas.password + "\n"); //записываем строку с новым пользователев в тхт файл
+                return true;
+            }
+            else {return false; }
         }
-         */
+         
        
 
     }

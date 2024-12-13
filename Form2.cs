@@ -22,26 +22,27 @@ namespace FormMarket
         }
          private void Form2_Load(object sender, EventArgs e)
         {
-            Shop shop = new Shop();
 
-            DataTable table = new DataTable();
+            //Shop shop = new Shop();
 
-
-            table.Columns.Add("Brand", typeof(string));
-            table.Columns.Add("Model", typeof(string));
-            table.Columns.Add("Submodel", typeof(string));
-            table.Columns.Add("Memory", typeof(int));
-            table.Columns.Add("Quantity", typeof(int));
+            //DataTable table = new DataTable();
 
 
-            shop.goodsToShop();
+            //table.Columns.Add("Brand", typeof(string));
+            //table.Columns.Add("Model", typeof(string));
+            //table.Columns.Add("Submodel", typeof(string));
+            //table.Columns.Add("Memory", typeof(int));
+            //table.Columns.Add("Quantity", typeof(int));
 
-            for (int i = 0; i < shop.goods.Count; i++)
-            {
-                table.Rows.Add(shop.goods[i].Brand, shop.goods[i].Model, shop.goods[i].Submodel, shop.goods[i].Memory, shop.goods[i].Quantity);
-            }
 
-            dataGridView1.DataSource = table;
+            //shop.goodsToShop();
+
+            //for (int i = 0; i < shop.goods.Count; i++)
+            //{
+            //    table.Rows.Add(shop.goods[i].Brand, shop.goods[i].Model, shop.goods[i].Submodel, shop.goods[i].Memory, shop.goods[i].Quantity);
+            //}
+
+            //dataGridView1.DataSource = table;
         }
         private void buttonBack_Click(object sender, EventArgs e)
         {

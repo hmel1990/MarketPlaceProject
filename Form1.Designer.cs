@@ -34,6 +34,7 @@
             loginbutton = new Button();
             dataGridView1 = new DataGridView();
             buttonToBuy = new Button();
+            RegistrationButton = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -64,7 +65,7 @@
             // loginbutton
             // 
             loginbutton.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            loginbutton.Location = new Point(721, 323);
+            loginbutton.Location = new Point(491, 331);
             loginbutton.Name = "loginbutton";
             loginbutton.Size = new Size(288, 46);
             loginbutton.TabIndex = 2;
@@ -75,7 +76,7 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(381, 81);
+            dataGridView1.Location = new Point(359, 81);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 82;
             dataGridView1.Size = new Size(1036, 514);
@@ -91,13 +92,25 @@
             buttonToBuy.UseVisualStyleBackColor = true;
             buttonToBuy.Click += buttonToBuy_Click;
             // 
+            // RegistrationButton
+            // 
+            RegistrationButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            RegistrationButton.Location = new Point(931, 331);
+            RegistrationButton.Name = "RegistrationButton";
+            RegistrationButton.Size = new Size(288, 46);
+            RegistrationButton.TabIndex = 2;
+            RegistrationButton.Text = "Registration";
+            RegistrationButton.UseVisualStyleBackColor = true;
+            RegistrationButton.Click += RegistrationButton_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1974, 929);
+            ClientSize = new Size(2396, 1107);
             Controls.Add(buttonToBuy);
             Controls.Add(dataGridView1);
+            Controls.Add(RegistrationButton);
             Controls.Add(loginbutton);
             Controls.Add(passwordField);
             Controls.Add(loginField);
@@ -119,5 +132,6 @@
         private Button loginbutton;
         private DataGridView dataGridView1;
         private Button buttonToBuy;
+        private Button RegistrationButton;
     }
 }

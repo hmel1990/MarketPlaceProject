@@ -84,7 +84,7 @@ namespace Market_try
 
                 if (lp.login == logPas.login && lp.password == logPas.password)
                 {
-                    Console.WriteLine("Такой Логин или Пароль уже существуют");
+                    //Console.WriteLine("Такой Логин или Пароль уже существуют");
                     return false;
                 }
 

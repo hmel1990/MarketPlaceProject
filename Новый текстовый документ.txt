@@ -1,0 +1,44 @@
+private void Form1_Load(object sender, EventArgs e)
+{
+    // Инициализация магазина
+    Shop shop = new Shop();
+    shop.goodsToShop();
+
+    // Создание таблицы
+    DataTable table = new DataTable();
+    table.Columns.Add("Brand", typeof(string));
+    table.Columns.Add("Model", typeof(string));
+    table.Columns.Add("Submodel", typeof(string));
+    table.Columns.Add("Memory", typeof(int));
+    table.Columns.Add("Quantity", typeof(int));
+
+    // Заполнение таблицы
+    foreach (var good in shop.goods)
+    {
+        table.Rows.Add(good.Brand, good.Model, good.Submodel, good.Memory, good.Quantity);
+    }
+
+    // Привязка данных к DataGridView
+    dataGridView1.DataSource = table;
+
+    // Инициализация ComboBox уникальными значениями брендов
+    var brands = shop.goods.Select(g => g.Brand).Distinct().ToList();
+    comboBoxFilter.Items.AddRange(brands.ToArray());
+    comboBoxFilter.SelectedIndex = 0; // Установить первый элемент выбранным
+}
+
+private void comboBoxFilter_SelectedIndexChanged(object sender, EventArgs e)
+{
+    // Получить выбранное значение
+    string selectedBrand = comboBoxFilter.SelectedItem.ToString();
+
+    // Преобразовать источник данных обратно в DataTable
+    DataTable table = (DataTable)dataGridView1.DataSource;
+
+    // Фильтрация строк
+    DataView view = table.DefaultView;
+    view.RowFilter = $"Brand = '{selectedBrand}'";
+
+    // Привязка отфильтрованных данных обратно к DataGridView
+    dataGridView1.DataSource = view;
+}

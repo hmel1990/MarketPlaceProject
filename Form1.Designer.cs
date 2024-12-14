@@ -35,6 +35,10 @@
             dataGridView1 = new DataGridView();
             buttonToBuy = new Button();
             RegistrationButton = new Button();
+            comboBoxFilter = new ComboBox();
+            buttonSearch = new Button();
+            textBoxSearch = new TextBox();
+            ResetButton = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -103,11 +107,52 @@
             RegistrationButton.UseVisualStyleBackColor = true;
             RegistrationButton.Click += RegistrationButton_Click;
             // 
+            // comboBoxFilter
+            // 
+            comboBoxFilter.FormattingEnabled = true;
+            comboBoxFilter.Location = new Point(85, 247);
+            comboBoxFilter.Name = "comboBoxFilter";
+            comboBoxFilter.Size = new Size(242, 40);
+            comboBoxFilter.TabIndex = 5;
+            comboBoxFilter.SelectedIndexChanged += comboBoxFilter_SelectedIndexChanged;
+            // 
+            // buttonSearch
+            // 
+            buttonSearch.Location = new Point(85, 417);
+            buttonSearch.Name = "buttonSearch";
+            buttonSearch.Size = new Size(233, 46);
+            buttonSearch.TabIndex = 4;
+            buttonSearch.Text = "Search";
+            buttonSearch.UseVisualStyleBackColor = true;
+            buttonSearch.Click += buttonSearch_Click;
+            // 
+            // textBoxSearch
+            // 
+            textBoxSearch.Location = new Point(45, 338);
+            textBoxSearch.Name = "textBoxSearch";
+            textBoxSearch.PlaceholderText = "Введите текст для поиска";
+            textBoxSearch.Size = new Size(299, 39);
+            textBoxSearch.TabIndex = 6;
+            // 
+            // ResetButton
+            // 
+            ResetButton.Location = new Point(85, 493);
+            ResetButton.Name = "ResetButton";
+            ResetButton.Size = new Size(233, 46);
+            ResetButton.TabIndex = 4;
+            ResetButton.Text = "Reset";
+            ResetButton.UseVisualStyleBackColor = true;
+            ResetButton.Click += ResetButton_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(2396, 1107);
+            Controls.Add(textBoxSearch);
+            Controls.Add(comboBoxFilter);
+            Controls.Add(ResetButton);
+            Controls.Add(buttonSearch);
             Controls.Add(buttonToBuy);
             Controls.Add(dataGridView1);
             Controls.Add(RegistrationButton);
@@ -133,5 +178,9 @@
         private DataGridView dataGridView1;
         private Button buttonToBuy;
         private Button RegistrationButton;
+        private ComboBox comboBoxFilter;
+        private Button buttonSearch;
+        private TextBox textBoxSearch;
+        private Button ResetButton;
     }
 }

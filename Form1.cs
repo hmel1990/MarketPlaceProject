@@ -47,16 +47,133 @@ namespace FormMarket
 
         private User user;
         private string cellValue;
+        private DataTable table;
         public Form1()
         {
             InitializeComponent();
             user = new User();// создаем объект User
 
             dataGridView1.Hide();// прячем таблицу которую разместили до этого в форме
+
+            // заполняем таблицу
+            Shop shop = new Shop();
+
+            table = new DataTable();
+
+
+            table.Columns.Add("Brand", typeof(string));
+            table.Columns.Add("Model", typeof(string));
+            table.Columns.Add("Submodel", typeof(string));
+            table.Columns.Add("Memory", typeof(int));
+            table.Columns.Add("Quantity", typeof(int));
+
+            // читаем из тхт файла и заполняем в список поля User каталог товаров
+            shop.goodsToShop();
+
+            // Заполнение таблицы
+            for (int i = 0; i < shop.goods.Count; i++)
+            {
+                table.Rows.Add(shop.goods[i].Brand, shop.goods[i].Model, shop.goods[i].Submodel, shop.goods[i].Memory, shop.goods[i].Quantity);
+            }
+
+            // Привязка данных к DataGridView
+            dataGridView1.DataSource = table;
+
+            // Инициализация ComboBox уникальными значениями брендов
+            comboBoxFilter.Items.Add("         "); // Добавить опцию для сброса фильтра
+            var brands = shop.goods.Select(g => g.Brand).Distinct().ToList();
+            comboBoxFilter.Items.AddRange(brands.ToArray());
+            comboBoxFilter.SelectedIndex = 0; // Установить первый элемент выбранным
+
+
         }
+
         private void Form1_Load(object sender, EventArgs e)
         {
         }
+
+        //==============================================================================================
+        private void comboBoxFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+
+            // Получить выбранное значение
+            string selectedBrand = comboBoxFilter.SelectedItem.ToString();
+
+            if (selectedBrand == "         ")
+            {
+                // Сбросить фильтр
+                DataView view = table.DefaultView;
+                view.RowFilter = string.Empty; // Удаляем фильтр
+                dataGridView1.DataSource = view; // Привязываем оригинальные данные
+            }
+            else
+            {
+                // Создать DataView из оригинальной таблицы
+                DataView view = table.DefaultView;
+                view.RowFilter = $"Brand = '{selectedBrand}'";
+
+                // Привязать отфильтрованные данные к DataGridView
+                dataGridView1.DataSource = view;
+            }
+        }
+        //==============================================================================================
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            // Получаем текст из текстового поля
+            string searchText = textBoxSearch.Text.Trim();
+
+            if (string.IsNullOrEmpty(searchText))
+            {
+                MessageBox.Show("Введите текст для поиска.");
+                return;
+            }
+
+            // Создаем DataView для фильтрации
+            DataView view = table.DefaultView;
+
+            // Формируем условие фильтрации
+            StringBuilder filter = new StringBuilder();
+
+            foreach (DataColumn column in table.Columns)
+            {
+                if (column.DataType == typeof(string))
+                {
+                    if (filter.Length > 0) filter.Append(" OR ");
+                    filter.Append($"{column.ColumnName} LIKE '%{searchText}%'");
+                }
+            }
+
+            // Проверяем, что фильтр сформирован
+            if (filter.Length == 0)
+            {
+                MessageBox.Show("Поиск возможен только по строковым столбцам.");
+                return;
+            }
+
+            // Применяем фильтр
+            try
+            {
+                view.RowFilter = filter.ToString();
+                dataGridView1.DataSource = view;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при поиске: {ex.Message}");
+            }
+        }
+
+        private void ResetButton_Click(object sender, EventArgs e)
+        {
+            // Сбросить фильтр
+            DataView view = table.DefaultView;
+            view.RowFilter = string.Empty; // Удаляем фильтр
+            dataGridView1.DataSource = view; // Привязываем оригинальные данные
+            textBoxSearch.Clear();
+        }
+
+        //==============================================================================================
 
         private void buttonSwitch_Click(object sender, EventArgs e)
         {
@@ -78,7 +195,7 @@ namespace FormMarket
             string loginUser = loginField.Text;
             string passwordUser = passwordField.Text;
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////
             if (user.Autorithation(loginUser, passwordUser))
             {
                 //MessageBox.Show("Ok!!");
@@ -90,33 +207,14 @@ namespace FormMarket
                 /////////////////////////////////////////////////////////////
                 dataGridView1.Show();   // показываем ранее созданую таблицу
 
-                Shop shop = new Shop();
 
-                DataTable table = new DataTable();
-
-
-                table.Columns.Add("Brand", typeof(string));
-                table.Columns.Add("Model", typeof(string));
-                table.Columns.Add("Submodel", typeof(string));
-                table.Columns.Add("Memory", typeof(int));
-                table.Columns.Add("Quantity", typeof(int));
-
-
-                shop.goodsToShop();
-
-                for (int i = 0; i < shop.goods.Count; i++)
-                {
-                    table.Rows.Add(shop.goods[i].Brand, shop.goods[i].Model, shop.goods[i].Submodel, shop.goods[i].Memory, shop.goods[i].Quantity);
-                }
-
-                dataGridView1.DataSource = table;
             }
             else
             {
                 MessageBox.Show("Not Ok!!");
             }
         }
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         private void RegistrationButton_Click(object sender, EventArgs e)
         {
@@ -133,33 +231,13 @@ namespace FormMarket
                 /////////////////////////////////////////////////////////////
                 dataGridView1.Show();   // показываем ранее созданую таблицу
 
-                Shop shop = new Shop();
-
-                DataTable table = new DataTable();
-
-
-                table.Columns.Add("Brand", typeof(string));
-                table.Columns.Add("Model", typeof(string));
-                table.Columns.Add("Submodel", typeof(string));
-                table.Columns.Add("Memory", typeof(int));
-                table.Columns.Add("Quantity", typeof(int));
-
-
-                shop.goodsToShop();
-
-                for (int i = 0; i < shop.goods.Count; i++)
-                {
-                    table.Rows.Add(shop.goods[i].Brand, shop.goods[i].Model, shop.goods[i].Submodel, shop.goods[i].Memory, shop.goods[i].Quantity);
-                }
-
-                dataGridView1.DataSource = table;
             }
             else
             {
                 MessageBox.Show("Такой Логин или Пароль уже существуют");
             }
         }
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         private void buttonToBuy_Click(object sender, EventArgs e)
         {
@@ -180,7 +258,9 @@ namespace FormMarket
                 MessageBox.Show("Пожалуйста, выберите строку.");
             }
         }
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     }

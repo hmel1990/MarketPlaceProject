@@ -39,6 +39,10 @@
             buttonSearch = new Button();
             textBoxSearch = new TextBox();
             ResetButton = new Button();
+            comboBoxSort = new ComboBox();
+            label1 = new Label();
+            label2 = new Label();
+            label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -54,14 +58,14 @@
             // 
             // loginField
             // 
-            loginField.Location = new Point(491, 81);
+            loginField.Location = new Point(657, 167);
             loginField.Name = "loginField";
             loginField.Size = new Size(728, 39);
             loginField.TabIndex = 1;
             // 
             // passwordField
             // 
-            passwordField.Location = new Point(491, 219);
+            passwordField.Location = new Point(657, 305);
             passwordField.Name = "passwordField";
             passwordField.Size = new Size(728, 39);
             passwordField.TabIndex = 1;
@@ -69,7 +73,7 @@
             // loginbutton
             // 
             loginbutton.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            loginbutton.Location = new Point(491, 331);
+            loginbutton.Location = new Point(657, 417);
             loginbutton.Name = "loginbutton";
             loginbutton.Size = new Size(288, 46);
             loginbutton.TabIndex = 2;
@@ -80,10 +84,10 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(359, 81);
+            dataGridView1.Location = new Point(427, 167);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 82;
-            dataGridView1.Size = new Size(1036, 514);
+            dataGridView1.Size = new Size(1712, 744);
             dataGridView1.TabIndex = 3;
             // 
             // buttonToBuy
@@ -99,7 +103,7 @@
             // RegistrationButton
             // 
             RegistrationButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            RegistrationButton.Location = new Point(931, 331);
+            RegistrationButton.Location = new Point(1097, 417);
             RegistrationButton.Name = "RegistrationButton";
             RegistrationButton.Size = new Size(288, 46);
             RegistrationButton.TabIndex = 2;
@@ -110,7 +114,7 @@
             // comboBoxFilter
             // 
             comboBoxFilter.FormattingEnabled = true;
-            comboBoxFilter.Location = new Point(85, 247);
+            comboBoxFilter.Location = new Point(80, 606);
             comboBoxFilter.Name = "comboBoxFilter";
             comboBoxFilter.Size = new Size(242, 40);
             comboBoxFilter.TabIndex = 5;
@@ -118,7 +122,7 @@
             // 
             // buttonSearch
             // 
-            buttonSearch.Location = new Point(85, 417);
+            buttonSearch.Location = new Point(96, 384);
             buttonSearch.Name = "buttonSearch";
             buttonSearch.Size = new Size(233, 46);
             buttonSearch.TabIndex = 4;
@@ -128,7 +132,7 @@
             // 
             // textBoxSearch
             // 
-            textBoxSearch.Location = new Point(45, 338);
+            textBoxSearch.Location = new Point(56, 305);
             textBoxSearch.Name = "textBoxSearch";
             textBoxSearch.PlaceholderText = "Введите текст для поиска";
             textBoxSearch.Size = new Size(299, 39);
@@ -136,7 +140,7 @@
             // 
             // ResetButton
             // 
-            ResetButton.Location = new Point(85, 493);
+            ResetButton.Location = new Point(96, 460);
             ResetButton.Name = "ResetButton";
             ResetButton.Size = new Size(233, 46);
             ResetButton.TabIndex = 4;
@@ -144,11 +148,51 @@
             ResetButton.UseVisualStyleBackColor = true;
             ResetButton.Click += ResetButton_Click;
             // 
+            // comboBoxSort
+            // 
+            comboBoxSort.FormattingEnabled = true;
+            comboBoxSort.Location = new Point(73, 798);
+            comboBoxSort.Name = "comboBoxSort";
+            comboBoxSort.Size = new Size(242, 40);
+            comboBoxSort.TabIndex = 7;
+            comboBoxSort.SelectedIndexChanged += ComboBoxSort_SelectedIndexChanged;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(123, 751);
+            label1.Name = "label1";
+            label1.Size = new Size(146, 32);
+            label1.TabIndex = 8;
+            label1.Text = "Сортировка";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(56, 571);
+            label2.Name = "label2";
+            label2.Size = new Size(295, 32);
+            label2.TabIndex = 8;
+            label2.Text = "Фильтр по имени бренда";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(60, 257);
+            label3.Name = "label3";
+            label3.Size = new Size(281, 32);
+            label3.TabIndex = 8;
+            label3.Text = "Поиск по содержимому";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(2396, 1107);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(comboBoxSort);
             Controls.Add(textBoxSearch);
             Controls.Add(comboBoxFilter);
             Controls.Add(ResetButton);
@@ -182,5 +226,9 @@
         private Button buttonSearch;
         private TextBox textBoxSearch;
         private Button ResetButton;
+        private ComboBox comboBoxSort;
+        private Label label1;
+        private Label label2;
+        private Label label3;
     }
 }

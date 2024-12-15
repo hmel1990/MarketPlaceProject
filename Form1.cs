@@ -15,33 +15,7 @@ namespace FormMarket
 {
     public partial class Form1 : Form
     {
-        /*
-         private void buttonToFiltrBrand_Click(object sender, EventArgs e)
-        {
-         dataGridView1.Hide();// прячем таблицу которую разместили до этого в форме
-         
-         string filtr_value = filtrValueField.Text; //текстбох для ввода фильтра
-
-         DataTable table2 = new DataTable();
-
-
-         table2.Columns.Add("Brand", typeof(string));
-                table.Columns.Add("Model", typeof(string));
-                table.Columns.Add("Submodel", typeof(string));
-                table.Columns.Add("Memory", typeof(int));
-                table.Columns.Add("Quantity", typeof(int));
-
-
-
-                for (int i = 0; i<shop.goods.Count; i++)
-                {
-                    if (shop.goods[i].Brand == filtr_value)
-                    table.Rows.Add(shop.goods[i].Brand, shop.goods[i].Model, shop.goods[i].Submodel, shop.goods[i].Memory, shop.goods[i].Quantity);
-                }
-
-        dataGridView2.DataSource = table;
-        }
-         */
+       
 
 
 
@@ -60,7 +34,7 @@ namespace FormMarket
 
             table = new DataTable();
 
-
+            //устанавливаем значение для заголовков столбцов
             table.Columns.Add("Brand", typeof(string));
             table.Columns.Add("Model", typeof(string));
             table.Columns.Add("Submodel", typeof(string));
@@ -79,12 +53,20 @@ namespace FormMarket
             // Привязка данных к DataGridView
             dataGridView1.DataSource = table;
 
-            // Инициализация ComboBox уникальными значениями брендов
+            // Добавляем элементы в ComboBox - значения брендов
             comboBoxFilter.Items.Add("         "); // Добавить опцию для сброса фильтра
             var brands = shop.goods.Select(g => g.Brand).Distinct().ToList();
             comboBoxFilter.Items.AddRange(brands.ToArray());
             comboBoxFilter.SelectedIndex = 0; // Установить первый элемент выбранным
 
+            // Добавляем элементы в ComboBox
+            comboBoxSort.Items.AddRange(new string[] {
+                "Без сортировки",
+                "По количеству памяти (возрастание)",
+                "По количеству памяти (убывание)",
+                "По имени бренда (возрастание)",
+                "По имени бренда (убывание)"
+            });
 
         }
 
@@ -174,6 +156,31 @@ namespace FormMarket
         }
 
         //==============================================================================================
+        // Обработчик изменения выбранного элемента ComboBox
+        private void ComboBoxSort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DataView dataView = new DataView(table); // DataView для сортировки
+            switch (comboBoxSort.SelectedIndex)
+            {
+                case 0: // Без сортировки
+                    dataView.Sort = string.Empty;
+                    break;
+                case 1: // По памяти (возрастание)
+                    dataView.Sort = "Memory ASC";
+                    break;
+                case 2: // По памяти (убывание)
+                    dataView.Sort = "Memory DESC";
+                    break;
+                case 3: // По имени бренда (возрастание)
+                    dataView.Sort = "Brand ASC";
+                    break;
+                case 4: // По имени бренда (убывание)
+                    dataView.Sort = "Brand DESC";
+                    break;
+            }
+            dataGridView1.DataSource = dataView;
+        }
+        //==============================================================================================
 
         private void buttonSwitch_Click(object sender, EventArgs e)
         {
@@ -203,10 +210,8 @@ namespace FormMarket
                 loginField.Hide();      //скрываем поле пароль
                 passwordField.Hide();   //скрываем кнопку логин
                 RegistrationButton.Hide();//скрываем кнопку регистрация
-
                 /////////////////////////////////////////////////////////////
                 dataGridView1.Show();   // показываем ранее созданую таблицу
-
 
             }
             else

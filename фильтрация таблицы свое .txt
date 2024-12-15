@@ -1,0 +1,27 @@
+ /*
+  private void buttonToFiltrBrand_Click(object sender, EventArgs e)
+ {
+  dataGridView1.Hide();// прячем таблицу которую разместили до этого в форме
+  
+  string filtr_value = filtrValueField.Text; //текстбох для ввода фильтра
+
+  DataTable table2 = new DataTable();
+
+
+  table2.Columns.Add("Brand", typeof(string));
+         table.Columns.Add("Model", typeof(string));
+         table.Columns.Add("Submodel", typeof(string));
+         table.Columns.Add("Memory", typeof(int));
+         table.Columns.Add("Quantity", typeof(int));
+
+
+
+         for (int i = 0; i<shop.goods.Count; i++)
+         {
+             if (shop.goods[i].Brand == filtr_value)
+             table.Rows.Add(shop.goods[i].Brand, shop.goods[i].Model, shop.goods[i].Submodel, shop.goods[i].Memory, shop.goods[i].Quantity);
+         }
+
+ dataGridView2.DataSource = table;
+ }
+  */

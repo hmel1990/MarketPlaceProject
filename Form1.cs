@@ -14,23 +14,30 @@ using Market_try;
 namespace FormMarket
 {
     public partial class Form1 : Form
-    {
-       
-
-
-
+    { 
         private User user;
+        private Customer customer;
+        private Seller seller;
+        private Admin admin;
         private string cellValue;
         private DataTable table;
         public Form1()
         {
             InitializeComponent();
-            user = new User();// создаем объект User
 
-            dataGridView1.Hide();// прячем таблицу которую разместили до этого в форме
+            user = new User();// создаем объект User
+            seller = new Seller();
+            admin = new Admin();
+            customer = new Customer();
+
+            //customer = new Customer(); // потом сделать так чтобы необходимый класс создавался в зависимости от результатов авторизации
 
             // заполняем таблицу
             Shop shop = new Shop();
+
+            // читаем из тхт файла и заполняем в список поля User каталог товаров
+            shop.goodsToShop();
+
 
             table = new DataTable();
 
@@ -41,8 +48,6 @@ namespace FormMarket
             table.Columns.Add("Memory", typeof(int));
             table.Columns.Add("Quantity", typeof(int));
 
-            // читаем из тхт файла и заполняем в список поля User каталог товаров
-            shop.goodsToShop();
 
             // Заполнение таблицы
             for (int i = 0; i < shop.goods.Count; i++)
@@ -72,6 +77,8 @@ namespace FormMarket
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            dataGridView1.Hide();// прячем таблицу которую разместили до этого в форме
+
         }
 
         //==============================================================================================
@@ -184,7 +191,7 @@ namespace FormMarket
 
         private void buttonSwitch_Click(object sender, EventArgs e)
         {
-            if (user.logPas.id != 0)
+            if (user.logPas.id != "")
             {
                 // Создаем экземпляр второй формы
                 Form2 form2 = new Form2();
@@ -213,10 +220,31 @@ namespace FormMarket
                 /////////////////////////////////////////////////////////////
                 dataGridView1.Show();   // показываем ранее созданую таблицу
 
+                //______________________________________________________________________________________
+                switch (user.logPas.id.ToString())
+                {
+                    case "": // Без сортировки
+                        Console.WriteLine("Пользователь отсутствует");
+                        break;
+                    case "admin": // админ
+                        //Admin admin = new Admin();
+                        admin.logPas.id = "admin";
+                        break;
+                    case "seller": // продавец
+                        //Seller seller = new Seller();
+                        seller.logPas.id = "seller";
+                        break;
+                    case "customer": // покупатель
+                        //Customer customer = new Customer();
+                        customer.logPas.id = "customer";
+                        break;
+                }
+                //______________________________________________________________________________________
+
             }
             else
             {
-                MessageBox.Show("Not Ok!!");
+                MessageBox.Show("Логин или пароль неверные!!!");
             }
         }
         /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -250,12 +278,13 @@ namespace FormMarket
             if (dataGridView1.CurrentRow != null)
             {
                 // Сохраняем значение первой ячейки выбранной строки
-                for (int i = 0; i < (dataGridView1.Rows.Count + 1); i++)
+                for (int i = 0; i < (dataGridView1.Columns.Count); i++)
                 {
                     cellValue += dataGridView1.CurrentRow.Cells[i].Value?.ToString() + "\t";//!!!!!!! значение и которое потом запишется в тхт файл корзины)
                 }
                 MessageBox.Show($"Содержимое первой ячейки строки скопировано: {cellValue}");
-                File.AppendAllText("market_goods_korzina.txt", cellValue + user.logPas.id + "\n");
+                customer.logPas.id = user.logPas.id;
+                customer.addToBucket(cellValue);
                 cellValue = "";
             }
             else

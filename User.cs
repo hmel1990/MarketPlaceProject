@@ -8,14 +8,11 @@ namespace Market_try
 {
     internal class User
     {
-        //private int id = 0;
-        //private string login;
-        //private string password;
-
         internal LoginPassword logPas = new LoginPassword();
 
         private List<LoginPassword> data = new List<LoginPassword>();
 
+        #region сеттеры и геттеры
         public void loginSetter (string login)
         {
             //Console.WriteLine("Введите Логин");
@@ -29,10 +26,12 @@ namespace Market_try
             //string password = Console.ReadLine();
             logPas.password = password;
         }
+        #endregion
 
+        #region конструктор
         public User ()
         {
-            logPas.id = 0;
+            logPas.id = "";
 
             // Считываем все строки из файла
             string[] lines = File.ReadAllLines("loginPassword.txt");
@@ -51,7 +50,9 @@ namespace Market_try
             }
 
         }
+        #endregion
 
+        #region регистрация и авторизация
         public bool Autorithation(string x, string y) //параметры х у принимаются из виндовс форм
         {
             loginSetter(x);
@@ -66,7 +67,7 @@ namespace Market_try
                     return true;
                 }
             }
-            if (logPas.id == 0)
+            if (logPas.id == "")
             {
                 //Console.WriteLine("Логин или пароль неверные");
                 //throw new Exception();
@@ -94,16 +95,13 @@ namespace Market_try
 
         public bool Registration(string x, string y)
         {
-            //while (!сheckOut(x,y)) 
-            //{
-            //    Console.WriteLine("Попробуйте снова.");
-            //}
+
 
             if (сheckOut(x, y))
             {
                 data.Add(new LoginPassword()); // добавляем в список еще один объект
-                logPas.id = data.Count(); // устанавливаем id по количеству строк в массиве (нулевая строка єто шапка)
-                data[(data.Count() - 1)].id = data.Count();            //заполняем новый объект в массиве
+                logPas.id = "customer"; // устанавливаем id по количеству строк в массиве (нулевая строка єто шапка)
+                data[(data.Count() - 1)].id = "customer";            //заполняем новый объект в массиве
                 data[(data.Count() - 1)].login = logPas.login;         //заполняем новый объект в массиве
                 data[(data.Count() - 1)].password = logPas.password;   //заполняем новый объект в массиве
                 File.AppendAllText("loginPassword.txt", logPas.id + "\t" + logPas.login + "\t" + logPas.password + "\n"); //записываем строку с новым пользователев в тхт файл
@@ -111,8 +109,8 @@ namespace Market_try
             }
             else {return false; }
         }
-         
-       
+        #endregion
+
 
     }
 }

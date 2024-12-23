@@ -43,6 +43,7 @@
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
+            buttonRefresh = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -52,7 +53,7 @@
             toForm2.Name = "toForm2";
             toForm2.Size = new Size(230, 46);
             toForm2.TabIndex = 0;
-            toForm2.Text = "Switch to shop";
+            toForm2.Text = "AdminMode";
             toForm2.UseVisualStyleBackColor = true;
             toForm2.Click += buttonSwitch_Click;
             // 
@@ -184,11 +185,22 @@
             label3.TabIndex = 8;
             label3.Text = "Поиск по содержимому";
             // 
+            // buttonRefresh
+            // 
+            buttonRefresh.Location = new Point(89, 892);
+            buttonRefresh.Name = "buttonRefresh";
+            buttonRefresh.Size = new Size(229, 40);
+            buttonRefresh.TabIndex = 9;
+            buttonRefresh.Text = "Refresh";
+            buttonRefresh.UseVisualStyleBackColor = true;
+            buttonRefresh.Click += buttonRefresh_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(2396, 1107);
+            Controls.Add(buttonRefresh);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -230,5 +242,6 @@
         private Label label1;
         private Label label2;
         private Label label3;
+        private Button buttonRefresh;
     }
 }

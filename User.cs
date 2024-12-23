@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Market_try
 {
-    internal class User
+    public class User
     {
         internal LoginPassword logPas = new LoginPassword();
 
@@ -31,7 +31,7 @@ namespace Market_try
         #region конструктор
         public User ()
         {
-            logPas.id = "";
+            logPas.access = "";
 
             // Считываем все строки из файла
             string[] lines = File.ReadAllLines("loginPassword.txt");
@@ -62,12 +62,12 @@ namespace Market_try
             {
                 if (lp.login == logPas.login && lp.password == logPas.password)
                 {
-                    logPas.id = lp.id;
+                    logPas.access = lp.access;
                     //Console.WriteLine("Все ОК!!!");
                     return true;
                 }
             }
-            if (logPas.id == "")
+            if (logPas.access == "")
             {
                 //Console.WriteLine("Логин или пароль неверные");
                 //throw new Exception();
@@ -100,17 +100,22 @@ namespace Market_try
             if (сheckOut(x, y))
             {
                 data.Add(new LoginPassword()); // добавляем в список еще один объект
-                logPas.id = "customer"; // устанавливаем id по количеству строк в массиве (нулевая строка єто шапка)
-                data[(data.Count() - 1)].id = "customer";            //заполняем новый объект в массиве
+                logPas.access = "customer"; // устанавливаем id == customer
+                data[(data.Count() - 1)].access = "customer";            //заполняем новый объект в массиве
                 data[(data.Count() - 1)].login = logPas.login;         //заполняем новый объект в массиве
                 data[(data.Count() - 1)].password = logPas.password;   //заполняем новый объект в массиве
-                File.AppendAllText("loginPassword.txt", logPas.id + "\t" + logPas.login + "\t" + logPas.password + "\n"); //записываем строку с новым пользователев в тхт файл
+                File.AppendAllText("loginPassword.txt", logPas.access + "\t" + logPas.login + "\t" + logPas.password + "\n"); //записываем строку с новым пользователев в тхт файл
                 return true;
             }
             else {return false; }
         }
         #endregion
 
-
+        #region добавление в корзину
+        public void addToBucket(string cellValue)
+        {
+            File.AppendAllText("market_goods_korzina.txt", cellValue + logPas.access + "\n");
+        }
+        #endregion
     }
 }

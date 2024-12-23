@@ -29,8 +29,16 @@
         private void InitializeComponent()
         {
             backToForm1 = new Button();
-            dataGridView1 = new DataGridView();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            dataGridView2 = new DataGridView();
+            deleteGoodsFromShop = new Button();
+            saveToFile = new Button();
+            buttonRefresh = new Button();
+            dataGridView3 = new DataGridView();
+            deleteUserFromList = new Button();
+            saveUsersToFile = new Button();
+            button3 = new Button();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView3).BeginInit();
             SuspendLayout();
             // 
             // backToForm1
@@ -44,36 +52,121 @@
             backToForm1.UseVisualStyleBackColor = false;
             backToForm1.Click += buttonBack_Click;
             // 
-            // dataGridView1
+            // dataGridView2
             // 
-            dataGridView1.BackgroundColor = Color.Salmon;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(127, 147);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 82;
-            dataGridView1.Size = new Size(1122, 662);
-            dataGridView1.TabIndex = 1;
+            dataGridView2.BackgroundColor = Color.Salmon;
+            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView2.Location = new Point(127, 139);
+            dataGridView2.Name = "dataGridView2";
+            dataGridView2.RightToLeft = RightToLeft.No;
+            dataGridView2.RowHeadersWidth = 82;
+            dataGridView2.Size = new Size(1122, 318);
+            dataGridView2.TabIndex = 1;
+            // 
+            // deleteGoodsFromShop
+            // 
+            deleteGoodsFromShop.Location = new Point(663, 65);
+            deleteGoodsFromShop.Name = "deleteGoodsFromShop";
+            deleteGoodsFromShop.Size = new Size(150, 46);
+            deleteGoodsFromShop.TabIndex = 2;
+            deleteGoodsFromShop.Text = "Delete";
+            deleteGoodsFromShop.UseVisualStyleBackColor = true;
+            deleteGoodsFromShop.Click += deleteGoodsFromShop_Click;
+            // 
+            // saveToFile
+            // 
+            saveToFile.Location = new Point(851, 65);
+            saveToFile.Name = "saveToFile";
+            saveToFile.Size = new Size(150, 46);
+            saveToFile.TabIndex = 3;
+            saveToFile.Text = "Save";
+            saveToFile.UseVisualStyleBackColor = true;
+            saveToFile.Click += saveToFile_Click;
+            // 
+            // buttonRefresh
+            // 
+            buttonRefresh.Location = new Point(1043, 65);
+            buttonRefresh.Name = "buttonRefresh";
+            buttonRefresh.Size = new Size(150, 46);
+            buttonRefresh.TabIndex = 4;
+            buttonRefresh.Text = "Refresh";
+            buttonRefresh.UseVisualStyleBackColor = true;
+            buttonRefresh.Click += buttonRefresh_Click;
+            // 
+            // dataGridView3
+            // 
+            dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView3.Location = new Point(127, 635);
+            dataGridView3.Name = "dataGridView3";
+            dataGridView3.RowHeadersWidth = 82;
+            dataGridView3.Size = new Size(1122, 384);
+            dataGridView3.TabIndex = 5;
+            // 
+            // deleteUserFromList
+            // 
+            deleteUserFromList.Location = new Point(663, 566);
+            deleteUserFromList.Name = "deleteUserFromList";
+            deleteUserFromList.Size = new Size(150, 46);
+            deleteUserFromList.TabIndex = 6;
+            deleteUserFromList.Text = "Delete";
+            deleteUserFromList.UseVisualStyleBackColor = true;
+            deleteUserFromList.Click += deleteUserFromList_Click;
+            // 
+            // saveUsersToFile
+            // 
+            saveUsersToFile.Location = new Point(851, 566);
+            saveUsersToFile.Name = "saveUsersToFile";
+            saveUsersToFile.Size = new Size(150, 46);
+            saveUsersToFile.TabIndex = 7;
+            saveUsersToFile.Text = "Save";
+            saveUsersToFile.UseVisualStyleBackColor = true;
+            saveUsersToFile.Click += saveUsersToFile_Click;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(1043, 566);
+            button3.Name = "button3";
+            button3.Size = new Size(150, 46);
+            button3.TabIndex = 8;
+            button3.Text = "Refresh";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += buttonUsersRefresh_Click;
             // 
             // Form2
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Salmon;
-            ClientSize = new Size(1974, 929);
-            Controls.Add(dataGridView1);
+            ClientSize = new Size(1974, 1135);
+            Controls.Add(button3);
+            Controls.Add(saveUsersToFile);
+            Controls.Add(deleteUserFromList);
+            Controls.Add(dataGridView3);
+            Controls.Add(buttonRefresh);
+            Controls.Add(saveToFile);
+            Controls.Add(deleteGoodsFromShop);
+            Controls.Add(dataGridView2);
             Controls.Add(backToForm1);
             ForeColor = SystemColors.HotTrack;
             Name = "Form2";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form2";
             Load += Form2_Load;
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView3).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
         private Button backToForm1;
-        private DataGridView dataGridView1;
+        private DataGridView dataGridView2;
+        private Button deleteGoodsFromShop;
+        private Button saveToFile;
+        private Button buttonRefresh;
+        private DataGridView dataGridView3;
+        private Button deleteUserFromList;
+        private Button saveUsersToFile;
+        private Button button3;
     }
 }

@@ -3,50 +3,50 @@
   <Class Name="Market_try.User" Collapsed="true">
     <Position X="5.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAABAAAAAAAAAIAAAAAAAAAAAAAAAAAAABAQAAAEQAA=</HashCode>
+      <HashCode>AAABAAAAAAAAAIAAAAAAAAAAAAAIAAAAABAQAAAEQAA=</HashCode>
       <FileName>User.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Market_try.Shop" Collapsed="true">
-    <Position X="9.75" Y="1.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIQAEAAA=</HashCode>
-      <FileName>Shop.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Market_try.LoginPassword" Collapsed="true">
     <Position X="5.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAEgA=</HashCode>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAEAA=</HashCode>
       <FileName>LoginPassword.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Market_try.Goods" Collapsed="true">
-    <Position X="9.75" Y="2.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAggAgAABAAA=</HashCode>
-      <FileName>Goods.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FormMarket.Seller" Collapsed="true">
     <Position X="3.25" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAABAAAAAA=</HashCode>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Seller.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FormMarket.Customer" Collapsed="true">
     <Position X="5.5" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Customer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FormMarket.Admin" Collapsed="true">
     <Position X="7.5" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAAAAAAAAAAIAAACAAAEAAAA=</HashCode>
       <FileName>Admin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FormMarket.Product" Collapsed="true">
+    <Position X="9.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAggAgAABAAA=</HashCode>
+      <FileName>Product.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FormMarket.Shop" Collapsed="true">
+    <Position X="9.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAABAAEAAA=</HashCode>
+      <FileName>Shop.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

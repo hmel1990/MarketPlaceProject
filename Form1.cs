@@ -20,7 +20,7 @@ namespace FormMarket
         private Seller seller;
         private Admin admin;
         private string cellValue;
-        private DataTable table;
+        internal DataTable table;
         public Form1()
         {
             InitializeComponent();
@@ -30,13 +30,12 @@ namespace FormMarket
             admin = new Admin();
             customer = new Customer();
 
-            //customer = new Customer(); // потом сделать так чтобы необходимый класс создавался в зависимости от результатов авторизации
-
+            #region таблица
             // заполняем таблицу
             Shop shop = new Shop();
 
             // читаем из тхт файла и заполняем в список поля User каталог товаров
-            shop.goodsToShop();
+            shop.productsToShop();
 
 
             table = new DataTable();
@@ -50,17 +49,19 @@ namespace FormMarket
 
 
             // Заполнение таблицы
-            for (int i = 0; i < shop.goods.Count; i++)
+            for (int i = 0; i < shop.products.Count; i++)
             {
-                table.Rows.Add(shop.goods[i].Brand, shop.goods[i].Model, shop.goods[i].Submodel, shop.goods[i].Memory, shop.goods[i].Quantity);
+                table.Rows.Add(shop.products[i].Brand, shop.products[i].Model, shop.products[i].Submodel, shop.products[i].Memory, shop.products[i].Quantity);
             }
 
             // Привязка данных к DataGridView
             dataGridView1.DataSource = table;
+            #endregion
 
+            #region сортировка
             // Добавляем элементы в ComboBox - значения брендов
             comboBoxFilter.Items.Add("         "); // Добавить опцию для сброса фильтра
-            var brands = shop.goods.Select(g => g.Brand).Distinct().ToList();
+            var brands = shop.products.Select(g => g.Brand).Distinct().ToList();
             comboBoxFilter.Items.AddRange(brands.ToArray());
             comboBoxFilter.SelectedIndex = 0; // Установить первый элемент выбранным
 
@@ -72,6 +73,7 @@ namespace FormMarket
                 "По имени бренда (возрастание)",
                 "По имени бренда (убывание)"
             });
+            #endregion
 
         }
 
@@ -81,6 +83,7 @@ namespace FormMarket
 
         }
 
+        #region comboBoxFilter_SelectedIndexChanged
         //==============================================================================================
         private void comboBoxFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -107,7 +110,9 @@ namespace FormMarket
             }
         }
         //==============================================================================================
+        #endregion
 
+        #region buttonSearch_Click
         private void buttonSearch_Click(object sender, EventArgs e)
         {
             // Получаем текст из текстового поля
@@ -152,7 +157,9 @@ namespace FormMarket
                 MessageBox.Show($"Ошибка при поиске: {ex.Message}");
             }
         }
+        #endregion
 
+        #region ResetButton_Click
         private void ResetButton_Click(object sender, EventArgs e)
         {
             // Сбросить фильтр
@@ -163,6 +170,9 @@ namespace FormMarket
         }
 
         //==============================================================================================
+        #endregion
+
+        #region ComboBoxSort_SelectedIndexChanged
         // Обработчик изменения выбранного элемента ComboBox
         private void ComboBoxSort_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -188,10 +198,12 @@ namespace FormMarket
             dataGridView1.DataSource = dataView;
         }
         //==============================================================================================
+        #endregion
 
+        #region переключиться на форму 2
         private void buttonSwitch_Click(object sender, EventArgs e)
         {
-            if (user.logPas.id != "")
+            if (user.logPas.access == "seller" | user.logPas.access == "admin")
             {
                 // Создаем экземпляр второй формы
                 Form2 form2 = new Form2();
@@ -203,7 +215,10 @@ namespace FormMarket
             }
 
         }
+        #endregion
 
+
+        #region LOGIN
         private void loginbutton_Click(object sender, EventArgs e)
         {
             string loginUser = loginField.Text;
@@ -221,22 +236,22 @@ namespace FormMarket
                 dataGridView1.Show();   // показываем ранее созданую таблицу
 
                 //______________________________________________________________________________________
-                switch (user.logPas.id.ToString())
+                switch (user.logPas.access.ToString())
                 {
                     case "": // Без сортировки
                         Console.WriteLine("Пользователь отсутствует");
                         break;
                     case "admin": // админ
                         //Admin admin = new Admin();
-                        admin.logPas.id = "admin";
+                        admin.logPas.access = "admin";
                         break;
                     case "seller": // продавец
                         //Seller seller = new Seller();
-                        seller.logPas.id = "seller";
+                        seller.logPas.access = "seller";
                         break;
                     case "customer": // покупатель
                         //Customer customer = new Customer();
-                        customer.logPas.id = "customer";
+                        customer.logPas.access = "customer";
                         break;
                 }
                 //______________________________________________________________________________________
@@ -248,7 +263,9 @@ namespace FormMarket
             }
         }
         /////////////////////////////////////////////////////////////////////////////////////////////////////////
+        #endregion
 
+        #region Registration
         private void RegistrationButton_Click(object sender, EventArgs e)
         {
             string loginUser = loginField.Text;
@@ -271,7 +288,7 @@ namespace FormMarket
             }
         }
         /////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+        #endregion
         private void buttonToBuy_Click(object sender, EventArgs e)
         {
             // Проверяем, что выбрана строка
@@ -283,7 +300,7 @@ namespace FormMarket
                     cellValue += dataGridView1.CurrentRow.Cells[i].Value?.ToString() + "\t";//!!!!!!! значение и которое потом запишется в тхт файл корзины)
                 }
                 MessageBox.Show($"Содержимое первой ячейки строки скопировано: {cellValue}");
-                customer.logPas.id = user.logPas.id;
+                customer.logPas.access = user.logPas.access;
                 customer.addToBucket(cellValue);
                 cellValue = "";
             }
@@ -296,6 +313,33 @@ namespace FormMarket
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        private void buttonRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshDataGridView();
+        }
 
+        private void RefreshDataGridView()
+        {
+            if (table != null)
+            {
+                // Обновляем данные в таблице
+                table.Clear();
+
+                Shop shop = new Shop();
+                shop.productsToShop();
+
+                foreach (var product in shop.products)
+                {
+                    table.Rows.Add(product.Brand, product.Model, product.Submodel, product.Memory, product.Quantity);
+                }
+
+                // Привязываем обновленную таблицу к DataGridView
+                dataGridView1.DataSource = table;
+            }
+            else
+            {
+                MessageBox.Show("Таблица не инициализирована.");
+            }
+        }
     }
 }

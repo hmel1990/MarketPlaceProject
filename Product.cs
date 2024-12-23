@@ -1,7 +1,7 @@
 ﻿using System;
-namespace Market_try
+namespace FormMarket
 {
-	public class Goods
+	public class Product
 	{
 		public string Brand;
 		public string Model;
@@ -9,10 +9,10 @@ namespace Market_try
 		public int Memory;
 		public int Quantity;
 
-		public Goods()
+		public Product()
 		{ }
 
-		public Goods(string lines)
+		public Product(string lines)
 		{
             string[] values = lines.Split('\t');
             this.Brand = values[0];
@@ -21,7 +21,7 @@ namespace Market_try
             this.Memory = Convert.ToInt32(values[3]);
             this.Quantity = Convert.ToInt32(values[4]);
         }
-        public Goods(string Brand, string Model, string Submodel, int Memory, int Quantity)
+        public Product(string Brand, string Model, string Submodel, int Memory, int Quantity)
 		{
 			this.Brand = Brand;
 			this.Model = Model;
@@ -30,9 +30,5 @@ namespace Market_try
 			this.Quantity = Quantity;
 		}
 
-        //public override string ToString()
-        //{
-        //    return $"{Brand}\t{Model}\t{Submodel}\t{Memory}\t{Quantity}";
-        //}
     }
 }

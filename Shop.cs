@@ -69,6 +69,28 @@ namespace FormMarket
             }
         }
 
+        public void addFilteringProducts(ComboBox comboBoxFilter)
+        {
+            // Добавляем элементы в ComboBox - значения брендов
+            comboBoxFilter.Items.Add("         "); // Добавить опцию для сброса фильтра
+            var brands = products.Select(g => g.Brand).Distinct().ToList();
+            comboBoxFilter.Items.AddRange(brands.ToArray());
+            comboBoxFilter.SelectedIndex = 0; // Установить первый элемент выбранным
+        }
+
+
+        public void addSortingProducts(ComboBox comboBoxSort)
+        { 
+           // Добавляем элементы в ComboBox
+           comboBoxSort.Items.AddRange(new string[]
+            {
+                "Без сортировки",
+                "По количеству памяти (возрастание)",
+                "По количеству памяти (убывание)",
+                "По имени бренда (возрастание)",
+                "По имени бренда (убывание)"
+            });
+        }
 
     }
 }

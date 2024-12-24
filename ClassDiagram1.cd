@@ -3,7 +3,7 @@
   <Class Name="Market_try.User" Collapsed="true">
     <Position X="5.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAABAAAAAAAAAIAAAAAAAAAAAAAIAAAAABAQAAAEQAA=</HashCode>
+      <HashCode>AAABAAAAAAAAAIAAAAEAAAAAAAAIAAAAABAQAAAEQAA=</HashCode>
       <FileName>User.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -45,8 +45,29 @@
   <Class Name="FormMarket.Shop" Collapsed="true">
     <Position X="9.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAABAAEAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAABAAhACAAAgAAAAAAAAAAAABAAEAAA=</HashCode>
       <FileName>Shop.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FormMarket.FileManager" Collapsed="true">
+    <Position X="9.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>FileManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FormMarket.Form1" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAIBAAFA7AAAhBDCACgAAAGAAkGQMABgAQOAQAIAQA=</HashCode>
+      <FileName>Form1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FormMarket.Form2" Collapsed="true">
+    <Position X="0.5" Y="4.5" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAMgIAEACAAgABAABCECAgiADEkAMQAAAAgAAEAACA=</HashCode>
+      <FileName>Form2.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

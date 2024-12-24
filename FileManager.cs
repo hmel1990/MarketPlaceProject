@@ -8,6 +8,7 @@ namespace FormMarket
 {
     internal class FileManager
     {
+
         public string[] readStringsFromFile(string path)
         {
             // Проверяем, существует ли файл

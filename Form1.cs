@@ -25,7 +25,7 @@ namespace FormMarket
         public Form1()
         {
             InitializeComponent();
-            user = new User();// создаем объект User
+            user = new User();// создаем объект User www
             seller = new Seller();
             admin = new Admin();
             customer = new Customer();

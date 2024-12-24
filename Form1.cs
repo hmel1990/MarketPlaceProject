@@ -30,62 +30,19 @@ namespace FormMarket
             admin = new Admin();
             customer = new Customer();
             shop = new Shop();
-
-
-            #region таблица
-            #region
-            // заполняем таблицу
+                               
             // читаем из тхт файла и заполняем в список поля User каталог товаров
-            //shop.productsToShop("market_goods.txt");
-            #endregion
-
+            // заполняем таблицу
             table = shop.table;
-
-            #region
-            //table = new DataTable();
-            ////устанавливаем значение для заголовков столбцов
-            //table.Columns.Add("Brand", typeof(string));
-            //table.Columns.Add("Model", typeof(string));
-            //table.Columns.Add("Submodel", typeof(string));
-            //table.Columns.Add("Memory", typeof(int));
-            //table.Columns.Add("Quantity", typeof(int));
-
-
-            //// Заполнение таблицы
-            //for (int i = 0; i < shop.products.Count; i++)
-            //{
-            //    table.Rows.Add(shop.products[i].Brand, shop.products[i].Model, shop.products[i].Submodel, shop.products[i].Memory, shop.products[i].Quantity);
-            //}
-            #endregion
 
             // Привязка данных к DataGridView
             dataGridView1.DataSource = table;
-            #endregion
 
+            //сортировка и фильтр
             shop.addSortingProducts(comboBoxSort);
             shop.addFilteringProducts(comboBoxFilter);
 
         }
-            #region сортировка
-        //public void sortingProducts ()
-        //{
-        //    // Добавляем элементы в ComboBox - значения брендов
-        //    comboBoxFilter.Items.Add("         "); // Добавить опцию для сброса фильтра
-        //    var brands = shop.products.Select(g => g.Brand).Distinct().ToList();
-        //    comboBoxFilter.Items.AddRange(brands.ToArray());
-        //    comboBoxFilter.SelectedIndex = 0; // Установить первый элемент выбранным
-
-        //    // Добавляем элементы в ComboBox
-        //    comboBoxSort.Items.AddRange(new string[]
-        //    {
-        //        "Без сортировки",
-        //        "По количеству памяти (возрастание)",
-        //        "По количеству памяти (убывание)",
-        //        "По имени бренда (возрастание)",
-        //        "По имени бренда (убывание)"
-        //    });
-        //}
-            #endregion
 
 
         private void Form1_Load(object sender, EventArgs e)
@@ -94,36 +51,126 @@ namespace FormMarket
 
         }
 
-        #region comboBoxFilter_SelectedIndexChanged
-        //==============================================================================================
+        // Обработчик изменения выбранного элемента ComboBox - фильтр
         private void comboBoxFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
+            shop.FilteringProducts(comboBoxFilter, dataGridView1);
+        }
 
 
-            // Получить выбранное значение
-            string selectedBrand = comboBoxFilter.SelectedItem.ToString();
+        // Обработчик изменения выбранного элемента ComboBox - сортировка
+        private void ComboBoxSort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            shop.SortingProducts(comboBoxSort, dataGridView1);
+           
+        }
 
-            if (selectedBrand == "         ")
+
+
+        //Авторизация 
+        private void loginbutton_Click(object sender, EventArgs e)
+        {
+            string loginUser = loginField.Text;
+            string passwordUser = passwordField.Text;
+                       
+            if (user.Autorithation(loginUser, passwordUser))
             {
-                // Сбросить фильтр
-                DataView view = table.DefaultView;
-                view.RowFilter = string.Empty; // Удаляем фильтр
-                dataGridView1.DataSource = view; // Привязываем оригинальные данные
+                //MessageBox.Show("Ok!!");
+                loginbutton.Hide();     //скрываем поле логин
+                loginField.Hide();      //скрываем поле пароль
+                passwordField.Hide();   //скрываем кнопку логин
+                RegistrationButton.Hide();//скрываем кнопку регистрация
+                dataGridView1.Show();   // показываем ранее созданую таблицу
+                //______________________________________________________________________________________
+                switch (user.logPas.access.ToString())
+                {
+                    case "": // Без сортировки
+                        Console.WriteLine("Пользователь отсутствует");
+                        break;
+                    case "admin": // админ
+                        //Admin admin = new Admin();
+                        admin.logPas.access = "admin";
+                        break;
+                    case "seller": // продавец
+                        //Seller seller = new Seller();
+                        seller.logPas.access = "seller";
+                        break;
+                    case "customer": // покупатель
+                        //Customer customer = new Customer();
+                        customer.logPas.access = "customer";
+                        break;
+                }
+                //______________________________________________________________________________________
+
             }
             else
             {
-                // Создать DataView из оригинальной таблицы
-                DataView view = table.DefaultView;
-                view.RowFilter = $"Brand = '{selectedBrand}'";
-
-                // Привязать отфильтрованные данные к DataGridView
-                dataGridView1.DataSource = view;
+                MessageBox.Show("Логин или пароль неверные!!!");
             }
         }
-        //==============================================================================================
-        #endregion
 
-        #region buttonSearch_Click
+        //Регистрация
+        private void RegistrationButton_Click(object sender, EventArgs e)
+        {
+            string loginUser = loginField.Text;
+            string passwordUser = passwordField.Text;
+
+            if (user.Registration(loginUser, passwordUser))
+            {
+                MessageBox.Show("Вы зарегистрированы!!!");
+                loginbutton.Hide();     //скрываем поле логин
+                loginField.Hide();      //скрываем поле пароль
+                passwordField.Hide();   //скрываем кнопку логин
+                RegistrationButton.Hide();//скрываем кнопку регистрация
+                dataGridView1.Show();   // показываем ранее созданую таблицу
+
+            }
+            else
+            {
+                MessageBox.Show("Такой Логин или Пароль уже существуют");
+            }
+        }
+        private void buttonToBuy_Click(object sender, EventArgs e)
+        {
+            // Проверяем, что выбрана строка
+            if (dataGridView1.CurrentRow != null)
+            {
+                // Сохраняем значение первой ячейки выбранной строки
+                for (int i = 0; i < (dataGridView1.Columns.Count); i++)
+                {
+                    cellValue += dataGridView1.CurrentRow.Cells[i].Value?.ToString() + "\t";//!!!!!!! значение и которое потом запишется в тхт файл корзины)
+                }
+                MessageBox.Show($"Содержимое первой ячейки строки скопировано: {cellValue}");
+                customer.logPas.access = user.logPas.access;
+                customer.addToBucket(cellValue);
+                cellValue = "";
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите строку.");
+            }
+        }
+
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
+        
+        //переключиться на форму 2
+        private void buttonSwitch_Click(object sender, EventArgs e)
+        {
+            if (user.logPas.access == "seller" | user.logPas.access == "admin")
+            {
+                // Создаем экземпляр второй формы
+                Form2 form2 = new Form2();
+                form2.Show();
+            }
+            else
+            {
+                MessageBox.Show("You are not authorized");
+            }
+
+        }
+        
         private void buttonSearch_Click(object sender, EventArgs e)
         {
             // Получаем текст из текстового поля
@@ -168,9 +215,7 @@ namespace FormMarket
                 MessageBox.Show($"Ошибка при поиске: {ex.Message}");
             }
         }
-        #endregion
 
-        #region ResetButton_Click
         private void ResetButton_Click(object sender, EventArgs e)
         {
             // Сбросить фильтр
@@ -179,151 +224,6 @@ namespace FormMarket
             dataGridView1.DataSource = view; // Привязываем оригинальные данные
             textBoxSearch.Clear();
         }
-
-        //==============================================================================================
-        #endregion
-
-        #region ComboBoxSort_SelectedIndexChanged
-        // Обработчик изменения выбранного элемента ComboBox
-        private void ComboBoxSort_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            DataView dataView = new DataView(table); // DataView для сортировки
-            switch (comboBoxSort.SelectedIndex)
-            {
-                case 0: // Без сортировки
-                    dataView.Sort = string.Empty;
-                    break;
-                case 1: // По памяти (возрастание)
-                    dataView.Sort = "Memory ASC";
-                    break;
-                case 2: // По памяти (убывание)
-                    dataView.Sort = "Memory DESC";
-                    break;
-                case 3: // По имени бренда (возрастание)
-                    dataView.Sort = "Brand ASC";
-                    break;
-                case 4: // По имени бренда (убывание)
-                    dataView.Sort = "Brand DESC";
-                    break;
-            }
-            dataGridView1.DataSource = dataView;
-        }
-        //==============================================================================================
-        #endregion
-
-        #region переключиться на форму 2
-        private void buttonSwitch_Click(object sender, EventArgs e)
-        {
-            if (user.logPas.access == "seller" | user.logPas.access == "admin")
-            {
-                // Создаем экземпляр второй формы
-                Form2 form2 = new Form2();
-                form2.Show();
-            }
-            else
-            {
-                MessageBox.Show("You are not authorized");
-            }
-
-        }
-        #endregion
-
-
-        #region LOGIN
-        private void loginbutton_Click(object sender, EventArgs e)
-        {
-            string loginUser = loginField.Text;
-            string passwordUser = passwordField.Text;
-
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////
-            if (user.Autorithation(loginUser, passwordUser))
-            {
-                //MessageBox.Show("Ok!!");
-                loginbutton.Hide();     //скрываем поле логин
-                loginField.Hide();      //скрываем поле пароль
-                passwordField.Hide();   //скрываем кнопку логин
-                RegistrationButton.Hide();//скрываем кнопку регистрация
-                /////////////////////////////////////////////////////////////
-                dataGridView1.Show();   // показываем ранее созданую таблицу
-
-                //______________________________________________________________________________________
-                switch (user.logPas.access.ToString())
-                {
-                    case "": // Без сортировки
-                        Console.WriteLine("Пользователь отсутствует");
-                        break;
-                    case "admin": // админ
-                        //Admin admin = new Admin();
-                        admin.logPas.access = "admin";
-                        break;
-                    case "seller": // продавец
-                        //Seller seller = new Seller();
-                        seller.logPas.access = "seller";
-                        break;
-                    case "customer": // покупатель
-                        //Customer customer = new Customer();
-                        customer.logPas.access = "customer";
-                        break;
-                }
-                //______________________________________________________________________________________
-
-            }
-            else
-            {
-                MessageBox.Show("Логин или пароль неверные!!!");
-            }
-        }
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////
-        #endregion
-
-        #region Registration
-        private void RegistrationButton_Click(object sender, EventArgs e)
-        {
-            string loginUser = loginField.Text;
-            string passwordUser = passwordField.Text;
-
-            if (user.Registration(loginUser, passwordUser))
-            {
-                MessageBox.Show("Вы зарегистрированы!!!");
-                loginbutton.Hide();     //скрываем поле логин
-                loginField.Hide();      //скрываем поле пароль
-                passwordField.Hide();   //скрываем кнопку логин
-                RegistrationButton.Hide();//скрываем кнопку регистрация
-                /////////////////////////////////////////////////////////////
-                dataGridView1.Show();   // показываем ранее созданую таблицу
-
-            }
-            else
-            {
-                MessageBox.Show("Такой Логин или Пароль уже существуют");
-            }
-        }
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////
-        #endregion
-        private void buttonToBuy_Click(object sender, EventArgs e)
-        {
-            // Проверяем, что выбрана строка
-            if (dataGridView1.CurrentRow != null)
-            {
-                // Сохраняем значение первой ячейки выбранной строки
-                for (int i = 0; i < (dataGridView1.Columns.Count); i++)
-                {
-                    cellValue += dataGridView1.CurrentRow.Cells[i].Value?.ToString() + "\t";//!!!!!!! значение и которое потом запишется в тхт файл корзины)
-                }
-                MessageBox.Show($"Содержимое первой ячейки строки скопировано: {cellValue}");
-                customer.logPas.access = user.logPas.access;
-                customer.addToBucket(cellValue);
-                cellValue = "";
-            }
-            else
-            {
-                MessageBox.Show("Пожалуйста, выберите строку.");
-            }
-        }
-
-
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
             RefreshDataGridView();

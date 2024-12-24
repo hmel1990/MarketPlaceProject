@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Data;
+using System.Windows.Forms;
 
 namespace FormMarket
 {
@@ -78,8 +79,32 @@ namespace FormMarket
             comboBoxFilter.SelectedIndex = 0; // Установить первый элемент выбранным
         }
 
+        public void FilteringProducts(ComboBox comboBoxFilter, DataGridView dataGridView1)
+        {
+            
+        // Получить выбранное значение
+        string selectedBrand = comboBoxFilter.SelectedItem.ToString();
 
-        public void addSortingProducts(ComboBox comboBoxSort)
+            if (selectedBrand == "         ")
+            {
+                // Сбросить фильтр
+                DataView view = table.DefaultView;
+        view.RowFilter = string.Empty; // Удаляем фильтр
+                dataGridView1.DataSource = view; // Привязываем оригинальные данные
+            }
+            else
+            {
+                // Создать DataView из оригинальной таблицы
+                DataView view = table.DefaultView;
+    view.RowFilter = $"Brand = '{selectedBrand}'";
+
+                // Привязать отфильтрованные данные к DataGridView
+                dataGridView1.DataSource = view;
+            }
+        }
+
+
+public void addSortingProducts(ComboBox comboBoxSort)
         { 
            // Добавляем элементы в ComboBox
            comboBoxSort.Items.AddRange(new string[]
@@ -90,6 +115,30 @@ namespace FormMarket
                 "По имени бренда (возрастание)",
                 "По имени бренда (убывание)"
             });
+        }
+
+        public void SortingProducts (ComboBox comboBoxSort, DataGridView dataGridView1)
+        {
+            DataView dataView = new DataView(table); // DataView для сортировки
+            switch (comboBoxSort.SelectedIndex)
+            {
+                case 0: // Без сортировки
+                    dataView.Sort = string.Empty;
+                    break;
+                case 1: // По памяти (возрастание)
+                    dataView.Sort = "Memory ASC";
+                    break;
+                case 2: // По памяти (убывание)
+                    dataView.Sort = "Memory DESC";
+                    break;
+                case 3: // По имени бренда (возрастание)
+                    dataView.Sort = "Brand ASC";
+                    break;
+                case 4: // По имени бренда (убывание)
+                    dataView.Sort = "Brand DESC";
+                    break;
+            }
+            dataGridView1.DataSource = dataView;
         }
 
     }

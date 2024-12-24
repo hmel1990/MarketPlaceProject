@@ -63,6 +63,7 @@ namespace Market_try
                 if (lp.login == logPas.login && lp.password == logPas.password)
                 {
                     logPas.access = lp.access;
+
                     //Console.WriteLine("Все ОК!!!");
                     return true;
                 }

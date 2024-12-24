@@ -73,7 +73,7 @@ namespace FormMarket
             string loginUser = loginField.Text;
             string passwordUser = passwordField.Text;
                        
-            if (user.Autorithation(loginUser, passwordUser))
+            if (user.Autorithation(loginUser, passwordUser, admin, seller,customer))
             {
                 //MessageBox.Show("Ok!!");
                 loginbutton.Hide();     //скрываем поле логин
@@ -81,27 +81,6 @@ namespace FormMarket
                 passwordField.Hide();   //скрываем кнопку логин
                 RegistrationButton.Hide();//скрываем кнопку регистрация
                 dataGridView1.Show();   // показываем ранее созданую таблицу
-                //______________________________________________________________________________________
-                switch (user.logPas.access.ToString())
-                {
-                    case "": // Без сортировки
-                        Console.WriteLine("Пользователь отсутствует");
-                        break;
-                    case "admin": // админ
-                        //Admin admin = new Admin();
-                        admin.logPas.access = "admin";
-                        break;
-                    case "seller": // продавец
-                        //Seller seller = new Seller();
-                        seller.logPas.access = "seller";
-                        break;
-                    case "customer": // покупатель
-                        //Customer customer = new Customer();
-                        customer.logPas.access = "customer";
-                        break;
-                }
-                //______________________________________________________________________________________
-
             }
             else
             {

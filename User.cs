@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FormMarket;
+using Microsoft.VisualBasic.ApplicationServices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +20,13 @@ namespace Market_try
             //Console.WriteLine("Введите Логин");
             //string login = Console.ReadLine();
             logPas.login = login;
+        }
+
+        public void accessSetter(string access)
+        {
+            //Console.WriteLine("Введите Логин");
+            //string login = Console.ReadLine();
+            logPas.access = access;
         }
 
         public void passwordSetter(string password)
@@ -53,16 +62,36 @@ namespace Market_try
         #endregion
 
         #region регистрация и авторизация
-        public bool Autorithation(string x, string y) //параметры х у принимаются из виндовс форм
+        public bool Autorithation(string loginUser, string passwordUser, Admin admin, Seller seller, Customer customer) //параметры х у принимаются из виндовс форм
         {
-            loginSetter(x);
-            passwordSetter(y);
 
             foreach (LoginPassword lp in usersData) 
             {
-                if (lp.login == logPas.login && lp.password == logPas.password)
+                if (lp.login == loginUser && lp.password == passwordUser)
                 {
-                    logPas.access = lp.access;
+                    accessSetter(lp.access);
+                    loginSetter(loginUser);
+                    passwordSetter(passwordUser);
+                    //______________________________________________________________________________________
+                    switch (logPas.access.ToString())
+                    {
+                        case "": // Без сортировки
+                            Console.WriteLine("Пользователь отсутствует");
+                            break;
+                        case "admin": // админ
+                                      //Admin admin = new Admin();
+                            admin.logPas.access = "admin";
+                            break;
+                        case "seller": // продавец
+                                       //Seller seller = new Seller();
+                            seller.logPas.access = "seller";
+                            break;
+                        case "customer": // покупатель
+                                         //Customer customer = new Customer();
+                            customer.logPas.access = "customer";
+                            break;
+                    }
+                    //______________________________________________________________________________________
 
                     //Console.WriteLine("Все ОК!!!");
                     return true;
@@ -70,10 +99,11 @@ namespace Market_try
             }
             if (logPas.access == "")
             {
+                return false;
                 //Console.WriteLine("Логин или пароль неверные");
                 //throw new Exception();
             }
-                return false;
+            return false;
         }
         
           public bool сheckOut(string x, string y)

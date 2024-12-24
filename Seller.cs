@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FormMarket
 {
-    internal class Seller: Market_try.User
+    public class Seller: Market_try.User
     {
         private List<Product> sellerBucketGoods = new List<Product>();
 

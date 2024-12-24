@@ -34,7 +34,7 @@ namespace FormMarket
         {
 
             Shop shop = new Shop();
-            shop.productsToShop();
+            shop.productsToShop("market_goods.txt");
 
             table = new DataTable();
 
@@ -189,7 +189,7 @@ namespace FormMarket
                 table.Clear();
 
                 Shop shop = new Shop();
-                shop.productsToShop();
+                shop.productsToShop("market_goods.txt");
 
                 foreach (var product in shop.products)
                 {

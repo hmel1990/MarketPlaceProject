@@ -15,50 +15,59 @@ namespace FormMarket
 {
     public partial class Form1 : Form
     { 
+        private Shop shop;
+        private string cellValue;
+        internal DataTable table;
         private User user;
         private Customer customer;
         private Seller seller;
         private Admin admin;
-        private string cellValue;
-        internal DataTable table;
         public Form1()
         {
             InitializeComponent();
-
             user = new User();// создаем объект User
             seller = new Seller();
             admin = new Admin();
             customer = new Customer();
+            shop = new Shop();
+
 
             #region таблица
+            #region
             // заполняем таблицу
-            Shop shop = new Shop();
-
             // читаем из тхт файла и заполняем в список поля User каталог товаров
-            shop.productsToShop();
+            //shop.productsToShop("market_goods.txt");
+            #endregion
+
+            table = shop.table;
+
+            #region
+            //table = new DataTable();
+            ////устанавливаем значение для заголовков столбцов
+            //table.Columns.Add("Brand", typeof(string));
+            //table.Columns.Add("Model", typeof(string));
+            //table.Columns.Add("Submodel", typeof(string));
+            //table.Columns.Add("Memory", typeof(int));
+            //table.Columns.Add("Quantity", typeof(int));
 
 
-            table = new DataTable();
-
-            //устанавливаем значение для заголовков столбцов
-            table.Columns.Add("Brand", typeof(string));
-            table.Columns.Add("Model", typeof(string));
-            table.Columns.Add("Submodel", typeof(string));
-            table.Columns.Add("Memory", typeof(int));
-            table.Columns.Add("Quantity", typeof(int));
-
-
-            // Заполнение таблицы
-            for (int i = 0; i < shop.products.Count; i++)
-            {
-                table.Rows.Add(shop.products[i].Brand, shop.products[i].Model, shop.products[i].Submodel, shop.products[i].Memory, shop.products[i].Quantity);
-            }
+            //// Заполнение таблицы
+            //for (int i = 0; i < shop.products.Count; i++)
+            //{
+            //    table.Rows.Add(shop.products[i].Brand, shop.products[i].Model, shop.products[i].Submodel, shop.products[i].Memory, shop.products[i].Quantity);
+            //}
+            #endregion
 
             // Привязка данных к DataGridView
             dataGridView1.DataSource = table;
             #endregion
 
+            sortingProducts();
+
+        }
             #region сортировка
+        public void sortingProducts ()
+        {
             // Добавляем элементы в ComboBox - значения брендов
             comboBoxFilter.Items.Add("         "); // Добавить опцию для сброса фильтра
             var brands = shop.products.Select(g => g.Brand).Distinct().ToList();
@@ -66,16 +75,17 @@ namespace FormMarket
             comboBoxFilter.SelectedIndex = 0; // Установить первый элемент выбранным
 
             // Добавляем элементы в ComboBox
-            comboBoxSort.Items.AddRange(new string[] {
+            comboBoxSort.Items.AddRange(new string[]
+            {
                 "Без сортировки",
                 "По количеству памяти (возрастание)",
                 "По количеству памяти (убывание)",
                 "По имени бренда (возрастание)",
                 "По имени бренда (убывание)"
             });
+        }
             #endregion
 
-        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -325,8 +335,11 @@ namespace FormMarket
                 // Обновляем данные в таблице
                 table.Clear();
 
-                Shop shop = new Shop();
-                shop.productsToShop();
+                //Shop shop = new Shop();
+
+                // Очищаем список продуктов перед обновлением
+                shop.products.Clear();
+                shop.productsToShop("market_goods.txt");
 
                 foreach (var product in shop.products)
                 {

@@ -10,7 +10,7 @@ namespace Market_try
     {
         internal LoginPassword logPas = new LoginPassword();
 
-        private List<LoginPassword> data = new List<LoginPassword>();
+        private List<LoginPassword> usersData = new List<LoginPassword>();
 
         #region сеттеры и геттеры
         public void loginSetter (string login)
@@ -46,7 +46,7 @@ namespace Market_try
             // Заполняем массив данными из файла (i = 1 т.к. первая строка в тхт файле это шапка таблицы)
             for (int i = 1; i < lines.Length; i++)
             {
-                data.Add(new LoginPassword(lines[i]));
+                usersData.Add(new LoginPassword(lines[i]));
             }
 
         }
@@ -58,7 +58,7 @@ namespace Market_try
             loginSetter(x);
             passwordSetter(y);
 
-            foreach (LoginPassword lp in data) 
+            foreach (LoginPassword lp in usersData) 
             {
                 if (lp.login == logPas.login && lp.password == logPas.password)
                 {
@@ -80,7 +80,7 @@ namespace Market_try
             loginSetter(x);
             passwordSetter(y);
 
-            foreach (LoginPassword lp in data)
+            foreach (LoginPassword lp in usersData)
             {
 
                 if (lp.login == logPas.login && lp.password == logPas.password)
@@ -99,11 +99,11 @@ namespace Market_try
 
             if (сheckOut(x, y))
             {
-                data.Add(new LoginPassword()); // добавляем в список еще один объект
+                usersData.Add(new LoginPassword()); // добавляем в список еще один объект
                 logPas.access = "customer"; // устанавливаем id == customer
-                data[(data.Count() - 1)].access = "customer";            //заполняем новый объект в массиве
-                data[(data.Count() - 1)].login = logPas.login;         //заполняем новый объект в массиве
-                data[(data.Count() - 1)].password = logPas.password;   //заполняем новый объект в массиве
+                usersData[(usersData.Count() - 1)].access = "customer";            //заполняем новый объект в массиве
+                usersData[(usersData.Count() - 1)].login = logPas.login;         //заполняем новый объект в массиве
+                usersData[(usersData.Count() - 1)].password = logPas.password;   //заполняем новый объект в массиве
                 File.AppendAllText("loginPassword.txt", logPas.access + "\t" + logPas.login + "\t" + logPas.password + "\n"); //записываем строку с новым пользователев в тхт файл
                 return true;
             }

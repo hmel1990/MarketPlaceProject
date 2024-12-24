@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Data;
 
 namespace FormMarket
 {
@@ -11,33 +12,60 @@ namespace FormMarket
     public class Shop
     {
         public List<Product> products = new List<Product>();
-        public void productsToShop()
-        {
-            // Считываем все строки из файла
-            string[] lines = File.ReadAllLines("market_goods.txt");
+        private string path = "market_goods.txt";
+        internal DataTable table = new DataTable();
 
-            // Проверяем, есть ли строки в файле
-            if (lines.Length == 0)
-            {
-                Console.WriteLine("Файл пуст.");
-                return;
-            }
+        public void setPath (string path)
+        { this.path = path; }
+        public Shop(string path)
+        {
+            setPath(path);
+            fillTableOfProducts(path);
+        }
+
+        public Shop()
+        {
+            fillTableOfProducts(path);
+        }
+
+        public List<Product> productsToShop(string path)
+        {
+            FileManager fileManager = new FileManager();
+            string [] lines = fileManager.readStringsFromFile(path);
 
             // Заполняем массив данными из файла (i = 1 т.к. первая строка в тхт файле это шапка таблицы)
             for (int i = 1; i<lines.Length; i++)
             {
                 products.Add(new Product(lines[i]));
             }
-
+            return products;
         }
+
+        public void fillTableOfProducts (string path)
+        {
+            products = productsToShop(path);
+
+            //устанавливаем значение для заголовков столбцов
+            table.Columns.Add("Brand", typeof(string));
+            table.Columns.Add("Model", typeof(string));
+            table.Columns.Add("Submodel", typeof(string));
+            table.Columns.Add("Memory", typeof(int));
+            table.Columns.Add("Quantity", typeof(int));
+            
+            // Заполнение таблицы
+            for (int i = 0; i < products.Count; i++)
+            {
+                table.Rows.Add(products[i].Brand, products[i].Model, products[i].Submodel, products[i].Memory, products[i].Quantity);
+            }
+            //return table;
+        }
+        
         public void Print()
         {
             for (int i = 0; i < products.Count; i++)
             {
                 Console.WriteLine($"{products[i].Brand,-10}{products[i].Model,-10}{products[i].Submodel,-10}{products[i].Memory,-10}{products[i].Quantity,-10}");
 
-                //Console.WriteLine(goods[i].Brand + " " + goods[i].Model + " " + goods[i].Submodel + " " + goods[i].Memory + " " + goods[i].Quantity);
-                //Console.WriteLine(goods[i]);
             }
         }
 

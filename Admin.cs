@@ -1,4 +1,4 @@
-﻿using Market_try;
+﻿//using Market_try;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FormMarket
 {
-    public class Admin: Market_try.User
+    public class Admin: FormMarket.User
     {
         private List<Product> adminBucketProducts = new List<Product>();
         internal List<LoginPassword> listOfUsers = new List<LoginPassword>();
@@ -15,6 +15,7 @@ namespace FormMarket
         public Admin ()
         {
             logPas.access = "";
+            usersToList();
         }
         public void usersToList()
         {

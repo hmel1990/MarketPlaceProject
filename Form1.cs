@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using Market_try;
 
 
 namespace FormMarket
@@ -22,6 +21,7 @@ namespace FormMarket
         private Customer customer;
         private Seller seller;
         private Admin admin;
+        private Basket basket;
         public Form1()
         {
             InitializeComponent();
@@ -30,10 +30,12 @@ namespace FormMarket
             admin = new Admin();
             customer = new Customer();
             shop = new Shop();
-                               
-            // читаем из тхт файла и заполняем в список поля User каталог товаров
-            // заполняем таблицу
-            table = shop.table;
+            basket = new Basket();
+
+
+        // читаем из тхт файла и заполняем в список поля User каталог товаров
+        // заполняем таблицу
+        table = shop.table;
 
             // Привязка данных к DataGridView
             dataGridView1.DataSource = table;
@@ -73,7 +75,7 @@ namespace FormMarket
             string loginUser = loginField.Text;
             string passwordUser = passwordField.Text;
                        
-            if (user.Autorithation(loginUser, passwordUser, admin, seller,customer))
+            if (user.Autorithation(user, loginUser, passwordUser, admin, seller,customer))
             {
                 //MessageBox.Show("Ok!!");
                 loginbutton.Hide();     //скрываем поле логин
@@ -111,29 +113,15 @@ namespace FormMarket
         }
         private void buttonToBuy_Click(object sender, EventArgs e)
         {
-            // Проверяем, что выбрана строка
-            if (dataGridView1.CurrentRow != null)
-            {
-                // Сохраняем значение первой ячейки выбранной строки
-                for (int i = 0; i < (dataGridView1.Columns.Count); i++)
-                {
-                    cellValue += dataGridView1.CurrentRow.Cells[i].Value?.ToString() + "\t";//!!!!!!! значение и которое потом запишется в тхт файл корзины)
-                }
-                MessageBox.Show($"Содержимое первой ячейки строки скопировано: {cellValue}");
-                customer.logPas.access = user.logPas.access;
-                customer.addToBucket(cellValue);
-                cellValue = "";
-            }
-            else
-            {
-                MessageBox.Show("Пожалуйста, выберите строку.");
-            }
+            basket.addProductToBasket(customer, dataGridView1, cellValue);
+            //MessageBox.Show( customer.idGetter());
+
         }
 
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        
+
+
         //переключиться на форму 2
         private void buttonSwitch_Click(object sender, EventArgs e)
         {

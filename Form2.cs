@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
-using Market_try;
 using static System.Windows.Forms.DataFormats;
 using Microsoft.VisualBasic.ApplicationServices;
 
@@ -55,16 +54,18 @@ namespace FormMarket
 
 
             admin = new Admin();
-            admin.usersToList();
+            //admin.usersToList();
 
             tableUsers = new DataTable();
 
             tableUsers.Columns.Add("Access", typeof(string));
             tableUsers.Columns.Add("Login", typeof(string));
             tableUsers.Columns.Add("Password", typeof(string));
+            tableUsers.Columns.Add("Id", typeof(string));
+
             for (int i = 0; i < admin.listOfUsers.Count; i++)
             {
-                tableUsers.Rows.Add(admin.listOfUsers[i].access, admin.listOfUsers[i].login, admin.listOfUsers[i].password);
+                tableUsers.Rows.Add(admin.listOfUsers[i].access, admin.listOfUsers[i].login, admin.listOfUsers[i].password, admin.listOfUsers[i].userID);
             }
 
             dataGridView3.DataSource = tableUsers;

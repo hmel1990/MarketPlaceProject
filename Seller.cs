@@ -1,5 +1,4 @@
-﻿using Market_try;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FormMarket
 {
-    public class Seller: Market_try.User
+    public class Seller: FormMarket.User
     {
         private List<Product> sellerBucketGoods = new List<Product>();
 

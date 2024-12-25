@@ -2,14 +2,17 @@
 using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
-namespace Market_try
+namespace FormMarket
 {
     public class User
     {
+        private string pathToUsersData = "loginPassword.txt";
         internal LoginPassword logPas = new LoginPassword();
 
         private List<LoginPassword> usersData = new List<LoginPassword>();
@@ -28,6 +31,8 @@ namespace Market_try
             //string login = Console.ReadLine();
             logPas.access = access;
         }
+        public void idSetter(string userID)
+        { logPas.userID = userID; }
 
         public void passwordSetter(string password)
         {
@@ -62,7 +67,22 @@ namespace Market_try
         #endregion
 
         #region регистрация и авторизация
-        public bool Autorithation(string loginUser, string passwordUser, Admin admin, Seller seller, Customer customer) //параметры х у принимаются из виндовс форм
+
+        //public void idSetter(string loginUser, string passwordUser)
+        //{
+        //    FileManager fm = new FileManager();
+        //    string[] lines = fm.readStringsFromFile(pathToUsersData);
+        //    int count = 0;
+        //    foreach (string line in lines)
+        //    {
+        //        count++;
+        //        if (line.Contains(loginUser)&& line.Contains(passwordUser))
+        //        {
+        //           logPas.id = Convert.ToString(count);
+        //        }
+        //    }
+        //}
+        public bool Autorithation(User user, string loginUser, string passwordUser, Admin admin, Seller seller, Customer customer) //параметры х у принимаются из виндовс форм
         {
 
             foreach (LoginPassword lp in usersData) 
@@ -72,8 +92,9 @@ namespace Market_try
                     accessSetter(lp.access);
                     loginSetter(loginUser);
                     passwordSetter(passwordUser);
+                    idSetter(lp.userID);
                     //______________________________________________________________________________________
-                    switch (logPas.access.ToString())
+                    switch (logPas.access)
                     {
                         case "": // Без сортировки
                             Console.WriteLine("Пользователь отсутствует");
@@ -81,14 +102,17 @@ namespace Market_try
                         case "admin": // админ
                                       //Admin admin = new Admin();
                             admin.logPas.access = "admin";
+                            admin.logPas.userID = logPas.userID;
                             break;
                         case "seller": // продавец
                                        //Seller seller = new Seller();
                             seller.logPas.access = "seller";
+                            seller.logPas.userID = logPas.userID;
                             break;
                         case "customer": // покупатель
                                          //Customer customer = new Customer();
                             customer.logPas.access = "customer";
+                            customer.logPas.userID = logPas.userID;
                             break;
                     }
                     //______________________________________________________________________________________

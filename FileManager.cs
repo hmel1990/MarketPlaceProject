@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,6 +36,14 @@ namespace FormMarket
             }
 
             return lines;
+        }
+    
+        public void addStringToFile (string path, string newLine)
+        {
+            using (StreamWriter writer = new StreamWriter(path, true))
+            {
+                writer.WriteLine(newLine);
+            }
         }
     }
 }

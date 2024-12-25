@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Market_try
+namespace FormMarket
 {
     internal class LoginPassword
     {
         internal string access;
         internal string login;
         internal string password;
+        internal string userID;
+
 
         public LoginPassword(string lines)
         {
@@ -18,6 +20,7 @@ namespace Market_try
             this.access = values[0];
             this.login = values[1];
             this.password = values[2];
+            this.userID = values[3];
         }
         public LoginPassword()
         {

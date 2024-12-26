@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            toForm2 = new Button();
+            switchToAdminMode = new Button();
             loginField = new TextBox();
             passwordField = new TextBox();
             loginbutton = new Button();
@@ -44,18 +44,19 @@
             label2 = new Label();
             label3 = new Label();
             buttonRefresh = new Button();
+            switchToSellerMode = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
-            // toForm2
+            // switchToAdminMode
             // 
-            toForm2.Location = new Point(85, 81);
-            toForm2.Name = "toForm2";
-            toForm2.Size = new Size(230, 46);
-            toForm2.TabIndex = 0;
-            toForm2.Text = "AdminMode";
-            toForm2.UseVisualStyleBackColor = true;
-            toForm2.Click += buttonSwitch_Click;
+            switchToAdminMode.Location = new Point(85, 81);
+            switchToAdminMode.Name = "switchToAdminMode";
+            switchToAdminMode.Size = new Size(230, 46);
+            switchToAdminMode.TabIndex = 0;
+            switchToAdminMode.Text = "AdminMode";
+            switchToAdminMode.UseVisualStyleBackColor = true;
+            switchToAdminMode.Click += switchToAdminMode_Click;
             // 
             // loginField
             // 
@@ -195,6 +196,16 @@
             buttonRefresh.UseVisualStyleBackColor = true;
             buttonRefresh.Click += buttonRefresh_Click;
             // 
+            // switchToSellerMode
+            // 
+            switchToSellerMode.Location = new Point(85, 12);
+            switchToSellerMode.Name = "switchToSellerMode";
+            switchToSellerMode.Size = new Size(230, 46);
+            switchToSellerMode.TabIndex = 0;
+            switchToSellerMode.Text = "SellerMode";
+            switchToSellerMode.UseVisualStyleBackColor = true;
+            switchToSellerMode.Click += switchToSellerMode_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
@@ -215,7 +226,8 @@
             Controls.Add(loginbutton);
             Controls.Add(passwordField);
             Controls.Add(loginField);
-            Controls.Add(toForm2);
+            Controls.Add(switchToSellerMode);
+            Controls.Add(switchToAdminMode);
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
@@ -227,7 +239,7 @@
 
         #endregion
 
-        private Button toForm2;
+        private Button switchToAdminMode;
         private TextBox loginField;
         private TextBox passwordField;
         private Button loginbutton;
@@ -243,5 +255,6 @@
         private Label label2;
         private Label label3;
         private Button buttonRefresh;
+        private Button switchToSellerMode;
     }
 }

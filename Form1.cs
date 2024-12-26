@@ -115,7 +115,7 @@ namespace FormMarket
         }
         private void buttonToBuy_Click(object sender, EventArgs e)
         {
-            basket.addProductToBasket(customer, dataGridView1, cellValue);
+            basket.addProductToBasket(user, customer, dataGridView1, cellValue);
             //MessageBox.Show( customer.idGetter());
 
         }
@@ -124,10 +124,11 @@ namespace FormMarket
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-        //переключиться на форму 2
-        private void buttonSwitch_Click(object sender, EventArgs e)
+        //переключиться на форму 2 для Админа
+        private void switchToAdminMode_Click(object sender, EventArgs e)
         {
-            if (user.logPas.access == "seller" | user.logPas.access == "admin")
+            //user.logPas.access == "seller" 
+            if (user.logPas.access == "admin")
             {
                 // Создаем экземпляр второй формы
                 Form2 form2 = new Form2();
@@ -139,6 +140,23 @@ namespace FormMarket
             }
 
         }
+
+        //переключиться на форму 3 для Продавца
+        private void switchToSellerMode_Click(object sender, EventArgs e)
+        {
+            if (user.logPas.access == "seller" | user.logPas.access == "admin")
+            {
+                // Создаем экземпляр второй формы
+                Form3 form3 = new Form3();
+                form3.Show();
+            }
+            else
+            {
+                MessageBox.Show("You are not authorized");
+            }
+
+        }
+
         //Кнопка поиска товара
         private void buttonSearch_Click(object sender, EventArgs e)
         {

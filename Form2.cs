@@ -18,7 +18,7 @@ namespace FormMarket
     {
         internal DataTable tableProducts;
         internal DataTable tableUsers;
-        private Shop shop;
+        internal Shop shop;
 
         internal Seller seller;
         internal Admin admin;
@@ -151,9 +151,7 @@ namespace FormMarket
         {
             if (tableProducts != null)
             {
-                // Сохраняем обновленные данные в файл
-                //SaveDataGridViewToFile();////////////////////////////////////////////////////////////////////////////!!!!!!!!!!!!!!!!!!!!
-                // Обновляем данные в таблице
+
                 tableProducts.Clear();
                 shop.products.Clear();
                 shop.productsToShop(pathToProducts);

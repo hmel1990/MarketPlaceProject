@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,10 +11,19 @@ namespace FormMarket
 {
     internal class Basket
     {
+        //internal DataTable tableBasketProducts;
+        //private List<Product> productsInBasket;
+        internal DataTable tableBasketProducts = new DataTable();
+
+
         private string pathToBasket = "market_goods_korzina.txt";
-        public void addProductToBasket(Customer customer, DataGridView dataGridView1, string cellValue)
+        public Basket()
         {
-             
+            addNamesToColumnsBasket(tableBasketProducts);
+            fillBasket(tableBasketProducts);
+        }
+        public void addProductToBasket(User user, Customer customer, DataGridView dataGridView1, string cellValue)
+        {             
             // Проверяем, что выбрана строка
             if (dataGridView1.CurrentRow != null)
             {
@@ -20,8 +31,8 @@ namespace FormMarket
                 for (int i = 0; i < (dataGridView1.Columns.Count); i++)
                 {
                     cellValue += dataGridView1.CurrentRow.Cells[i].Value?.ToString() + "\t";//!!!!!!! значение и которое потом запишется в тхт файл корзины)
-                }
-                cellValue = cellValue + "\t" + customer.logPas.userID;
+                }                
+                cellValue = (user.logPas.userID + "\t" + cellValue);
                 MessageBox.Show($"Содержимое первой ячейки строки скопировано: {cellValue}");
                 FileManager fm = new FileManager();
                 fm.addStringToFile(pathToBasket,cellValue);
@@ -32,6 +43,59 @@ namespace FormMarket
                 MessageBox.Show("Пожалуйста, выберите строку.");
             }
         }
+        public void addNamesToColumnsBasket(DataTable tableBasketProducts)
+        {
+            //устанавливаем значение для заголовков столбцов
+            tableBasketProducts.Columns.Add("Id", typeof(int));
+            tableBasketProducts.Columns.Add("Brand", typeof(string));
+            tableBasketProducts.Columns.Add("Model", typeof(string));
+            tableBasketProducts.Columns.Add("Submodel", typeof(string));
+            tableBasketProducts.Columns.Add("Memory", typeof(int));
+            tableBasketProducts.Columns.Add("Quantity", typeof(int));
+        }
+        public void fillBasket(DataTable tableBasketProducts)
+        {
 
+            FileManager fileManager = new FileManager();
+
+            string[] lines = fileManager.readStringsFromFile(pathToBasket);
+
+            // Заполняем массив данными из файла (i = 1 т.к. первая строка в тхт файле это шапка таблицы)
+
+            for (int i = 1; i < lines.Length; i++)
+            {
+                string[] values = lines[i].Split('\t');
+                // Заполнение таблицы
+                tableBasketProducts.Rows.Add(Convert.ToInt32(values[0]), values[1], values[2], values[3], Convert.ToInt32(values[4]), Convert.ToInt32(values[5]));
+            }
+        }
+
+        public void deleteProductFromBasket(int index)
+        {
+            // Проверяем, существует ли файл
+            if (!File.Exists(pathToBasket))
+            {
+                Console.WriteLine("Файл не найден.");
+                return;
+            }
+
+            // Читаем все строки из файла
+            var lines = File.ReadAllLines(pathToBasket).ToList();
+
+            // Проверяем, корректен ли номер строки
+            if (index < 1 || index > lines.Count)
+            {
+                Console.WriteLine("Номер строки вне диапазона.");
+                return;
+            }
+
+            // Удаляем строку с указанным номером (индекс на 1 меньше, так как индексация с 0)
+            lines.RemoveAt(index);
+
+            // Перезаписываем файл без удалённой строки
+            File.WriteAllLines(pathToBasket, lines);
+
+            //Console.WriteLine($"Строка {index} успешно удалена.");
+        }
     }
 }

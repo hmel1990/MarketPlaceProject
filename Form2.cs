@@ -16,46 +16,25 @@ namespace FormMarket
 {
     public partial class Form2 : Form
     {
-        internal DataTable table;
+        internal DataTable tableProducts;
         internal DataTable tableUsers;
+        private Shop shop;
 
         internal Seller seller;
         internal Admin admin;
 
-
+        private string pathToUsers = "loginPassword.txt";
+        private string pathToProducts = "market_goods.txt";
 
         public Form2()
         {
             InitializeComponent();
             seller = new Seller();
-        }
-        private void Form2_Load(object sender, EventArgs e)
-        {
-
-            Shop shop = new Shop();
-            shop.productsToShop("market_goods.txt");
-
-            table = new DataTable();
-
-            table.Columns.Add("Brand", typeof(string));
-            table.Columns.Add("Model", typeof(string));
-            table.Columns.Add("Submodel", typeof(string));
-            table.Columns.Add("Memory", typeof(int));
-            table.Columns.Add("Quantity", typeof(int));
-
-
-
-            for (int i = 0; i < shop.products.Count; i++)
-            {
-                table.Rows.Add(shop.products[i].Brand, shop.products[i].Model, shop.products[i].Submodel, shop.products[i].Memory, shop.products[i].Quantity);
-            }
-
-            dataGridView2.DataSource = table;
-
-
             admin = new Admin();
-            //admin.usersToList();
-
+            shop = new Shop();
+            tableProducts = shop.table;
+            dataGridViewProducts.DataSource = tableProducts;
+            //___________________________________________________
             tableUsers = new DataTable();
 
             tableUsers.Columns.Add("Access", typeof(string));
@@ -68,15 +47,18 @@ namespace FormMarket
                 tableUsers.Rows.Add(admin.listOfUsers[i].access, admin.listOfUsers[i].login, admin.listOfUsers[i].password, admin.listOfUsers[i].userID);
             }
 
-            dataGridView3.DataSource = tableUsers;
+            dataGridViewUsers.DataSource = tableUsers;
         }
+
+
+        private void Form2_Load(object sender, EventArgs e){}
 
         private void deleteUserFromList_Click(object sender, EventArgs e)
         {
             // Проверяем, что выбрана строка
-            if (dataGridView3.CurrentRow != null)
+            if (dataGridViewUsers.CurrentRow != null)
             {
-                int index = (dataGridView3.CurrentRow.Index + 1);
+                int index = (dataGridViewUsers.CurrentRow.Index + 1);
                 admin.deleteUserFromList(index);
             }
             else
@@ -86,15 +68,12 @@ namespace FormMarket
         }
 
 
-
-
-
         private void deleteGoodsFromShop_Click(object sender, EventArgs e)
         {
             // Проверяем, что выбрана строка
-            if (dataGridView2.CurrentRow != null)
+            if (dataGridViewProducts.CurrentRow != null)
             {
-                int index = (dataGridView2.CurrentRow.Index + 1);
+                int index = (dataGridViewProducts.CurrentRow.Index + 1);
                 seller.deleteGoodsFromShop(index);
             }
             else
@@ -103,25 +82,11 @@ namespace FormMarket
             }
         }
 
-        public void SaveUsersGridViewToFile()
-        {
-            using (var writer = new StreamWriter("loginPassword.txt"))
-            {
-                // Запись заголовков
-                var headers = string.Join("\t", tableUsers.Columns.Cast<DataColumn>().Select(column => column.ColumnName));
-                writer.WriteLine(headers);
-
-                // Запись данных строк
-                foreach (DataRow row in tableUsers.Rows)
-                {
-                    var values = string.Join("\t", row.ItemArray);
-                    writer.WriteLine(values);
-                }
-            }
-        }
+       
         private void saveUsersToFile_Click(object sender, EventArgs e)
         {
-            SaveUsersGridViewToFile();
+            FileManager fm = new FileManager();
+            fm.writeUsersGridViewToFile(tableUsers, pathToUsers);
         }
 
         private void buttonUsersRefresh_Click(object sender, EventArgs e)
@@ -141,11 +106,11 @@ namespace FormMarket
 
                 foreach (var adm in admin.listOfUsers)
                 {
-                    tableUsers.Rows.Add(adm.access, adm.login, adm.password);
+                    tableUsers.Rows.Add(adm.access, adm.login, adm.password, adm.userID);
                 }
 
                 // Привязываем обновленную таблицу к DataGridView
-                dataGridView3.DataSource = tableUsers;
+                dataGridViewUsers.DataSource = tableUsers;
             }
             else
             {
@@ -160,11 +125,11 @@ namespace FormMarket
             using (var writer = new StreamWriter("market_goods.txt"))
             {
                 // Запись заголовков
-                var headers = string.Join("\t", table.Columns.Cast<DataColumn>().Select(column => column.ColumnName));
+                var headers = string.Join("\t", tableProducts.Columns.Cast<DataColumn>().Select(column => column.ColumnName));
                 writer.WriteLine(headers);
 
                 // Запись данных строк
-                foreach (DataRow row in table.Rows)
+                foreach (DataRow row in tableProducts.Rows)
                 {
                     var values = string.Join("\t", row.ItemArray);
                     writer.WriteLine(values);
@@ -184,21 +149,23 @@ namespace FormMarket
 
         private void RefreshDataGridView()
         {
-            if (table != null)
+            if (tableProducts != null)
             {
+                // Сохраняем обновленные данные в файл
+                //SaveDataGridViewToFile();////////////////////////////////////////////////////////////////////////////!!!!!!!!!!!!!!!!!!!!
                 // Обновляем данные в таблице
-                table.Clear();
-
-                Shop shop = new Shop();
-                shop.productsToShop("market_goods.txt");
+                tableProducts.Clear();
+                shop.products.Clear();
+                shop.productsToShop(pathToProducts);
 
                 foreach (var product in shop.products)
                 {
-                    table.Rows.Add(product.Brand, product.Model, product.Submodel, product.Memory, product.Quantity);
+                    tableProducts.Rows.Add(product.Brand, product.Model, product.Submodel, product.Memory, product.Quantity);
                 }
 
                 // Привязываем обновленную таблицу к DataGridView
-                dataGridView2.DataSource = table;
+                dataGridViewProducts.DataSource = tableProducts;
+
             }
             else
             {

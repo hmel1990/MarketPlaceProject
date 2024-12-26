@@ -1,0 +1,3 @@
+Brand	Model	Submodel	Memory	Quantity	id
+Samsung	Galaxy	Flip	124	4		
+Apple	Iphone	ProMax	256	20		10

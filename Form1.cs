@@ -22,6 +22,8 @@ namespace FormMarket
         private Seller seller;
         private Admin admin;
         private Basket basket;
+        
+        //Конструктор
         public Form1()
         {
             InitializeComponent();
@@ -33,9 +35,9 @@ namespace FormMarket
             basket = new Basket();
 
 
-        // читаем из тхт файла и заполняем в список поля User каталог товаров
-        // заполняем таблицу
-        table = shop.table;
+            // читаем из тхт файла и заполняем в список поля User каталог товаров
+            // заполняем таблицу
+            table = shop.table;
 
             // Привязка данных к DataGridView
             dataGridView1.DataSource = table;
@@ -46,7 +48,7 @@ namespace FormMarket
 
         }
 
-
+        //загрузка формы
         private void Form1_Load(object sender, EventArgs e)
         {
             dataGridView1.Hide();// прячем таблицу которую разместили до этого в форме
@@ -137,7 +139,7 @@ namespace FormMarket
             }
 
         }
-        
+        //Кнопка поиска товара
         private void buttonSearch_Click(object sender, EventArgs e)
         {
             // Получаем текст из текстового поля
@@ -183,6 +185,7 @@ namespace FormMarket
             }
         }
 
+        //Кнопка сброса фильтра
         private void ResetButton_Click(object sender, EventArgs e)
         {
             // Сбросить фильтр
@@ -196,6 +199,7 @@ namespace FormMarket
             RefreshDataGridView();
         }
 
+        //Кнопка обновить данные после редактирования
         private void RefreshDataGridView()
         {
             if (table != null)

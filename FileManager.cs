@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -37,13 +38,32 @@ namespace FormMarket
 
             return lines;
         }
-    
-        public void addStringToFile (string path, string newLine)
+
+        public void addStringToFile(string path, string newLine)
         {
             using (StreamWriter writer = new StreamWriter(path, true))
             {
                 writer.WriteLine(newLine);
             }
         }
+
+
+        public void writeUsersGridViewToFile(DataTable tableUsers, string pathToProducts)
+        {
+            using (var writer = new StreamWriter(pathToProducts))
+            {
+                // Запись заголовков
+                var headers = string.Join("\t", tableUsers.Columns.Cast<DataColumn>().Select(column => column.ColumnName));
+                writer.WriteLine(headers);
+
+                // Запись данных строк
+                foreach (DataRow row in tableUsers.Rows)
+                {
+                    var values = string.Join("\t", row.ItemArray);
+                    writer.WriteLine(values);
+                }
+            }
+        }
     }
+
 }

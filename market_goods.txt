@@ -1,4 +1,26 @@
 Brand	Model	Submodel	Memory	Quantity
 Samsung	Galaxy	Flip	124	4
-Apple	Iphone	ProMax	256	20
+Apple	iPhone	ProMax	256	20
 Xiaomi	Redmi	Note	500	16
+Samsung	Galaxy	S23	512	10
+Apple	iPhone	Mini	128	5
+Xiaomi	Mi	11	256	12
+Samsung	Galaxy	Fold	1024	8
+Apple	iPhone	SE	64	15
+Xiaomi	Redmi	9T	128	20
+Samsung	Galaxy	A14	128	30
+Apple	iPhone	14	256	18
+Xiaomi	Poco	X4	512	25
+Samsung	Galaxy	Note10	256	22
+Apple	iPhone	XR	64	12
+Xiaomi	Redmi	K40	128	30
+Samsung	Galaxy	M33	128	40
+Apple	iPhone	13 Pro	512	7
+Xiaomi	Mi	10 Ultra	256	9
+Samsung	Galaxy	A72	256	17
+Apple	iPhone	12	128	24
+Xiaomi	Redmi	8 Pro	64	35
+Samsung	Galaxy	Z Fold 4	1024	5
+Apple	iPhone	11 Pro	256	19
+Xiaomi	Poco	F3	512	11
+Samsung	Galaxy	S21	256	23

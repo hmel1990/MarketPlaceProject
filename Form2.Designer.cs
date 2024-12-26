@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             backToForm1 = new Button();
-            dataGridView2 = new DataGridView();
+            dataGridViewProducts = new DataGridView();
             deleteGoodsFromShop = new Button();
             saveToFile = new Button();
             buttonRefresh = new Button();
-            dataGridView3 = new DataGridView();
+            dataGridViewUsers = new DataGridView();
             deleteUserFromList = new Button();
             saveUsersToFile = new Button();
             button3 = new Button();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewProducts).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewUsers).BeginInit();
             SuspendLayout();
             // 
             // backToForm1
@@ -52,16 +52,16 @@
             backToForm1.UseVisualStyleBackColor = false;
             backToForm1.Click += buttonBack_Click;
             // 
-            // dataGridView2
+            // dataGridViewProducts
             // 
-            dataGridView2.BackgroundColor = Color.Salmon;
-            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Location = new Point(127, 139);
-            dataGridView2.Name = "dataGridView2";
-            dataGridView2.RightToLeft = RightToLeft.No;
-            dataGridView2.RowHeadersWidth = 82;
-            dataGridView2.Size = new Size(1122, 318);
-            dataGridView2.TabIndex = 1;
+            dataGridViewProducts.BackgroundColor = Color.Salmon;
+            dataGridViewProducts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewProducts.Location = new Point(127, 139);
+            dataGridViewProducts.Name = "dataGridViewProducts";
+            dataGridViewProducts.RightToLeft = RightToLeft.No;
+            dataGridViewProducts.RowHeadersWidth = 82;
+            dataGridViewProducts.Size = new Size(1122, 318);
+            dataGridViewProducts.TabIndex = 1;
             // 
             // deleteGoodsFromShop
             // 
@@ -93,14 +93,14 @@
             buttonRefresh.UseVisualStyleBackColor = true;
             buttonRefresh.Click += buttonRefresh_Click;
             // 
-            // dataGridView3
+            // dataGridViewUsers
             // 
-            dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView3.Location = new Point(127, 635);
-            dataGridView3.Name = "dataGridView3";
-            dataGridView3.RowHeadersWidth = 82;
-            dataGridView3.Size = new Size(1122, 384);
-            dataGridView3.TabIndex = 5;
+            dataGridViewUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewUsers.Location = new Point(127, 635);
+            dataGridViewUsers.Name = "dataGridViewUsers";
+            dataGridViewUsers.RowHeadersWidth = 82;
+            dataGridViewUsers.Size = new Size(1122, 384);
+            dataGridViewUsers.TabIndex = 5;
             // 
             // deleteUserFromList
             // 
@@ -141,30 +141,30 @@
             Controls.Add(button3);
             Controls.Add(saveUsersToFile);
             Controls.Add(deleteUserFromList);
-            Controls.Add(dataGridView3);
+            Controls.Add(dataGridViewUsers);
             Controls.Add(buttonRefresh);
             Controls.Add(saveToFile);
             Controls.Add(deleteGoodsFromShop);
-            Controls.Add(dataGridView2);
+            Controls.Add(dataGridViewProducts);
             Controls.Add(backToForm1);
             ForeColor = SystemColors.HotTrack;
             Name = "Form2";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form2";
             Load += Form2_Load;
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewProducts).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewUsers).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
         private Button backToForm1;
-        private DataGridView dataGridView2;
+        private DataGridView dataGridViewProducts;
         private Button deleteGoodsFromShop;
         private Button saveToFile;
         private Button buttonRefresh;
-        private DataGridView dataGridView3;
+        private DataGridView dataGridViewUsers;
         private Button deleteUserFromList;
         private Button saveUsersToFile;
         private Button button3;

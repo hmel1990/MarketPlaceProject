@@ -115,7 +115,19 @@ namespace FormMarket
         }
         private void buttonToBuy_Click(object sender, EventArgs e)
         {
-            basket.addProductToBasket(user, customer, dataGridView1, cellValue);
+            int index = (dataGridView1.CurrentCell.RowIndex);
+            if (Convert.ToInt32(table.Rows[index][4]) > 0)
+            {
+                table.Rows[index][4] = Convert.ToInt32(table.Rows[index][4]) - 1;
+                FileManager fm = new FileManager();
+                fm.writeUsersGridViewToFile(table, "market_goods.txt");
+                basket.addProductToBasket(user, customer, dataGridView1, cellValue);
+            }
+            else 
+            {
+                MessageBox.Show("Товар закончился, извините ((((");
+            }
+
             //MessageBox.Show( customer.idGetter());
 
         }

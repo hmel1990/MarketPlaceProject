@@ -36,6 +36,8 @@ namespace FormMarket
             basket = new Basket();
             tableBasketProducts = basket.tableBasketProducts;
             dataGridViewBasket.DataSource = tableBasketProducts;
+            basket.addFilteringProducts(comboBoxFilter);
+
         }
 
         private void buttonSwitchToMain_Click(object sender, EventArgs e)
@@ -156,5 +158,13 @@ namespace FormMarket
                 MessageBox.Show("Таблица не инициализирована.");
             }
         }
+
+        //Обработчик изменения выбранного элемента ComboBox - фильтр
+        private void comboBoxFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            basket.FilteringProducts(comboBoxFilter, dataGridViewBasket);
+        }
+
+
     }
 }

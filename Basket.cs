@@ -97,5 +97,40 @@ namespace FormMarket
 
             //Console.WriteLine($"Строка {index} успешно удалена.");
         }
+
+
+        public void addFilteringProducts(ComboBox comboBoxFilter)
+        {
+            // Добавляем элементы в ComboBox - значения брендов
+            comboBoxFilter.Items.Add("         "); // Добавить опцию для сброса фильтра
+            var ids = tableBasketProducts.AsEnumerable().Select(row => row.Field<int>("Id")).Distinct().OrderBy(id => id).ToList();
+            comboBoxFilter.Items.AddRange(ids.Select(id => id.ToString()).ToArray());
+            comboBoxFilter.SelectedIndex = 0; // Установить первый элемент выбранным
+        }
+
+        //фильтрация для корзины
+        public void FilteringProducts(ComboBox comboBoxFilter, DataGridView dataGridViewBasket)
+        {
+
+            // Получить выбранное значение
+            string selectedId = comboBoxFilter.SelectedItem.ToString();
+
+            if (selectedId == "         ")
+            {
+                // Сбросить фильтр
+                DataView view = tableBasketProducts.DefaultView;
+                view.RowFilter = string.Empty; // Удаляем фильтр
+                dataGridViewBasket.DataSource = view; // Привязываем оригинальные данные
+            }
+            else
+            {
+                // Создать DataView из оригинальной таблицы
+                DataView view = tableBasketProducts.DefaultView;
+                view.RowFilter = $"Convert(Id, 'System.String') LIKE '{selectedId}'";
+
+                // Привязать отфильтрованные данные к DataGridView
+                dataGridViewBasket.DataSource = view;
+            }
+        }
     }
 }

@@ -18,13 +18,19 @@ namespace FormMarket
     {
         internal DataTable tableProducts;
         internal DataTable tableUsers;
+        internal DataTable tableBasketProducts;
+
         internal Shop shop;
+        internal Basket basket;
+
 
         internal Seller seller;
         internal Admin admin;
 
         private string pathToUsers = "loginPassword.txt";
         private string pathToProducts = "market_goods.txt";
+        private string pathToBusket = "market_goods_korzina.txt";
+
 
         public Form2()
         {
@@ -41,6 +47,11 @@ namespace FormMarket
             tableUsers.Columns.Add("Login", typeof(string));
             tableUsers.Columns.Add("Password", typeof(string));
             tableUsers.Columns.Add("Id", typeof(string));
+
+            basket = new Basket();
+            tableBasketProducts = basket.tableBasketProducts;
+            dataGridViewBasket.DataSource = tableBasketProducts;
+            basket.addFilteringProducts(comboBoxFilter);
 
             for (int i = 0; i < admin.listOfUsers.Count; i++)
             {
@@ -176,5 +187,56 @@ namespace FormMarket
             this.Close();
 
         }
+
+        //________________________________________________________________________________
+
+        private void deleteProductFromBasket_Click(object sender, EventArgs e)
+        {
+            // Проверяем, что выбрана строка
+            if (dataGridViewBasket.CurrentRow != null)
+            {
+                int index = (dataGridViewBasket.CurrentRow.Index + 1);
+                basket.deleteProductFromBasket(index);
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите строку.");
+            }
+        }
+
+        private void saveProductsToBascketFile_Click(object sender, EventArgs e)
+        {
+            FileManager fm = new FileManager();
+            fm.writeUsersGridViewToFile(tableBasketProducts, pathToBusket);
+        }
+
+        private void RefreshBasketProductsGrid_Click(object sender, EventArgs e)
+        {
+            RefreshBasketProductsGridView();
+        }
+        private void RefreshBasketProductsGridView()
+        {
+            if (tableBasketProducts != null)
+            {
+                // Обновляем данные в таблице
+                tableBasketProducts.Clear();
+                basket.tableBasketProducts.Clear();
+                basket.fillBasket(tableBasketProducts);
+               
+                // Привязываем обновленную таблицу к DataGridView
+                dataGridViewBasket.DataSource = tableBasketProducts;
+            }
+            else
+            {
+                MessageBox.Show("Таблица не инициализирована.");
+            }
+        }
+
+        //Обработчик изменения выбранного элемента ComboBox - фильтр
+        private void comboBoxFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            basket.FilteringProducts(comboBoxFilter, dataGridViewBasket);
+        }
+
     }
 }

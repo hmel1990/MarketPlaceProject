@@ -37,14 +37,20 @@
             deleteUserFromList = new Button();
             saveUsersToFile = new Button();
             button3 = new Button();
+            dataGridViewBasket = new DataGridView();
+            deleteProductFromBasket = new Button();
+            saveProductsToBascketFile = new Button();
+            RefreshBasketProductsGrid = new Button();
+            comboBoxFilter = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dataGridViewProducts).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewUsers).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewBasket).BeginInit();
             SuspendLayout();
             // 
             // backToForm1
             // 
             backToForm1.BackColor = Color.Goldenrod;
-            backToForm1.Location = new Point(127, 74);
+            backToForm1.Location = new Point(127, 31);
             backToForm1.Name = "backToForm1";
             backToForm1.Size = new Size(262, 46);
             backToForm1.TabIndex = 0;
@@ -56,7 +62,7 @@
             // 
             dataGridViewProducts.BackgroundColor = Color.Salmon;
             dataGridViewProducts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewProducts.Location = new Point(127, 139);
+            dataGridViewProducts.Location = new Point(127, 105);
             dataGridViewProducts.Name = "dataGridViewProducts";
             dataGridViewProducts.RightToLeft = RightToLeft.No;
             dataGridViewProducts.RowHeadersWidth = 82;
@@ -65,7 +71,7 @@
             // 
             // deleteGoodsFromShop
             // 
-            deleteGoodsFromShop.Location = new Point(663, 65);
+            deleteGoodsFromShop.Location = new Point(663, 31);
             deleteGoodsFromShop.Name = "deleteGoodsFromShop";
             deleteGoodsFromShop.Size = new Size(150, 46);
             deleteGoodsFromShop.TabIndex = 2;
@@ -75,7 +81,7 @@
             // 
             // saveToFile
             // 
-            saveToFile.Location = new Point(851, 65);
+            saveToFile.Location = new Point(851, 31);
             saveToFile.Name = "saveToFile";
             saveToFile.Size = new Size(150, 46);
             saveToFile.TabIndex = 3;
@@ -85,7 +91,7 @@
             // 
             // buttonRefresh
             // 
-            buttonRefresh.Location = new Point(1043, 65);
+            buttonRefresh.Location = new Point(1043, 31);
             buttonRefresh.Name = "buttonRefresh";
             buttonRefresh.Size = new Size(150, 46);
             buttonRefresh.TabIndex = 4;
@@ -96,7 +102,7 @@
             // dataGridViewUsers
             // 
             dataGridViewUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewUsers.Location = new Point(127, 635);
+            dataGridViewUsers.Location = new Point(127, 505);
             dataGridViewUsers.Name = "dataGridViewUsers";
             dataGridViewUsers.RowHeadersWidth = 82;
             dataGridViewUsers.Size = new Size(1122, 384);
@@ -104,7 +110,7 @@
             // 
             // deleteUserFromList
             // 
-            deleteUserFromList.Location = new Point(663, 566);
+            deleteUserFromList.Location = new Point(663, 453);
             deleteUserFromList.Name = "deleteUserFromList";
             deleteUserFromList.Size = new Size(150, 46);
             deleteUserFromList.TabIndex = 6;
@@ -114,7 +120,7 @@
             // 
             // saveUsersToFile
             // 
-            saveUsersToFile.Location = new Point(851, 566);
+            saveUsersToFile.Location = new Point(851, 453);
             saveUsersToFile.Name = "saveUsersToFile";
             saveUsersToFile.Size = new Size(150, 46);
             saveUsersToFile.TabIndex = 7;
@@ -124,7 +130,7 @@
             // 
             // button3
             // 
-            button3.Location = new Point(1043, 566);
+            button3.Location = new Point(1043, 453);
             button3.Name = "button3";
             button3.Size = new Size(150, 46);
             button3.TabIndex = 8;
@@ -132,15 +138,68 @@
             button3.UseVisualStyleBackColor = true;
             button3.Click += buttonUsersRefresh_Click;
             // 
+            // dataGridViewBasket
+            // 
+            dataGridViewBasket.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewBasket.Location = new Point(127, 1035);
+            dataGridViewBasket.Name = "dataGridViewBasket";
+            dataGridViewBasket.RowHeadersWidth = 82;
+            dataGridViewBasket.Size = new Size(1122, 384);
+            dataGridViewBasket.TabIndex = 5;
+            // 
+            // deleteProductFromBasket
+            // 
+            deleteProductFromBasket.Location = new Point(381, 967);
+            deleteProductFromBasket.Name = "deleteProductFromBasket";
+            deleteProductFromBasket.Size = new Size(150, 46);
+            deleteProductFromBasket.TabIndex = 6;
+            deleteProductFromBasket.Text = "Delete";
+            deleteProductFromBasket.UseVisualStyleBackColor = true;
+            deleteProductFromBasket.Click += deleteProductFromBasket_Click;
+            // 
+            // saveProductsToBascketFile
+            // 
+            saveProductsToBascketFile.Location = new Point(569, 967);
+            saveProductsToBascketFile.Name = "saveProductsToBascketFile";
+            saveProductsToBascketFile.Size = new Size(150, 46);
+            saveProductsToBascketFile.TabIndex = 7;
+            saveProductsToBascketFile.Text = "Save";
+            saveProductsToBascketFile.UseVisualStyleBackColor = true;
+            saveProductsToBascketFile.Click += saveProductsToBascketFile_Click;
+            // 
+            // RefreshBasketProductsGrid
+            // 
+            RefreshBasketProductsGrid.Location = new Point(761, 967);
+            RefreshBasketProductsGrid.Name = "RefreshBasketProductsGrid";
+            RefreshBasketProductsGrid.Size = new Size(150, 46);
+            RefreshBasketProductsGrid.TabIndex = 8;
+            RefreshBasketProductsGrid.Text = "Refresh";
+            RefreshBasketProductsGrid.UseVisualStyleBackColor = true;
+            RefreshBasketProductsGrid.Click += RefreshBasketProductsGrid_Click;
+            // 
+            // comboBoxFilter
+            // 
+            comboBoxFilter.FormattingEnabled = true;
+            comboBoxFilter.Location = new Point(1007, 967);
+            comboBoxFilter.Name = "comboBoxFilter";
+            comboBoxFilter.Size = new Size(242, 40);
+            comboBoxFilter.TabIndex = 9;
+            comboBoxFilter.SelectedIndexChanged += comboBoxFilter_SelectedIndexChanged;
+            // 
             // Form2
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Salmon;
-            ClientSize = new Size(1974, 1135);
+            ClientSize = new Size(1974, 1515);
+            Controls.Add(comboBoxFilter);
+            Controls.Add(RefreshBasketProductsGrid);
+            Controls.Add(saveProductsToBascketFile);
             Controls.Add(button3);
+            Controls.Add(deleteProductFromBasket);
             Controls.Add(saveUsersToFile);
             Controls.Add(deleteUserFromList);
+            Controls.Add(dataGridViewBasket);
             Controls.Add(dataGridViewUsers);
             Controls.Add(buttonRefresh);
             Controls.Add(saveToFile);
@@ -154,6 +213,7 @@
             Load += Form2_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridViewProducts).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewUsers).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewBasket).EndInit();
             ResumeLayout(false);
         }
 
@@ -168,5 +228,10 @@
         private Button deleteUserFromList;
         private Button saveUsersToFile;
         private Button button3;
+        private DataGridView dataGridViewBasket;
+        private Button deleteProductFromBasket;
+        private Button saveProductsToBascketFile;
+        private Button RefreshBasketProductsGrid;
+        private ComboBox comboBoxFilter;
     }
 }

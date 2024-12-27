@@ -52,11 +52,13 @@ namespace FormMarket
             table.Columns.Add("Submodel", typeof(string));
             table.Columns.Add("Memory", typeof(int));
             table.Columns.Add("Quantity", typeof(int));
-            
+            table.Columns.Add("Price (USD)", typeof(int));
+
+
             // Заполнение таблицы
             for (int i = 0; i < products.Count; i++)
             {
-                table.Rows.Add(products[i].Brand, products[i].Model, products[i].Submodel, products[i].Memory, products[i].Quantity);
+                table.Rows.Add(products[i].Brand, products[i].Model, products[i].Submodel, products[i].Memory, products[i].Quantity, products[i].Price);
             }
             //return table;
         }

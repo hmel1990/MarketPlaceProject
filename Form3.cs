@@ -162,7 +162,9 @@ namespace FormMarket
         //Обработчик изменения выбранного элемента ComboBox - фильтр
         private void comboBoxFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            basket.FilteringProducts(comboBoxFilter, dataGridViewBasket);
+            DataView view = basket.FilteringProducts(comboBoxFilter, dataGridViewBasket);
+            int totalSum = basket.UpdateFilteredSum(view);
+            labelFilteredSum.Text = $"Сумма: {totalSum}$";
         }
 
 

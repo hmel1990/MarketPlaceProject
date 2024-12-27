@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -52,6 +53,7 @@ namespace FormMarket
             tableBasketProducts.Columns.Add("Submodel", typeof(string));
             tableBasketProducts.Columns.Add("Memory", typeof(int));
             tableBasketProducts.Columns.Add("Quantity", typeof(int));
+            tableBasketProducts.Columns.Add("Price (USD)", typeof(int));
         }
         public void fillBasket(DataTable tableBasketProducts)
         {
@@ -66,7 +68,7 @@ namespace FormMarket
             {
                 string[] values = lines[i].Split('\t');
                 // Заполнение таблицы
-                tableBasketProducts.Rows.Add(Convert.ToInt32(values[0]), values[1], values[2], values[3], Convert.ToInt32(values[4]), Convert.ToInt32(values[5]));
+                tableBasketProducts.Rows.Add(Convert.ToInt32(values[0]), values[1], values[2], values[3], Convert.ToInt32(values[4]), Convert.ToInt32(values[5]), Convert.ToInt32(values[6]));
             }
         }
 
@@ -109,7 +111,7 @@ namespace FormMarket
         }
 
         //фильтрация для корзины
-        public void FilteringProducts(ComboBox comboBoxFilter, DataGridView dataGridViewBasket)
+        public DataView FilteringProducts(ComboBox comboBoxFilter, DataGridView dataGridViewBasket)
         {
 
             // Получить выбранное значение
@@ -121,6 +123,8 @@ namespace FormMarket
                 DataView view = tableBasketProducts.DefaultView;
                 view.RowFilter = string.Empty; // Удаляем фильтр
                 dataGridViewBasket.DataSource = view; // Привязываем оригинальные данные
+                return view;
+
             }
             else
             {
@@ -130,7 +134,16 @@ namespace FormMarket
 
                 // Привязать отфильтрованные данные к DataGridView
                 dataGridViewBasket.DataSource = view;
+                return view;
             }
         }
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        public int UpdateFilteredSum(DataView view)
+        {
+            // Подсчет суммы
+            return view.Cast<DataRowView>().Sum(row => row.Row.Field<int>("Price (USD)")); // Укажите имя колонки с ценой
+        }
+
+
     }
 }

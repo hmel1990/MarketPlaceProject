@@ -11,6 +11,7 @@ using System.IO;
 
 using static System.Windows.Forms.DataFormats;
 using Microsoft.VisualBasic.ApplicationServices;
+using System.Reflection.Emit;
 
 namespace FormMarket
 {
@@ -59,10 +60,15 @@ namespace FormMarket
             }
 
             dataGridViewUsers.DataSource = tableUsers;
+
+
         }
 
 
-        private void Form2_Load(object sender, EventArgs e){}
+        private void Form2_Load(object sender, EventArgs e)
+        {
+            this.BackColor = Color.FromArgb(230, 230, 250);
+        }
 
         private void deleteUserFromList_Click(object sender, EventArgs e)
         {
@@ -93,7 +99,7 @@ namespace FormMarket
             }
         }
 
-       
+
         private void saveUsersToFile_Click(object sender, EventArgs e)
         {
             FileManager fm = new FileManager();
@@ -222,7 +228,7 @@ namespace FormMarket
                 tableBasketProducts.Clear();
                 basket.tableBasketProducts.Clear();
                 basket.fillBasket(tableBasketProducts);
-               
+
                 // Привязываем обновленную таблицу к DataGridView
                 dataGridViewBasket.DataSource = tableBasketProducts;
             }
@@ -235,8 +241,11 @@ namespace FormMarket
         //Обработчик изменения выбранного элемента ComboBox - фильтр
         private void comboBoxFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            basket.FilteringProducts(comboBoxFilter, dataGridViewBasket);
+            DataView view = basket.FilteringProducts(comboBoxFilter, dataGridViewBasket);
+            int totalSum = basket.UpdateFilteredSum(view);
+            labelFilteredSum.Text = $"Сумма: {totalSum}$";
         }
+
 
     }
 }

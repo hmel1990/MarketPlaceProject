@@ -42,6 +42,7 @@
             saveProductsToBascketFile = new Button();
             RefreshBasketProductsGrid = new Button();
             comboBoxFilter = new ComboBox();
+            labelFilteredSum = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridViewProducts).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewUsers).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewBasket).BeginInit();
@@ -50,7 +51,7 @@
             // backToForm1
             // 
             backToForm1.BackColor = Color.Goldenrod;
-            backToForm1.Location = new Point(127, 31);
+            backToForm1.Location = new Point(61, 37);
             backToForm1.Name = "backToForm1";
             backToForm1.Size = new Size(262, 46);
             backToForm1.TabIndex = 0;
@@ -60,18 +61,19 @@
             // 
             // dataGridViewProducts
             // 
-            dataGridViewProducts.BackgroundColor = Color.Salmon;
+            dataGridViewProducts.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewProducts.BackgroundColor = Color.Gainsboro;
             dataGridViewProducts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewProducts.Location = new Point(127, 105);
+            dataGridViewProducts.Location = new Point(1644, 348);
             dataGridViewProducts.Name = "dataGridViewProducts";
             dataGridViewProducts.RightToLeft = RightToLeft.No;
             dataGridViewProducts.RowHeadersWidth = 82;
-            dataGridViewProducts.Size = new Size(1122, 318);
+            dataGridViewProducts.Size = new Size(1294, 876);
             dataGridViewProducts.TabIndex = 1;
             // 
             // deleteGoodsFromShop
             // 
-            deleteGoodsFromShop.Location = new Point(663, 31);
+            deleteGoodsFromShop.Location = new Point(1644, 269);
             deleteGoodsFromShop.Name = "deleteGoodsFromShop";
             deleteGoodsFromShop.Size = new Size(150, 46);
             deleteGoodsFromShop.TabIndex = 2;
@@ -81,7 +83,7 @@
             // 
             // saveToFile
             // 
-            saveToFile.Location = new Point(851, 31);
+            saveToFile.Location = new Point(1832, 269);
             saveToFile.Name = "saveToFile";
             saveToFile.Size = new Size(150, 46);
             saveToFile.TabIndex = 3;
@@ -91,7 +93,7 @@
             // 
             // buttonRefresh
             // 
-            buttonRefresh.Location = new Point(1043, 31);
+            buttonRefresh.Location = new Point(2028, 271);
             buttonRefresh.Name = "buttonRefresh";
             buttonRefresh.Size = new Size(150, 46);
             buttonRefresh.TabIndex = 4;
@@ -101,16 +103,18 @@
             // 
             // dataGridViewUsers
             // 
+            dataGridViewUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewUsers.BackgroundColor = Color.Gainsboro;
             dataGridViewUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewUsers.Location = new Point(127, 505);
+            dataGridViewUsers.Location = new Point(1009, 1395);
             dataGridViewUsers.Name = "dataGridViewUsers";
             dataGridViewUsers.RowHeadersWidth = 82;
-            dataGridViewUsers.Size = new Size(1122, 384);
+            dataGridViewUsers.Size = new Size(1294, 453);
             dataGridViewUsers.TabIndex = 5;
             // 
             // deleteUserFromList
             // 
-            deleteUserFromList.Location = new Point(663, 453);
+            deleteUserFromList.Location = new Point(1353, 1323);
             deleteUserFromList.Name = "deleteUserFromList";
             deleteUserFromList.Size = new Size(150, 46);
             deleteUserFromList.TabIndex = 6;
@@ -120,7 +124,7 @@
             // 
             // saveUsersToFile
             // 
-            saveUsersToFile.Location = new Point(851, 453);
+            saveUsersToFile.Location = new Point(1541, 1323);
             saveUsersToFile.Name = "saveUsersToFile";
             saveUsersToFile.Size = new Size(150, 46);
             saveUsersToFile.TabIndex = 7;
@@ -130,7 +134,7 @@
             // 
             // button3
             // 
-            button3.Location = new Point(1043, 453);
+            button3.Location = new Point(1733, 1323);
             button3.Name = "button3";
             button3.Size = new Size(150, 46);
             button3.TabIndex = 8;
@@ -140,16 +144,18 @@
             // 
             // dataGridViewBasket
             // 
+            dataGridViewBasket.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewBasket.BackgroundColor = Color.Gainsboro;
             dataGridViewBasket.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewBasket.Location = new Point(127, 1035);
+            dataGridViewBasket.Location = new Point(256, 348);
             dataGridViewBasket.Name = "dataGridViewBasket";
-            dataGridViewBasket.RowHeadersWidth = 82;
-            dataGridViewBasket.Size = new Size(1122, 384);
+            dataGridViewBasket.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            dataGridViewBasket.Size = new Size(1294, 876);
             dataGridViewBasket.TabIndex = 5;
             // 
             // deleteProductFromBasket
             // 
-            deleteProductFromBasket.Location = new Point(381, 967);
+            deleteProductFromBasket.Location = new Point(256, 269);
             deleteProductFromBasket.Name = "deleteProductFromBasket";
             deleteProductFromBasket.Size = new Size(150, 46);
             deleteProductFromBasket.TabIndex = 6;
@@ -159,7 +165,7 @@
             // 
             // saveProductsToBascketFile
             // 
-            saveProductsToBascketFile.Location = new Point(569, 967);
+            saveProductsToBascketFile.Location = new Point(444, 269);
             saveProductsToBascketFile.Name = "saveProductsToBascketFile";
             saveProductsToBascketFile.Size = new Size(150, 46);
             saveProductsToBascketFile.TabIndex = 7;
@@ -169,7 +175,7 @@
             // 
             // RefreshBasketProductsGrid
             // 
-            RefreshBasketProductsGrid.Location = new Point(761, 967);
+            RefreshBasketProductsGrid.Location = new Point(636, 269);
             RefreshBasketProductsGrid.Name = "RefreshBasketProductsGrid";
             RefreshBasketProductsGrid.Size = new Size(150, 46);
             RefreshBasketProductsGrid.TabIndex = 8;
@@ -180,18 +186,28 @@
             // comboBoxFilter
             // 
             comboBoxFilter.FormattingEnabled = true;
-            comboBoxFilter.Location = new Point(1007, 967);
+            comboBoxFilter.Location = new Point(924, 269);
             comboBoxFilter.Name = "comboBoxFilter";
             comboBoxFilter.Size = new Size(242, 40);
             comboBoxFilter.TabIndex = 9;
             comboBoxFilter.SelectedIndexChanged += comboBoxFilter_SelectedIndexChanged;
             // 
+            // labelFilteredSum
+            // 
+            labelFilteredSum.AutoSize = true;
+            labelFilteredSum.Location = new Point(1341, 271);
+            labelFilteredSum.Name = "labelFilteredSum";
+            labelFilteredSum.Size = new Size(109, 32);
+            labelFilteredSum.TabIndex = 10;
+            labelFilteredSum.Text = "Sum in $";
+            // 
             // Form2
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Salmon;
-            ClientSize = new Size(1974, 1515);
+            BackColor = Color.FromArgb(230, 230, 255);
+            ClientSize = new Size(3362, 1814);
+            Controls.Add(labelFilteredSum);
             Controls.Add(comboBoxFilter);
             Controls.Add(RefreshBasketProductsGrid);
             Controls.Add(saveProductsToBascketFile);
@@ -210,11 +226,13 @@
             Name = "Form2";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form2";
+            WindowState = FormWindowState.Maximized;
             Load += Form2_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridViewProducts).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewUsers).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewBasket).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -233,5 +251,6 @@
         private Button saveProductsToBascketFile;
         private Button RefreshBasketProductsGrid;
         private ComboBox comboBoxFilter;
+        private Label labelFilteredSum;
     }
 }

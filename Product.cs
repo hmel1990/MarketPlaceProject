@@ -8,6 +8,7 @@ namespace FormMarket
 		public string Submodel;
 		public int Memory;
 		public int Quantity;
+		public int Price;
 
 		public Product()
 		{ }
@@ -20,6 +21,8 @@ namespace FormMarket
             this.Submodel = values[2];
             this.Memory = Convert.ToInt32(values[3]);
             this.Quantity = Convert.ToInt32(values[4]);
+			this.Price = Convert.ToInt32(values[5]);
+
         }
         public Product(string Brand, string Model, string Submodel, int Memory, int Quantity)
 		{

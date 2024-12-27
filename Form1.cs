@@ -52,6 +52,20 @@ namespace FormMarket
         private void Form1_Load(object sender, EventArgs e)
         {
             dataGridView1.Hide();// прячем таблицу которую разместили до этого в форме
+            comboBoxFilter.Hide();
+            comboBoxSort.Hide();
+            buttonToBuy.Hide();
+            label3.Hide();
+            textBoxSearch.Hide();
+            buttonSearch.Hide();
+            ResetButton.Hide();
+            label2.Hide();
+            label1.Hide();
+            buttonRefresh.Hide();
+            switchToAdminMode.Hide();
+            switchToSellerMode.Hide();
+            this.BackColor = Color.FromArgb(245, 245, 220);
+
 
         }
 
@@ -85,6 +99,19 @@ namespace FormMarket
                 passwordField.Hide();   //скрываем кнопку логин
                 RegistrationButton.Hide();//скрываем кнопку регистрация
                 dataGridView1.Show();   // показываем ранее созданую таблицу
+                comboBoxFilter.Show();
+                comboBoxSort.Show();
+                buttonToBuy.Show();
+                label3.Show();
+                textBoxSearch.Show();
+                buttonSearch.Show();
+                ResetButton.Show();
+                label2.Show();
+                label1.Show();
+                buttonRefresh.Show();
+                switchToAdminMode.Show();
+                switchToSellerMode.Show();
+                this.BackColor = Color.FromArgb(250, 240, 230);
             }
             else
             {
@@ -106,6 +133,16 @@ namespace FormMarket
                 passwordField.Hide();   //скрываем кнопку логин
                 RegistrationButton.Hide();//скрываем кнопку регистрация
                 dataGridView1.Show();   // показываем ранее созданую таблицу
+                comboBoxFilter.Show();
+                comboBoxSort.Show();
+                buttonToBuy.Show();
+                label3.Show();
+                textBoxSearch.Show();
+                buttonSearch.Show();
+                ResetButton.Show();
+                label2.Show();
+                label1.Show();
+                buttonRefresh.Show();
 
             }
             else

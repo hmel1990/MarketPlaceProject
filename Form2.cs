@@ -175,7 +175,7 @@ namespace FormMarket
 
                 foreach (var product in shop.products)
                 {
-                    tableProducts.Rows.Add(product.Brand, product.Model, product.Submodel, product.Memory, product.Quantity);
+                    tableProducts.Rows.Add(product.Brand, product.Model, product.Submodel, product.Memory, product.Quantity, product.Price);
                 }
 
                 // Привязываем обновленную таблицу к DataGridView

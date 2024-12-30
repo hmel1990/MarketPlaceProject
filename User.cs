@@ -62,6 +62,7 @@ namespace FormMarket
             {
                 usersData.Add(new LoginPassword(lines[i]));
             }
+            //logPas.userID = "0";
 
         }
         #endregion
@@ -142,11 +143,14 @@ namespace FormMarket
             if (сheckOut(x, y))
             {
                 usersData.Add(new LoginPassword()); // добавляем в список еще один объект
-                logPas.access = "customer"; // устанавливаем id == customer
+                logPas.access = "customer"; // устанавливаем access == customer
+                logPas.userID = Convert.ToString(usersData.Count());
                 usersData[(usersData.Count() - 1)].access = "customer";            //заполняем новый объект в массиве
                 usersData[(usersData.Count() - 1)].login = logPas.login;         //заполняем новый объект в массиве
                 usersData[(usersData.Count() - 1)].password = logPas.password;   //заполняем новый объект в массиве
-                File.AppendAllText("loginPassword.txt", logPas.access + "\t" + logPas.login + "\t" + logPas.password + "\n"); //записываем строку с новым пользователев в тхт файл
+                usersData[(usersData.Count() -1)].userID = Convert.ToString(usersData.Count());
+                File.AppendAllText("loginPassword.txt", logPas.access + "\t" + logPas.login + "\t" + logPas.password + "\t" + logPas.userID + "\n"); //записываем строку с новым пользователев в тхт файл
+
                 return true;
             }
             else {return false; }

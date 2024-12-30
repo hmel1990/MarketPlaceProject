@@ -146,7 +146,7 @@ namespace FormMarket
                 label2.Show();
                 label1.Show();
                 buttonRefresh.Show();
-
+                logOutButton.Show();
             }
             else
             {

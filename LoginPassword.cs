@@ -26,5 +26,11 @@ namespace FormMarket
         {
             access = "";
         }
+        public LoginPassword(int x)
+        {
+            access = "";
+            this.userID = Convert.ToString(x);
+
+        }
     }
 }

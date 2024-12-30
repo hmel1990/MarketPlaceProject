@@ -1,0 +1,1499 @@
+using FormMarket;
+using Microsoft.VisualBasic.ApplicationServices;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlTypes;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
+
+namespace FormMarket
+{
+    public class User
+    {
+        private string pathToUsersData = "loginPassword.txt";
+        internal LoginPassword logPas = new LoginPassword();
+
+        private List<LoginPassword> usersData = new List<LoginPassword>();
+
+        #region сеттеры и геттеры
+        public void loginSetter (string login)
+        {
+            //Console.WriteLine("Введите Логин");
+            //string login = Console.ReadLine();
+            logPas.login = login;
+        }
+
+        public void accessSetter(string access)
+        {
+            //Console.WriteLine("Введите Логин");
+            //string login = Console.ReadLine();
+            logPas.access = access;
+        }
+        public void idSetter(string userID)
+        { logPas.userID = userID; }
+
+        public void passwordSetter(string password)
+        {
+            //Console.WriteLine("Введите Пароль");
+            //string password = Console.ReadLine();
+            logPas.password = password;
+        }
+        #endregion
+
+        #region конструктор
+        public User ()
+        {
+            logPas.access = "";
+
+            // Считываем все строки из файла
+            string[] lines = File.ReadAllLines("loginPassword.txt");
+
+            // Проверяем, есть ли строки в файле
+            if (lines.Length == 0)
+            {
+                Console.WriteLine("Файл пуст.");
+                return;
+            }
+
+            // Заполняем массив данными из файла (i = 1 т.к. первая строка в тхт файле это шапка таблицы)
+            for (int i = 1; i < lines.Length; i++)
+            {
+                usersData.Add(new LoginPassword(lines[i]));
+            }
+
+        }
+        #endregion
+
+        #region регистрация и авторизация
+
+        //public void idSetter(string loginUser, string passwordUser)
+        //{
+        //    FileManager fm = new FileManager();
+        //    string[] lines = fm.readStringsFromFile(pathToUsersData);
+        //    int count = 0;
+        //    foreach (string line in lines)
+        //    {
+        //        count++;
+        //        if (line.Contains(loginUser)&& line.Contains(passwordUser))
+        //        {
+        //           logPas.id = Convert.ToString(count);
+        //        }
+        //    }
+        //}
+        public bool Autorithation(User user, string loginUser, string passwordUser, Admin admin, Seller seller, Customer customer) //параметры х у принимаются из виндовс форм
+        {
+
+            foreach (LoginPassword lp in usersData) 
+            {
+                if (lp.login == loginUser && lp.password == passwordUser)
+                {
+                    accessSetter(lp.access);
+                    loginSetter(loginUser);
+                    passwordSetter(passwordUser);
+                    idSetter(lp.userID);
+                    //______________________________________________________________________________________
+                    switch (logPas.access)
+                    {
+                        case "": // Без сортировки
+                            Console.WriteLine("Пользователь отсутствует");
+                            break;
+                        case "admin": // админ
+                                      //Admin admin = new Admin();
+                            admin.logPas.access = "admin";
+                            admin.logPas.userID = logPas.userID;
+                            break;
+                        case "seller": // продавец
+                                       //Seller seller = new Seller();
+                            seller.logPas.access = "seller";
+                            seller.logPas.userID = logPas.userID;
+                            break;
+                        case "customer": // покупатель
+                                         //Customer customer = new Customer();
+                            customer.logPas.access = "customer";
+                            customer.logPas.userID = logPas.userID;
+                            break;
+                    }
+                    //______________________________________________________________________________________
+
+                    //Console.WriteLine("Все ОК!!!");
+                    return true;
+                }
+            }
+            if (logPas.access == "")
+            {
+                return false;
+                //Console.WriteLine("Логин или пароль неверные");
+                //throw new Exception();
+            }
+            return false;
+        }
+        
+          public bool сheckOut(string x, string y)
+        {
+            loginSetter(x);
+            passwordSetter(y);
+
+            foreach (LoginPassword lp in usersData)
+            {
+
+                if (lp.login == logPas.login && lp.password == logPas.password)
+                {
+                    //Console.WriteLine("Такой Логин или Пароль уже существуют");
+                    return false;
+                }
+
+            }
+            return true;
+        }
+
+        public bool Registration(string x, string y)
+        {
+
+
+            if (сheckOut(x, y))
+            {
+                usersData.Add(new LoginPassword()); // добавляем в список еще один объект
+                logPas.access = "customer"; // устанавливаем id == customer
+                usersData[(usersData.Count() - 1)].access = "customer";            //заполняем новый объект в массиве
+                usersData[(usersData.Count() - 1)].login = logPas.login;         //заполняем новый объект в массиве
+                usersData[(usersData.Count() - 1)].password = logPas.password;   //заполняем новый объект в массиве
+                File.AppendAllText("loginPassword.txt", logPas.access + "\t" + logPas.login + "\t" + logPas.password + "\n"); //записываем строку с новым пользователев в тхт файл
+                return true;
+            }
+            else {return false; }
+        }
+        #endregion
+
+        #region добавление в корзину
+        public void addToBucket(string cellValue)
+        {
+            File.AppendAllText("market_goods_korzina.txt", cellValue + logPas.access + "\n");
+        }
+        #endregion
+    }
+}
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FormMarket
+{
+    internal class LoginPassword
+    {
+        internal string access;
+        internal string login;
+        internal string password;
+        internal string userID;
+
+
+        public LoginPassword(string lines)
+        {
+            string[] values = lines.Split('\t');
+            this.access = values[0];
+            this.login = values[1];
+            this.password = values[2];
+            this.userID = values[3];
+        }
+        public LoginPassword()
+        {
+            access = "";
+        }
+    }
+}
+
+//using Market_try;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FormMarket
+{
+    public class Admin: FormMarket.User
+    {
+        private List<Product> adminBucketProducts = new List<Product>();
+        internal List<LoginPassword> listOfUsers = new List<LoginPassword>();
+
+        public Admin ()
+        {
+            logPas.access = "";
+            usersToList();
+        }
+        public void usersToList()
+        {
+            // Считываем все строки из файла
+            string[] lines = File.ReadAllLines("loginPassword.txt");
+
+            // Проверяем, есть ли строки в файле
+            if (lines.Length == 0)
+            {
+                Console.WriteLine("Файл пуст.");
+                return;
+            }
+
+            // Заполняем массив данными из файла (i = 1 т.к. первая строка в тхт файле это шапка таблицы)
+            for (int i = 1; i < lines.Length; i++)
+            {
+                listOfUsers.Add(new LoginPassword(lines[i]));
+            }
+
+        }
+
+        public void deleteUserFromList(int index)
+        {
+            // Проверяем, существует ли файл
+            if (!File.Exists("loginPassword.txt"))
+            {
+                Console.WriteLine("Файл не найден.");
+                return;
+            }
+
+            // Читаем все строки из файла
+            var lines = File.ReadAllLines("loginPassword.txt").ToList();
+
+            // Проверяем, корректен ли номер строки
+            if (index < 1 || index > lines.Count)
+            {
+                Console.WriteLine("Номер строки вне диапазона.");
+                return;
+            }
+
+            // Удаляем строку с указанным номером (индекс на 1 меньше, так как индексация с 0)
+            lines.RemoveAt(index);
+
+            // Перезаписываем файл без удалённой строки
+            File.WriteAllLines("loginPassword.txt", lines);
+
+            //Console.WriteLine($"Строка {index} успешно удалена.");
+        }
+
+    }
+}
+using Microsoft.VisualBasic.ApplicationServices;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FormMarket
+{
+    public class Customer : FormMarket.User
+    {
+        private string id;
+        private List<Product> custumer_bucket_goods = new List<Product> ();
+        public Customer()
+        {
+            logPas.access = "";
+        }
+        public string idGetter ()
+            { return id; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FormMarket
+{
+    public class Seller: FormMarket.User
+    {
+        private List<Product> sellerBucketGoods = new List<Product>();
+
+        public Seller()
+        {
+            logPas.access = "";
+        }
+
+
+        public void deleteGoodsFromShop(int index)
+        {
+            // Проверяем, существует ли файл
+            if (!File.Exists("market_goods.txt"))
+            {
+                Console.WriteLine("Файл не найден.");
+                return;
+            }
+
+            // Читаем все строки из файла
+            var lines = File.ReadAllLines("market_goods.txt").ToList();
+
+            // Проверяем, корректен ли номер строки
+            if (index < 1 || index > lines.Count)
+            {
+                Console.WriteLine("Номер строки вне диапазона.");
+                return;
+            }
+
+            // Удаляем строку с указанным номером (индекс на 1 меньше, так как индексация с 0)
+            lines.RemoveAt(index);
+
+            // Перезаписываем файл без удалённой строки
+            File.WriteAllLines("market_goods.txt", lines);
+
+            //Console.WriteLine($"Строка {index} успешно удалена.");
+        }
+    }
+    
+}
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using System.Linq;
+using System.Reflection.Emit;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace FormMarket
+{
+    internal class Basket
+    {
+        //internal DataTable tableBasketProducts;
+        //private List<Product> productsInBasket;
+        internal DataTable tableBasketProducts = new DataTable();
+
+
+        private string pathToBasket = "market_goods_korzina.txt";
+        public Basket()
+        {
+            addNamesToColumnsBasket(tableBasketProducts);
+            fillBasket(tableBasketProducts);
+        }
+        public void addProductToBasket(User user, Customer customer, DataGridView dataGridView1, string cellValue)
+        {             
+            // Проверяем, что выбрана строка
+            if (dataGridView1.CurrentRow != null)
+            {
+                // Сохраняем значение первой ячейки выбранной строки
+                for (int i = 0; i < (dataGridView1.Columns.Count); i++)
+                {
+                    cellValue += dataGridView1.CurrentRow.Cells[i].Value?.ToString() + "\t";//!!!!!!! значение и которое потом запишется в тхт файл корзины)
+                }                
+                cellValue = (user.logPas.userID + "\t" + cellValue);
+                MessageBox.Show($"Содержимое первой ячейки строки скопировано: {cellValue}");
+                FileManager fm = new FileManager();
+                fm.addStringToFile(pathToBasket,cellValue);
+                cellValue = "";
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите строку.");
+            }
+        }
+        public void addNamesToColumnsBasket(DataTable tableBasketProducts)
+        {
+            //устанавливаем значение для заголовков столбцов
+            tableBasketProducts.Columns.Add("Id", typeof(int));
+            tableBasketProducts.Columns.Add("Brand", typeof(string));
+            tableBasketProducts.Columns.Add("Model", typeof(string));
+            tableBasketProducts.Columns.Add("Submodel", typeof(string));
+            tableBasketProducts.Columns.Add("Memory", typeof(int));
+            tableBasketProducts.Columns.Add("Quantity", typeof(int));
+            tableBasketProducts.Columns.Add("Price (USD)", typeof(int));
+        }
+        public void fillBasket(DataTable tableBasketProducts)
+        {
+
+            FileManager fileManager = new FileManager();
+
+            string[] lines = fileManager.readStringsFromFile(pathToBasket);
+
+            // Заполняем массив данными из файла (i = 1 т.к. первая строка в тхт файле это шапка таблицы)
+
+            for (int i = 1; i < lines.Length; i++)
+            {
+                string[] values = lines[i].Split('\t');
+                // Заполнение таблицы
+                tableBasketProducts.Rows.Add(Convert.ToInt32(values[0]), values[1], values[2], values[3], Convert.ToInt32(values[4]), Convert.ToInt32(values[5]), Convert.ToInt32(values[6]));
+            }
+        }
+
+        public void deleteProductFromBasket(int index)
+        {
+            // Проверяем, существует ли файл
+            if (!File.Exists(pathToBasket))
+            {
+                Console.WriteLine("Файл не найден.");
+                return;
+            }
+
+            // Читаем все строки из файла
+            var lines = File.ReadAllLines(pathToBasket).ToList();
+
+            // Проверяем, корректен ли номер строки
+            if (index < 1 || index > lines.Count)
+            {
+                Console.WriteLine("Номер строки вне диапазона.");
+                return;
+            }
+
+            // Удаляем строку с указанным номером (индекс на 1 меньше, так как индексация с 0)
+            lines.RemoveAt(index);
+
+            // Перезаписываем файл без удалённой строки
+            File.WriteAllLines(pathToBasket, lines);
+
+            //Console.WriteLine($"Строка {index} успешно удалена.");
+        }
+
+
+        public void addFilteringProducts(ComboBox comboBoxFilter)
+        {
+            // Добавляем элементы в ComboBox - значения брендов
+            comboBoxFilter.Items.Add("         "); // Добавить опцию для сброса фильтра
+            var ids = tableBasketProducts.AsEnumerable().Select(row => row.Field<int>("Id")).Distinct().OrderBy(id => id).ToList();
+            comboBoxFilter.Items.AddRange(ids.Select(id => id.ToString()).ToArray());
+            comboBoxFilter.SelectedIndex = 0; // Установить первый элемент выбранным
+        }
+
+        //фильтрация для корзины
+        public DataView FilteringProducts(ComboBox comboBoxFilter, DataGridView dataGridViewBasket)
+        {
+
+            // Получить выбранное значение
+            string selectedId = comboBoxFilter.SelectedItem.ToString();
+
+            if (selectedId == "         ")
+            {
+                // Сбросить фильтр
+                DataView view = tableBasketProducts.DefaultView;
+                view.RowFilter = string.Empty; // Удаляем фильтр
+                dataGridViewBasket.DataSource = view; // Привязываем оригинальные данные
+                return view;
+
+            }
+            else
+            {
+                // Создать DataView из оригинальной таблицы
+                DataView view = tableBasketProducts.DefaultView;
+                view.RowFilter = $"Convert(Id, 'System.String') LIKE '{selectedId}'";
+
+                // Привязать отфильтрованные данные к DataGridView
+                dataGridViewBasket.DataSource = view;
+                return view;
+            }
+        }
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        public int UpdateFilteredSum(DataView view)
+        {
+            // Подсчет суммы
+            return view.Cast<DataRowView>().Sum(row => row.Row.Field<int>("Price (USD)")); // Укажите имя колонки с ценой
+        }
+
+
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FormMarket
+{
+    internal class FileManager
+    {
+
+        public string[] readStringsFromFile(string path)
+        {
+            // Проверяем, существует ли файл
+            if (!File.Exists(path))
+            {
+                throw new FileNotFoundException("Файл не найден.", path);
+            }
+            string[] lines;
+            try
+            {
+                // Считываем все строки из файла
+                lines = File.ReadAllLines(path);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+
+            // Проверяем, есть ли строки в файле
+            if (lines.Length == 0)
+            {
+                throw new InvalidOperationException("Файл пуст.");
+            }
+
+            return lines;
+        }
+
+        public void addStringToFile(string path, string newLine)
+        {
+            using (StreamWriter writer = new StreamWriter(path, true))
+            {
+                writer.WriteLine(newLine);
+            }
+        }
+
+
+        public void writeUsersGridViewToFile(DataTable tableUsers, string pathToProducts)
+        {
+            using (var writer = new StreamWriter(pathToProducts))
+            {
+                // Запись заголовков
+                var headers = string.Join("\t", tableUsers.Columns.Cast<DataColumn>().Select(column => column.ColumnName));
+                writer.WriteLine(headers);
+
+                // Запись данных строк
+                foreach (DataRow row in tableUsers.Rows)
+                {
+                    var values = string.Join("\t", row.ItemArray);
+                    writer.WriteLine(values);
+                }
+            }
+        }
+    }
+
+}
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+using System.Data;
+using System.Windows.Forms;
+
+namespace FormMarket
+{
+
+    public class Shop
+    {
+        public List<Product> products = new List<Product>();
+        private string path = "market_goods.txt";
+        internal DataTable table = new DataTable();
+
+        public void setPath (string path)
+        { this.path = path; }
+        public Shop(string path)
+        {
+            setPath(path);
+            fillTableOfProducts(path);
+        }
+
+        public Shop()
+        {
+            fillTableOfProducts(path);
+        }
+
+        public List<Product> productsToShop(string path)
+        {
+            FileManager fileManager = new FileManager();
+            string [] lines = fileManager.readStringsFromFile(path);
+
+            // Заполняем массив данными из файла (i = 1 т.к. первая строка в тхт файле это шапка таблицы)
+            for (int i = 1; i<lines.Length; i++)
+            {
+                products.Add(new Product(lines[i]));
+            }
+            return products;
+        }
+
+        public void fillTableOfProducts (string path)
+        {
+            products = productsToShop(path);
+
+            //устанавливаем значение для заголовков столбцов
+            table.Columns.Add("Brand", typeof(string));
+            table.Columns.Add("Model", typeof(string));
+            table.Columns.Add("Submodel", typeof(string));
+            table.Columns.Add("Memory", typeof(int));
+            table.Columns.Add("Quantity", typeof(int));
+            table.Columns.Add("Price (USD)", typeof(int));
+
+
+            // Заполнение таблицы
+            for (int i = 0; i < products.Count; i++)
+            {
+                table.Rows.Add(products[i].Brand, products[i].Model, products[i].Submodel, products[i].Memory, products[i].Quantity, products[i].Price);
+            }
+            //return table;
+        }
+        
+        public void Print()
+        {
+            for (int i = 0; i < products.Count; i++)
+            {
+                Console.WriteLine($"{products[i].Brand,-10}{products[i].Model,-10}{products[i].Submodel,-10}{products[i].Memory,-10}{products[i].Quantity,-10}");
+
+            }
+        }
+
+        public void addFilteringProducts(ComboBox comboBoxFilter)
+        {
+            // Добавляем элементы в ComboBox - значения брендов
+            comboBoxFilter.Items.Add("         "); // Добавить опцию для сброса фильтра
+            var brands = products.Select(g => g.Brand).Distinct().ToList();
+            comboBoxFilter.Items.AddRange(brands.ToArray());
+            comboBoxFilter.SelectedIndex = 0; // Установить первый элемент выбранным
+        }
+
+        public void FilteringProducts(ComboBox comboBoxFilter, DataGridView dataGridView1)
+        {
+            
+        // Получить выбранное значение
+        string selectedBrand = comboBoxFilter.SelectedItem.ToString();
+
+            if (selectedBrand == "         ")
+            {
+                // Сбросить фильтр
+                DataView view = table.DefaultView;
+        view.RowFilter = string.Empty; // Удаляем фильтр
+                dataGridView1.DataSource = view; // Привязываем оригинальные данные
+            }
+            else
+            {
+                // Создать DataView из оригинальной таблицы
+                DataView view = table.DefaultView;
+    view.RowFilter = $"Brand = '{selectedBrand}'";
+
+                // Привязать отфильтрованные данные к DataGridView
+                dataGridView1.DataSource = view;
+            }
+        }
+
+
+public void addSortingProducts(ComboBox comboBoxSort)
+        { 
+           // Добавляем элементы в ComboBox
+           comboBoxSort.Items.AddRange(new string[]
+            {
+                "Без сортировки",
+                "По количеству памяти (возрастание)",
+                "По количеству памяти (убывание)",
+                "По имени бренда (возрастание)",
+                "По имени бренда (убывание)"
+            });
+        }
+
+        public void SortingProducts (ComboBox comboBoxSort, DataGridView dataGridView1)
+        {
+            DataView dataView = new DataView(table); // DataView для сортировки
+            switch (comboBoxSort.SelectedIndex)
+            {
+                case 0: // Без сортировки
+                    dataView.Sort = string.Empty;
+                    break;
+                case 1: // По памяти (возрастание)
+                    dataView.Sort = "Memory ASC";
+                    break;
+                case 2: // По памяти (убывание)
+                    dataView.Sort = "Memory DESC";
+                    break;
+                case 3: // По имени бренда (возрастание)
+                    dataView.Sort = "Brand ASC";
+                    break;
+                case 4: // По имени бренда (убывание)
+                    dataView.Sort = "Brand DESC";
+                    break;
+            }
+            dataGridView1.DataSource = dataView;
+        }
+
+    }
+}
+using System;
+namespace FormMarket
+{
+	public class Product
+	{
+		public string Brand;
+		public string Model;
+		public string Submodel;
+		public int Memory;
+		public int Quantity;
+		public int Price;
+
+		public Product()
+		{ }
+
+		public Product(string lines)
+		{
+            string[] values = lines.Split('\t');
+            this.Brand = values[0];
+            this.Model = values[1]; 
+            this.Submodel = values[2];
+            this.Memory = Convert.ToInt32(values[3]);
+            this.Quantity = Convert.ToInt32(values[4]);
+			this.Price = Convert.ToInt32(values[5]);
+
+        }
+        public Product(string Brand, string Model, string Submodel, int Memory, int Quantity)
+		{
+			this.Brand = Brand;
+			this.Model = Model;
+			this.Submodel = Submodel;
+			this.Memory = Memory;
+			this.Quantity = Quantity;
+		}
+
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+
+
+namespace FormMarket
+{
+    public partial class Form1 : Form
+    { 
+        private Shop shop;
+        private string cellValue;
+        internal DataTable table;
+        private User user;
+        private Customer customer;
+        private Seller seller;
+        private Admin admin;
+        private Basket basket;
+        
+        //Конструктор
+        public Form1()
+        {
+            InitializeComponent();
+            user = new User();// создаем объект User www
+            seller = new Seller();
+            admin = new Admin();
+            customer = new Customer();
+            shop = new Shop();
+            basket = new Basket();
+
+
+            // читаем из тхт файла и заполняем в список поля User каталог товаров
+            // заполняем таблицу
+            table = shop.table;
+
+            // Привязка данных к DataGridView
+            dataGridView1.DataSource = table;
+
+            //сортировка и фильтр
+            shop.addSortingProducts(comboBoxSort);
+            shop.addFilteringProducts(comboBoxFilter);
+
+        }
+
+        //загрузка формы
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            dataGridView1.Hide();// прячем таблицу которую разместили до этого в форме
+            comboBoxFilter.Hide();
+            comboBoxSort.Hide();
+            buttonToBuy.Hide();
+            label3.Hide();
+            textBoxSearch.Hide();
+            buttonSearch.Hide();
+            ResetButton.Hide();
+            label2.Hide();
+            label1.Hide();
+            buttonRefresh.Hide();
+            switchToAdminMode.Hide();
+            switchToSellerMode.Hide();
+            this.BackColor = Color.FromArgb(245, 245, 220);
+
+
+        }
+
+        // Обработчик изменения выбранного элемента ComboBox - фильтр
+        private void comboBoxFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            shop.FilteringProducts(comboBoxFilter, dataGridView1);
+        }
+
+
+        // Обработчик изменения выбранного элемента ComboBox - сортировка
+        private void ComboBoxSort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            shop.SortingProducts(comboBoxSort, dataGridView1);
+           
+        }
+
+
+
+        //Авторизация 
+        private void loginbutton_Click(object sender, EventArgs e)
+        {
+            string loginUser = loginField.Text;
+            string passwordUser = passwordField.Text;
+                       
+            if (user.Autorithation(user, loginUser, passwordUser, admin, seller,customer))
+            {
+                //MessageBox.Show("Ok!!");
+                loginbutton.Hide();     //скрываем поле логин
+                loginField.Hide();      //скрываем поле пароль
+                passwordField.Hide();   //скрываем кнопку логин
+                RegistrationButton.Hide();//скрываем кнопку регистрация
+                dataGridView1.Show();   // показываем ранее созданую таблицу
+                comboBoxFilter.Show();
+                comboBoxSort.Show();
+                buttonToBuy.Show();
+                label3.Show();
+                textBoxSearch.Show();
+                buttonSearch.Show();
+                ResetButton.Show();
+                label2.Show();
+                label1.Show();
+                buttonRefresh.Show();
+                switchToAdminMode.Show();
+                switchToSellerMode.Show();
+                this.BackColor = Color.FromArgb(250, 240, 230);
+            }
+            else
+            {
+                MessageBox.Show("Логин или пароль неверные!!!");
+            }
+        }
+
+        //Регистрация
+        private void RegistrationButton_Click(object sender, EventArgs e)
+        {
+            string loginUser = loginField.Text;
+            string passwordUser = passwordField.Text;
+
+            if (user.Registration(loginUser, passwordUser))
+            {
+                MessageBox.Show("Вы зарегистрированы!!!");
+                loginbutton.Hide();     //скрываем поле логин
+                loginField.Hide();      //скрываем поле пароль
+                passwordField.Hide();   //скрываем кнопку логин
+                RegistrationButton.Hide();//скрываем кнопку регистрация
+                dataGridView1.Show();   // показываем ранее созданую таблицу
+                comboBoxFilter.Show();
+                comboBoxSort.Show();
+                buttonToBuy.Show();
+                label3.Show();
+                textBoxSearch.Show();
+                buttonSearch.Show();
+                ResetButton.Show();
+                label2.Show();
+                label1.Show();
+                buttonRefresh.Show();
+
+            }
+            else
+            {
+                MessageBox.Show("Такой Логин или Пароль уже существуют");
+            }
+        }
+        private void buttonToBuy_Click(object sender, EventArgs e)
+        {
+            int index = (dataGridView1.CurrentCell.RowIndex);
+            if (Convert.ToInt32(table.Rows[index][4]) > 0)
+            {
+                table.Rows[index][4] = Convert.ToInt32(table.Rows[index][4]) - 1;
+                FileManager fm = new FileManager();
+                fm.writeUsersGridViewToFile(table, "market_goods.txt");
+                basket.addProductToBasket(user, customer, dataGridView1, cellValue);
+            }
+            else 
+            {
+                MessageBox.Show("Товар закончился, извините ((((");
+            }
+
+            //MessageBox.Show( customer.idGetter());
+
+        }
+
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        //переключиться на форму 2 для Админа
+        private void switchToAdminMode_Click(object sender, EventArgs e)
+        {
+            //user.logPas.access == "seller" 
+            if (user.logPas.access == "admin")
+            {
+                // Создаем экземпляр второй формы
+                Form2 form2 = new Form2();
+                form2.Show();
+            }
+            else
+            {
+                MessageBox.Show("You are not authorized");
+            }
+
+        }
+
+        //переключиться на форму 3 для Продавца
+        private void switchToSellerMode_Click(object sender, EventArgs e)
+        {
+            if (user.logPas.access == "seller" | user.logPas.access == "admin")
+            {
+                // Создаем экземпляр второй формы
+                Form3 form3 = new Form3();
+                form3.Show();
+            }
+            else
+            {
+                MessageBox.Show("You are not authorized");
+            }
+
+        }
+
+        //Кнопка поиска товара
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            // Получаем текст из текстового поля
+            string searchText = textBoxSearch.Text.Trim();
+
+            if (string.IsNullOrEmpty(searchText))
+            {
+                MessageBox.Show("Введите текст для поиска.");
+                return;
+            }
+
+            // Создаем DataView для фильтрации
+            DataView view = table.DefaultView;
+
+            // Формируем условие фильтрации
+            StringBuilder filter = new StringBuilder();
+
+            foreach (DataColumn column in table.Columns)
+            {
+                if (column.DataType == typeof(string))
+                {
+                    if (filter.Length > 0) filter.Append(" OR ");
+                    filter.Append($"{column.ColumnName} LIKE '%{searchText}%'");
+                }
+            }
+
+            // Проверяем, что фильтр сформирован
+            if (filter.Length == 0)
+            {
+                MessageBox.Show("Поиск возможен только по строковым столбцам.");
+                return;
+            }
+
+            // Применяем фильтр
+            try
+            {
+                view.RowFilter = filter.ToString();
+                dataGridView1.DataSource = view;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при поиске: {ex.Message}");
+            }
+        }
+
+        //Кнопка сброса фильтра
+        private void ResetButton_Click(object sender, EventArgs e)
+        {
+            // Сбросить фильтр
+            DataView view = table.DefaultView;
+            view.RowFilter = string.Empty; // Удаляем фильтр
+            dataGridView1.DataSource = view; // Привязываем оригинальные данные
+            textBoxSearch.Clear();
+        }
+        private void buttonRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshDataGridView();
+        }
+
+        //Кнопка обновить данные после редактирования
+        private void RefreshDataGridView()
+        {
+            if (table != null)
+            {
+                // Обновляем данные в таблице
+                table.Clear();
+
+                //Shop shop = new Shop();
+
+                // Очищаем список продуктов перед обновлением
+                shop.products.Clear();
+                shop.productsToShop("market_goods.txt");
+
+                foreach (var product in shop.products)
+                {
+                    table.Rows.Add(product.Brand, product.Model, product.Submodel, product.Memory, product.Quantity);
+                }
+
+                // Привязываем обновленную таблицу к DataGridView
+                dataGridView1.DataSource = table;
+            }
+            else
+            {
+                MessageBox.Show("Таблица не инициализирована.");
+            }
+        }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.IO;
+
+using static System.Windows.Forms.DataFormats;
+using Microsoft.VisualBasic.ApplicationServices;
+using System.Reflection.Emit;
+
+namespace FormMarket
+{
+    public partial class Form2 : Form
+    {
+        internal DataTable tableProducts;
+        internal DataTable tableUsers;
+        internal DataTable tableBasketProducts;
+
+        internal Shop shop;
+        internal Basket basket;
+
+
+        internal Seller seller;
+        internal Admin admin;
+
+        private string pathToUsers = "loginPassword.txt";
+        private string pathToProducts = "market_goods.txt";
+        private string pathToBusket = "market_goods_korzina.txt";
+
+
+        public Form2()
+        {
+            InitializeComponent();
+            seller = new Seller();
+            admin = new Admin();
+            shop = new Shop();
+            tableProducts = shop.table;
+            dataGridViewProducts.DataSource = tableProducts;
+            //___________________________________________________
+            tableUsers = new DataTable();
+
+            tableUsers.Columns.Add("Access", typeof(string));
+            tableUsers.Columns.Add("Login", typeof(string));
+            tableUsers.Columns.Add("Password", typeof(string));
+            tableUsers.Columns.Add("Id", typeof(string));
+
+            basket = new Basket();
+            tableBasketProducts = basket.tableBasketProducts;
+            dataGridViewBasket.DataSource = tableBasketProducts;
+            basket.addFilteringProducts(comboBoxFilter);
+
+            for (int i = 0; i < admin.listOfUsers.Count; i++)
+            {
+                tableUsers.Rows.Add(admin.listOfUsers[i].access, admin.listOfUsers[i].login, admin.listOfUsers[i].password, admin.listOfUsers[i].userID);
+            }
+
+            dataGridViewUsers.DataSource = tableUsers;
+
+
+        }
+
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+            this.BackColor = Color.FromArgb(230, 230, 250);
+        }
+
+        private void deleteUserFromList_Click(object sender, EventArgs e)
+        {
+            // Проверяем, что выбрана строка
+            if (dataGridViewUsers.CurrentRow != null)
+            {
+                int index = (dataGridViewUsers.CurrentRow.Index + 1);
+                admin.deleteUserFromList(index);
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите строку.");
+            }
+        }
+
+
+        private void deleteGoodsFromShop_Click(object sender, EventArgs e)
+        {
+            // Проверяем, что выбрана строка
+            if (dataGridViewProducts.CurrentRow != null)
+            {
+                int index = (dataGridViewProducts.CurrentRow.Index + 1);
+                seller.deleteGoodsFromShop(index);
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите строку.");
+            }
+        }
+
+
+        private void saveUsersToFile_Click(object sender, EventArgs e)
+        {
+            FileManager fm = new FileManager();
+            fm.writeUsersGridViewToFile(tableUsers, pathToUsers);
+        }
+
+        private void buttonUsersRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshUsersGridView();
+        }
+
+        private void RefreshUsersGridView()
+        {
+            if (tableUsers != null)
+            {
+                // Обновляем данные в таблице
+                tableUsers.Clear();
+
+                Admin admin = new Admin();
+                admin.usersToList();
+
+                foreach (var adm in admin.listOfUsers)
+                {
+                    tableUsers.Rows.Add(adm.access, adm.login, adm.password, adm.userID);
+                }
+
+                // Привязываем обновленную таблицу к DataGridView
+                dataGridViewUsers.DataSource = tableUsers;
+            }
+            else
+            {
+                MessageBox.Show("Таблица не инициализирована.");
+            }
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////
+
+        public void SaveDataGridViewToFile()
+        {
+            using (var writer = new StreamWriter("market_goods.txt"))
+            {
+                // Запись заголовков
+                var headers = string.Join("\t", tableProducts.Columns.Cast<DataColumn>().Select(column => column.ColumnName));
+                writer.WriteLine(headers);
+
+                // Запись данных строк
+                foreach (DataRow row in tableProducts.Rows)
+                {
+                    var values = string.Join("\t", row.ItemArray);
+                    writer.WriteLine(values);
+                }
+            }
+        }
+        private void saveToFile_Click(object sender, EventArgs e)
+        {
+            SaveDataGridViewToFile();
+        }
+
+
+        private void buttonRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshDataGridView();
+        }
+
+        private void RefreshDataGridView()
+        {
+            if (tableProducts != null)
+            {
+
+                tableProducts.Clear();
+                shop.products.Clear();
+                shop.productsToShop(pathToProducts);
+
+                foreach (var product in shop.products)
+                {
+                    tableProducts.Rows.Add(product.Brand, product.Model, product.Submodel, product.Memory, product.Quantity);
+                }
+
+                // Привязываем обновленную таблицу к DataGridView
+                dataGridViewProducts.DataSource = tableProducts;
+
+            }
+            else
+            {
+                MessageBox.Show("Таблица не инициализирована.");
+            }
+        }
+        private void buttonBack_Click(object sender, EventArgs e)
+        {
+
+            this.Close();
+
+        }
+
+        //________________________________________________________________________________
+
+        private void deleteProductFromBasket_Click(object sender, EventArgs e)
+        {
+            // Проверяем, что выбрана строка
+            if (dataGridViewBasket.CurrentRow != null)
+            {
+                int index = (dataGridViewBasket.CurrentRow.Index + 1);
+                basket.deleteProductFromBasket(index);
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите строку.");
+            }
+        }
+
+        private void saveProductsToBascketFile_Click(object sender, EventArgs e)
+        {
+            FileManager fm = new FileManager();
+            fm.writeUsersGridViewToFile(tableBasketProducts, pathToBusket);
+        }
+
+        private void RefreshBasketProductsGrid_Click(object sender, EventArgs e)
+        {
+            RefreshBasketProductsGridView();
+        }
+        private void RefreshBasketProductsGridView()
+        {
+            if (tableBasketProducts != null)
+            {
+                // Обновляем данные в таблице
+                tableBasketProducts.Clear();
+                basket.tableBasketProducts.Clear();
+                basket.fillBasket(tableBasketProducts);
+
+                // Привязываем обновленную таблицу к DataGridView
+                dataGridViewBasket.DataSource = tableBasketProducts;
+            }
+            else
+            {
+                MessageBox.Show("Таблица не инициализирована.");
+            }
+        }
+
+        //Обработчик изменения выбранного элемента ComboBox - фильтр
+        private void comboBoxFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DataView view = basket.FilteringProducts(comboBoxFilter, dataGridViewBasket);
+            int totalSum = basket.UpdateFilteredSum(view);
+            labelFilteredSum.Text = $"Сумма: {totalSum}$";
+        }
+
+
+    }
+}
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace FormMarket
+{
+    public partial class Form3 : Form
+    {
+        internal DataTable tableProducts;
+        internal DataTable tableBasketProducts;
+        internal Shop shop;
+
+        internal Seller seller;
+        internal Admin admin;
+
+        private string pathToUsers = "loginPassword.txt";
+        private string pathToProducts = "market_goods.txt";
+        private string pathToBusket = "market_goods_korzina.txt";
+
+        internal Basket basket;
+
+        public Form3()
+        {
+            InitializeComponent();
+            seller = new Seller();
+            admin = new Admin();
+            shop = new Shop();
+            tableProducts = shop.table;
+            dataGridViewProducts.DataSource = tableProducts;
+            basket = new Basket();
+            tableBasketProducts = basket.tableBasketProducts;
+            dataGridViewBasket.DataSource = tableBasketProducts;
+            basket.addFilteringProducts(comboBoxFilter);
+
+        }
+
+        private void buttonSwitchToMain_Click(object sender, EventArgs e)
+        {
+            this.Close();            
+        }
+
+        //удаляем товар из магазина
+        private void deleteGoodsFromShop_Click(object sender, EventArgs e)
+        {
+            // Проверяем, что выбрана строка
+            if (dataGridViewProducts.CurrentRow != null)
+            {
+                int index = (dataGridViewProducts.CurrentRow.Index + 1);
+                seller.deleteGoodsFromShop(index);
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите строку.");
+            }
+        }
+
+        public void SaveProductsGridViewToFile()
+        {
+            using (var writer = new StreamWriter("market_goods.txt"))
+            {
+                // Запись заголовков
+                var headers = string.Join("\t", tableProducts.Columns.Cast<DataColumn>().Select(column => column.ColumnName));
+                writer.WriteLine(headers);
+
+                // Запись данных строк
+                foreach (DataRow row in tableProducts.Rows)
+                {
+                    var values = string.Join("\t", row.ItemArray);
+                    writer.WriteLine(values);
+                }
+            }
+        }
+        private void saveProductsToFile_Click(object sender, EventArgs e)
+        {
+            SaveProductsGridViewToFile();
+        }
+
+        private void buttonRefreshProdutcs_Click(object sender, EventArgs e)
+        {
+            RefreshDataProductsGridView();
+        }
+
+        private void RefreshDataProductsGridView()
+        {
+            if (tableProducts != null)
+            {
+
+                tableProducts.Clear();
+                shop.products.Clear();
+                shop.productsToShop(pathToProducts);
+
+                foreach (var product in shop.products)
+                {
+                    tableProducts.Rows.Add(product.Brand, product.Model, product.Submodel, product.Memory, product.Quantity);
+                }
+
+                // Привязываем обновленную таблицу к DataGridView
+                dataGridViewProducts.DataSource = tableProducts;
+
+            }
+            else
+            {
+                MessageBox.Show("Таблица не инициализирована.");
+            }
+        }
+
+        private void deleteProductFromBasket_Click(object sender, EventArgs e)
+        {
+            // Проверяем, что выбрана строка
+            if (dataGridViewBasket.CurrentRow != null)
+            {
+                int index = (dataGridViewBasket.CurrentRow.Index + 1);
+                basket.deleteProductFromBasket(index);
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите строку.");
+            }
+        }
+
+        private void saveUsersToFile_Click(object sender, EventArgs e)
+        {
+            FileManager fm = new FileManager();
+            fm.writeUsersGridViewToFile(tableBasketProducts, pathToBusket);
+        }
+
+        private void RefreshBasketProductsGrid_Click(object sender, EventArgs e)
+        {
+            RefreshBasketProductsGridView();
+        }
+        private void RefreshBasketProductsGridView()
+        {
+            if (tableBasketProducts != null)
+            {
+                // Обновляем данные в таблице
+                tableBasketProducts.Clear();
+                basket.tableBasketProducts.Clear();
+                basket.fillBasket(tableBasketProducts);
+                //Admin admin = new Admin();
+                //admin.usersToList();
+
+                //foreach (var adm in admin.listOfUsers)
+                //{
+                //    tableBasketProducts.Rows.Add(adm.access, adm.login, adm.password, adm.userID);
+                //}
+
+                // Привязываем обновленную таблицу к DataGridView
+                dataGridViewBasket.DataSource = tableBasketProducts;                
+            }
+            else
+            {
+                MessageBox.Show("Таблица не инициализирована.");
+            }
+        }
+
+        //Обработчик изменения выбранного элемента ComboBox - фильтр
+        private void comboBoxFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DataView view = basket.FilteringProducts(comboBoxFilter, dataGridViewBasket);
+            int totalSum = basket.UpdateFilteredSum(view);
+            labelFilteredSum.Text = $"Сумма: {totalSum}$";
+        }
+
+
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FormMarket
+{
+    internal class LoginPassword
+    {
+        internal string access;
+        internal string login;
+        internal string password;
+        internal string userID;
+
+
+        public LoginPassword(string lines)
+        {
+            string[] values = lines.Split('\t');
+            this.access = values[0];
+            this.login = values[1];
+            this.password = values[2];
+            this.userID = values[3];
+        }
+        public LoginPassword()
+        {
+            access = "";
+        }
+    }
+}

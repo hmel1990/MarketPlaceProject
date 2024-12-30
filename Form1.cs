@@ -13,7 +13,7 @@ using System.Windows.Forms;
 namespace FormMarket
 {
     public partial class Form1 : Form
-    { 
+    {
         private Shop shop;
         private string cellValue;
         internal DataTable table;
@@ -22,7 +22,7 @@ namespace FormMarket
         private Seller seller;
         private Admin admin;
         private Basket basket;
-        
+
         //Конструктор
         public Form1()
         {
@@ -64,6 +64,8 @@ namespace FormMarket
             buttonRefresh.Hide();
             switchToAdminMode.Hide();
             switchToSellerMode.Hide();
+            logOutButton.Hide();
+
             this.BackColor = Color.FromArgb(245, 245, 220);
 
 
@@ -80,7 +82,7 @@ namespace FormMarket
         private void ComboBoxSort_SelectedIndexChanged(object sender, EventArgs e)
         {
             shop.SortingProducts(comboBoxSort, dataGridView1);
-           
+
         }
 
 
@@ -90,8 +92,8 @@ namespace FormMarket
         {
             string loginUser = loginField.Text;
             string passwordUser = passwordField.Text;
-                       
-            if (user.Autorithation(user, loginUser, passwordUser, admin, seller,customer))
+
+            if (user.Autorithation(user, loginUser, passwordUser, admin, seller, customer))
             {
                 //MessageBox.Show("Ok!!");
                 loginbutton.Hide();     //скрываем поле логин
@@ -111,6 +113,7 @@ namespace FormMarket
                 buttonRefresh.Show();
                 switchToAdminMode.Show();
                 switchToSellerMode.Show();
+                logOutButton.Show();
                 this.BackColor = Color.FromArgb(250, 240, 230);
             }
             else
@@ -160,7 +163,7 @@ namespace FormMarket
                 fm.writeUsersGridViewToFile(table, "market_goods.txt");
                 basket.addProductToBasket(user, customer, dataGridView1, cellValue);
             }
-            else 
+            else
             {
                 MessageBox.Show("Товар закончился, извините ((((");
             }
@@ -185,7 +188,7 @@ namespace FormMarket
             }
             else
             {
-                MessageBox.Show("You are not authorized");
+                MessageBox.Show("You are not admin!!!");
             }
 
         }
@@ -292,6 +295,36 @@ namespace FormMarket
             {
                 MessageBox.Show("Таблица не инициализирована.");
             }
+        }
+
+        private void logOutButton_Click(object sender, EventArgs e)
+        {
+            user.logPas.access = "";
+            user.logPas.userID = "";
+            user.logPas.login = "";
+            user.logPas.password = "";
+
+            loginbutton.Show();     //скрываем поле логин
+            loginField.Show();      //скрываем поле пароль
+            passwordField.Show();   //скрываем кнопку логин
+            RegistrationButton.Show();//скрываем кнопку регистрация
+            dataGridView1.Hide();   // показываем ранее созданую таблицу
+            comboBoxFilter.Hide();
+            comboBoxSort.Hide();
+            buttonToBuy.Hide();
+            label3.Hide();
+            textBoxSearch.Hide();
+            buttonSearch.Hide();
+            ResetButton.Hide();
+            label2.Hide();
+            label1.Hide();
+            buttonRefresh.Hide();
+            switchToAdminMode.Hide();
+            switchToSellerMode.Hide();
+            logOutButton.Hide();
+            loginField.Clear();
+            passwordField.Clear();
+            this.BackColor = Color.FromArgb(250, 240, 230);
         }
     }
 }

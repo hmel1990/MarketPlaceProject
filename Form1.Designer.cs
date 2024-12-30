@@ -45,6 +45,7 @@
             label3 = new Label();
             buttonRefresh = new Button();
             switchToSellerMode = new Button();
+            logOutButton = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -63,7 +64,7 @@
             loginField.Location = new Point(1409, 524);
             loginField.Name = "loginField";
             loginField.Size = new Size(728, 39);
-            loginField.TabIndex = 1;
+            loginField.TabIndex = 0;
             // 
             // passwordField
             // 
@@ -78,7 +79,7 @@
             loginbutton.Location = new Point(1409, 774);
             loginbutton.Name = "loginbutton";
             loginbutton.Size = new Size(288, 46);
-            loginbutton.TabIndex = 2;
+            loginbutton.TabIndex = 3;
             loginbutton.Text = "LogIn";
             loginbutton.UseVisualStyleBackColor = true;
             loginbutton.Click += loginbutton_Click;
@@ -109,7 +110,7 @@
             RegistrationButton.Location = new Point(1849, 774);
             RegistrationButton.Name = "RegistrationButton";
             RegistrationButton.Size = new Size(288, 46);
-            RegistrationButton.TabIndex = 2;
+            RegistrationButton.TabIndex = 4;
             RegistrationButton.Text = "Registration";
             RegistrationButton.UseVisualStyleBackColor = true;
             RegistrationButton.Click += RegistrationButton_Click;
@@ -207,6 +208,16 @@
             switchToSellerMode.UseVisualStyleBackColor = true;
             switchToSellerMode.Click += switchToSellerMode_Click;
             // 
+            // logOutButton
+            // 
+            logOutButton.Location = new Point(544, 1727);
+            logOutButton.Name = "logOutButton";
+            logOutButton.Size = new Size(230, 46);
+            logOutButton.TabIndex = 0;
+            logOutButton.Text = "LogOut";
+            logOutButton.UseVisualStyleBackColor = true;
+            logOutButton.Click += logOutButton_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
@@ -223,13 +234,14 @@
             Controls.Add(ResetButton);
             Controls.Add(buttonSearch);
             Controls.Add(buttonToBuy);
-            Controls.Add(dataGridView1);
             Controls.Add(RegistrationButton);
             Controls.Add(loginbutton);
             Controls.Add(passwordField);
             Controls.Add(loginField);
+            Controls.Add(logOutButton);
             Controls.Add(switchToSellerMode);
             Controls.Add(switchToAdminMode);
+            Controls.Add(dataGridView1);
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
@@ -259,5 +271,6 @@
         private Label label3;
         private Button buttonRefresh;
         private Button switchToSellerMode;
+        private Button logOutButton;
     }
 }

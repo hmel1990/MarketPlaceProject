@@ -1,73 +1,87 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Market_try.User" Collapsed="true">
-    <Position X="5.5" Y="2.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAABAAAAAAAAAIAAAAEAAAAAAAAIAAAAABAQAAAEQAA=</HashCode>
-      <FileName>User.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Market_try.LoginPassword" Collapsed="true">
-    <Position X="5.5" Y="3.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAEAA=</HashCode>
-      <FileName>LoginPassword.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FormMarket.Seller" Collapsed="true">
-    <Position X="3.25" Y="1.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAgAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Seller.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FormMarket.Customer" Collapsed="true">
-    <Position X="5.5" Y="1.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Customer.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="FormMarket.Admin" Collapsed="true">
-    <Position X="7.5" Y="1.25" Width="1.5" />
+    <Position X="8.25" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAIAAAAAAAAAAIAAACAAAEAAAA=</HashCode>
       <FileName>Admin.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="FormMarket.Product" Collapsed="true">
-    <Position X="9.75" Y="2.5" Width="1.5" />
+  <Class Name="FormMarket.Basket" Collapsed="true">
+    <Position X="15.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAggAgAABAAA=</HashCode>
-      <FileName>Product.cs</FileName>
+      <HashCode>gAAAAAAAAAAAAAAAAEAACAgAAAACAAAAAgAAAAAEAAk=</HashCode>
+      <FileName>Basket.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="FormMarket.Shop" Collapsed="true">
-    <Position X="9.75" Y="1.75" Width="1.5" />
+  <Class Name="FormMarket.Customer" Collapsed="true">
+    <Position X="10.75" Y="4.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAABAAhACAAAgAAAAAAAAAAAABAAEAAA=</HashCode>
-      <FileName>Shop.cs</FileName>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAgA=</HashCode>
+      <FileName>Customer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FormMarket.FileManager" Collapsed="true">
-    <Position X="9.75" Y="3.25" Width="1.5" />
+    <Position X="17" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAJAAAAAAAAAA=</HashCode>
       <FileName>FileManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FormMarket.Form1" Collapsed="true">
-    <Position X="0.5" Y="3.5" Width="3.75" />
+    <Position X="15.25" Y="3.5" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AAAIBAAFA7AAAhBDCACgAAAGAAkGQMABgAQOAQAIAQA=</HashCode>
+      <HashCode>AgAIBACFA6AAAhBRCACoAAAGAAkGQMABiAQOAAAIAQA=</HashCode>
       <FileName>Form1.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FormMarket.Form2" Collapsed="true">
-    <Position X="0.5" Y="4.5" Width="3.75" />
+    <Position X="18.75" Y="3.5" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AAAMgIAEACAAgABAABCECAgiADEkAMQAAAAgAAEAACA=</HashCode>
+      <HashCode>AABMgoCEACCAgAIAABDASAgiAgkmAMQAgAAgAAEEQCQ=</HashCode>
       <FileName>Form2.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FormMarket.Form3" Collapsed="true">
+    <Position X="22" Y="3.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>IgBIggCAACGAAABAABDAQQgCAAkGAERAgAAgAAAGQAA=</HashCode>
+      <FileName>Form3.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FormMarket.LoginPassword" Collapsed="true">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAACAAAAAAAAAAAAAAAAAAAAgAAEAA=</HashCode>
+      <FileName>LoginPassword.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FormMarket.Product" Collapsed="true">
+    <Position X="17" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAASAAAAAAAAAAAAAAAAAAAAAAAggAgAABAAA=</HashCode>
+      <FileName>Product.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FormMarket.Seller" Collapsed="true">
+    <Position X="13" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Seller.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FormMarket.Shop" Collapsed="true">
+    <Position X="18.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAABAAlACAAggAAAAAAAAAAAABAAEAAE=</HashCode>
+      <FileName>Shop.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FormMarket.User" Collapsed="true">
+    <Position X="10.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAIAAAAEAAAAAAAAIAAAAABASAACEQgA=</HashCode>
+      <FileName>User.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

@@ -1,0 +1,111 @@
+Класс User
+
+Поля:
+- pathToUsersData : string
+- logPas : LoginPassword
+- usersData : List<LoginPassword>
+
+Методы:
++ loginSetter(login : string) : void
++ accessSetter(access : string) : void
++ idSetter(userID : string) : void
++ passwordSetter(password : string) : void
++ Autorithation(...) : bool
++ сheckOut(...) : bool
++ Registration(...) : bool
++ addToBucket(cellValue : string) : void
+
+Класс LoginPassword
+
+Поля:
+- access : string
+- login : string
+- password : string
+- userID : string
+
+Методы:
++ LoginPassword(lines : string)
++ LoginPassword()
+
+Класс Admin (наследует User)
+
+Поля:
+- adminBucketProducts : List<Product>
+- listOfUsers : List<LoginPassword>
+
+Методы:
++ usersToList() : void
++ deleteUserFromList(index : int) : void
+
+Класс Customer (наследует User)
+
+Поля:
+- id : string
+- custumer_bucket_goods : List<Product>
+
+Методы:
++ idGetter() : string
+
+Класс Seller (наследует User)
+
+Поля:
+- sellerBucketGoods : List<Product>
+
+Методы:
++ deleteGoodsFromShop(index : int) : void
+
+Класс Basket
+
+Поля:
+# tableBasketProducts : DataTable
+- pathToBasket : string
+
+Методы:
++ addProductToBasket(...)
++ addNamesToColumnsBasket(tableBasketProducts : DataTable) : void
++ fillBasket(tableBasketProducts : DataTable) : void
++ deleteProductFromBasket(index : int) : void
++ addFilteringProducts(comboBoxFilter : ComboBox) : void
++ FilteringProducts(...) : DataView
++ UpdateFilteredSum(view : DataView) : int
+
+Класс FileManager
+
+Методы:
++ readStringsFromFile(path : string) : string[]
++ addStringToFile(path : string, newLine : string) : void
++ writeUsersGridViewToFile(...) : void
+
+Класс Shop
+
+Поля:
+- products : List<Product>
+- path : string
+- table : DataTable
+
+Методы:
++ setPath(path : string) : void
++ Shop(path : string)
++ Shop()
++ productsToShop(path : string) : List<Product>
++ fillTableOfProducts(path : string) : void
++ Print() : void
++ addFilteringProducts(comboBoxFilter : ComboBox) : void
++ FilteringProducts(...) : void
++ addSortingProducts(comboBoxSort : ComboBox) : void
++ SortingProducts(...) : void
+
+Класс Product
+
+Поля:
+- Brand : string
+- Model : string
+- Submodel : string
+- Memory : int
+- Quantity : int
+- Price : int
+
+Методы:
++ Product()
++ Product(lines : string)
++ Product(...)

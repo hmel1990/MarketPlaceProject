@@ -39,6 +39,8 @@
             RefreshBasketProductsGrid = new Button();
             comboBoxFilter = new ComboBox();
             labelFilteredSum = new Label();
+            ShopSellerLabel = new Label();
+            BasketSellerLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridViewProducts).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewBasket).BeginInit();
             SuspendLayout();
@@ -151,12 +153,38 @@
             labelFilteredSum.TabIndex = 4;
             labelFilteredSum.Text = "label1";
             // 
+            // ShopSellerLabel
+            // 
+            ShopSellerLabel.AutoSize = true;
+            ShopSellerLabel.Font = new Font("Times New Roman", 19.875F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            ShopSellerLabel.ForeColor = Color.FromArgb(255, 128, 0);
+            ShopSellerLabel.Location = new Point(1037, 181);
+            ShopSellerLabel.Name = "ShopSellerLabel";
+            ShopSellerLabel.Size = new Size(152, 61);
+            ShopSellerLabel.TabIndex = 5;
+            ShopSellerLabel.Text = " Shop";
+            ShopSellerLabel.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // BasketSellerLabel
+            // 
+            BasketSellerLabel.AutoSize = true;
+            BasketSellerLabel.Font = new Font("Times New Roman", 19.875F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            BasketSellerLabel.ForeColor = Color.FromArgb(255, 128, 0);
+            BasketSellerLabel.Location = new Point(2709, 181);
+            BasketSellerLabel.Name = "BasketSellerLabel";
+            BasketSellerLabel.Size = new Size(181, 61);
+            BasketSellerLabel.TabIndex = 5;
+            BasketSellerLabel.Text = "Basket";
+            BasketSellerLabel.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // Form3
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(255, 224, 192);
             ClientSize = new Size(3458, 1811);
+            Controls.Add(BasketSellerLabel);
+            Controls.Add(ShopSellerLabel);
             Controls.Add(labelFilteredSum);
             Controls.Add(comboBoxFilter);
             Controls.Add(RefreshBasketProductsGrid);
@@ -191,5 +219,7 @@
         private Button RefreshBasketProductsGrid;
         private ComboBox comboBoxFilter;
         private Label labelFilteredSum;
+        private Label ShopSellerLabel;
+        private Label BasketSellerLabel;
     }
 }

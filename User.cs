@@ -68,20 +68,7 @@ namespace FormMarket
 
         #region регистрация и авторизация
 
-        //public void idSetter(string loginUser, string passwordUser)
-        //{
-        //    FileManager fm = new FileManager();
-        //    string[] lines = fm.readStringsFromFile(pathToUsersData);
-        //    int count = 0;
-        //    foreach (string line in lines)
-        //    {
-        //        count++;
-        //        if (line.Contains(loginUser)&& line.Contains(passwordUser))
-        //        {
-        //           logPas.id = Convert.ToString(count);
-        //        }
-        //    }
-        //}
+
         public bool Autorithation(User user, string loginUser, string passwordUser, Admin admin, Seller seller, Customer customer) //параметры х у принимаются из виндовс форм
         {
 

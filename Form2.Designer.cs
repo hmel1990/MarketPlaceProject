@@ -43,6 +43,9 @@
             RefreshBasketProductsGrid = new Button();
             comboBoxFilter = new ComboBox();
             labelFilteredSum = new Label();
+            BasketLabel = new Label();
+            ShopLabel = new Label();
+            UsersLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridViewProducts).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewUsers).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewBasket).BeginInit();
@@ -106,7 +109,7 @@
             dataGridViewUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewUsers.BackgroundColor = Color.Gainsboro;
             dataGridViewUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewUsers.Location = new Point(1009, 1395);
+            dataGridViewUsers.Location = new Point(1001, 1531);
             dataGridViewUsers.Name = "dataGridViewUsers";
             dataGridViewUsers.RowHeadersWidth = 82;
             dataGridViewUsers.Size = new Size(1294, 453);
@@ -114,7 +117,7 @@
             // 
             // deleteUserFromList
             // 
-            deleteUserFromList.Location = new Point(1353, 1323);
+            deleteUserFromList.Location = new Point(1345, 1459);
             deleteUserFromList.Name = "deleteUserFromList";
             deleteUserFromList.Size = new Size(150, 46);
             deleteUserFromList.TabIndex = 6;
@@ -124,7 +127,7 @@
             // 
             // saveUsersToFile
             // 
-            saveUsersToFile.Location = new Point(1541, 1323);
+            saveUsersToFile.Location = new Point(1533, 1459);
             saveUsersToFile.Name = "saveUsersToFile";
             saveUsersToFile.Size = new Size(150, 46);
             saveUsersToFile.TabIndex = 7;
@@ -134,7 +137,7 @@
             // 
             // button3
             // 
-            button3.Location = new Point(1733, 1323);
+            button3.Location = new Point(1725, 1459);
             button3.Name = "button3";
             button3.Size = new Size(150, 46);
             button3.TabIndex = 8;
@@ -201,12 +204,48 @@
             labelFilteredSum.TabIndex = 10;
             labelFilteredSum.Text = "Sum in $";
             // 
+            // BasketLabel
+            // 
+            BasketLabel.AutoSize = true;
+            BasketLabel.Font = new Font("Times New Roman", 19.875F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            BasketLabel.Location = new Point(707, 148);
+            BasketLabel.Name = "BasketLabel";
+            BasketLabel.Size = new Size(181, 61);
+            BasketLabel.TabIndex = 11;
+            BasketLabel.Text = "Basket";
+            BasketLabel.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // ShopLabel
+            // 
+            ShopLabel.AutoSize = true;
+            ShopLabel.Font = new Font("Times New Roman", 19.875F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            ShopLabel.Location = new Point(2122, 148);
+            ShopLabel.Name = "ShopLabel";
+            ShopLabel.Size = new Size(139, 61);
+            ShopLabel.TabIndex = 11;
+            ShopLabel.Text = "Shop";
+            ShopLabel.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // UsersLabel
+            // 
+            UsersLabel.AutoSize = true;
+            UsersLabel.Font = new Font("Times New Roman", 19.875F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            UsersLabel.Location = new Point(1563, 1352);
+            UsersLabel.Name = "UsersLabel";
+            UsersLabel.Size = new Size(246, 61);
+            UsersLabel.TabIndex = 11;
+            UsersLabel.Text = "UsereList";
+            UsersLabel.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // Form2
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(230, 230, 255);
             ClientSize = new Size(3362, 1814);
+            Controls.Add(UsersLabel);
+            Controls.Add(ShopLabel);
+            Controls.Add(BasketLabel);
             Controls.Add(labelFilteredSum);
             Controls.Add(comboBoxFilter);
             Controls.Add(RefreshBasketProductsGrid);
@@ -225,7 +264,7 @@
             ForeColor = SystemColors.HotTrack;
             Name = "Form2";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Form2";
+            Text = "AdminMode";
             WindowState = FormWindowState.Maximized;
             Load += Form2_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridViewProducts).EndInit();
@@ -252,5 +291,8 @@
         private Button RefreshBasketProductsGrid;
         private ComboBox comboBoxFilter;
         private Label labelFilteredSum;
+        private Label BasketLabel;
+        private Label ShopLabel;
+        private Label UsersLabel;
     }
 }

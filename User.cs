@@ -13,41 +13,42 @@ namespace FormMarket
     public class User
     {
         private string pathToUsersData = "loginPassword.txt";
-        internal LoginPassword logPas = new LoginPassword();
 
-        private List<LoginPassword> usersData = new List<LoginPassword>();
+        internal LoginPassword currentUserLoginPassword = new LoginPassword();
+
+        private List<LoginPassword> usersLoginPasswordList = new List<LoginPassword>();
 
         #region сеттеры и геттеры
         public void loginSetter (string login)
         {
             //Console.WriteLine("Введите Логин");
             //string login = Console.ReadLine();
-            logPas.login = login;
+            currentUserLoginPassword.login = login;
         }
 
         public void accessSetter(string access)
         {
             //Console.WriteLine("Введите Логин");
             //string login = Console.ReadLine();
-            logPas.access = access;
+            currentUserLoginPassword.access = access;
         }
         public void idSetter(string userID)
-        { logPas.userID = userID; }
+        { currentUserLoginPassword.userID = userID; }
 
         public void passwordSetter(string password)
         {
             //Console.WriteLine("Введите Пароль");
             //string password = Console.ReadLine();
-            logPas.password = password;
+            currentUserLoginPassword.password = password;
         }
         #endregion
 
         #region конструктор
         public User ()
         {
-            logPas.access = "";
+            currentUserLoginPassword.access = "";
 
-            // Считываем все строки из файла
+            // Считываем все строки из файлаqqq
             string[] lines = File.ReadAllLines("loginPassword.txt");
 
             // Проверяем, есть ли строки в файле
@@ -60,7 +61,7 @@ namespace FormMarket
             // Заполняем массив данными из файла (i = 1 т.к. первая строка в тхт файле это шапка таблицы)
             for (int i = 1; i < lines.Length; i++)
             {
-                usersData.Add(new LoginPassword(lines[i]));
+                usersLoginPasswordList.Add(new LoginPassword(lines[i]));
             }
             //logPas.userID = "0";
 
@@ -70,10 +71,10 @@ namespace FormMarket
         #region регистрация и авторизация
 
 
-        public bool Autorithation(User user, string loginUser, string passwordUser, Admin admin, Seller seller, Customer customer) //параметры х у принимаются из виндовс форм
+        public bool Autorithation(string loginUser, string passwordUser /*User user, ,Admin admin, Seller seller, Customer customer*/) //параметры х у принимаются из виндовс форм
         {
 
-            foreach (LoginPassword lp in usersData) 
+            foreach (LoginPassword lp in usersLoginPasswordList) 
             {
                 if (lp.login == loginUser && lp.password == passwordUser)
                 {
@@ -81,35 +82,38 @@ namespace FormMarket
                     loginSetter(loginUser);
                     passwordSetter(passwordUser);
                     idSetter(lp.userID);
+                     /*
                     //______________________________________________________________________________________
-                    switch (logPas.access)
+                       switch (currentUserLoginPassword.access)
                     {
                         case "": // Без сортировки
                             Console.WriteLine("Пользователь отсутствует");
                             break;
                         case "admin": // админ
                                       //Admin admin = new Admin();
-                            admin.logPas.access = "admin";
-                            admin.logPas.userID = logPas.userID;
+                            admin.currentUserLoginPassword.access = "admin";
+                            admin.currentUserLoginPassword.userID = currentUserLoginPassword.userID;
                             break;
                         case "seller": // продавец
                                        //Seller seller = new Seller();
-                            seller.logPas.access = "seller";
-                            seller.logPas.userID = logPas.userID;
+                            seller.currentUserLoginPassword.access = "seller";
+                            seller.currentUserLoginPassword.userID = currentUserLoginPassword.userID;
                             break;
                         case "customer": // покупатель
                                          //Customer customer = new Customer();
-                            customer.logPas.access = "customer";
-                            customer.logPas.userID = logPas.userID;
+                            customer.currentUserLoginPassword.access = "customer";
+                            customer.currentUserLoginPassword.userID = currentUserLoginPassword.userID;
                             break;
                     }
                     //______________________________________________________________________________________
+                      */
+                   
 
                     //Console.WriteLine("Все ОК!!!");
                     return true;
                 }
             }
-            if (logPas.access == "")
+            if (currentUserLoginPassword.access == "")
             {
                 return false;
                 //Console.WriteLine("Логин или пароль неверные");
@@ -118,15 +122,15 @@ namespace FormMarket
             return false;
         }
         
-          public bool сheckOut(string x, string y)
+          private bool сheckOut(string x, string y)
         {
             loginSetter(x);
             passwordSetter(y);
 
-            foreach (LoginPassword lp in usersData)
+            foreach (LoginPassword lp in usersLoginPasswordList)
             {
 
-                if (lp.login == logPas.login && lp.password == logPas.password)
+                if (lp.login == currentUserLoginPassword.login && lp.password == currentUserLoginPassword.password)
                 {
                     //Console.WriteLine("Такой Логин или Пароль уже существуют");
                     return false;
@@ -142,14 +146,14 @@ namespace FormMarket
 
             if (сheckOut(x, y))
             {
-                usersData.Add(new LoginPassword()); // добавляем в список еще один объект
-                logPas.access = "customer"; // устанавливаем access == customer
-                logPas.userID = Convert.ToString(usersData.Count());
-                usersData[(usersData.Count() - 1)].access = "customer";            //заполняем новый объект в массиве
-                usersData[(usersData.Count() - 1)].login = logPas.login;         //заполняем новый объект в массиве
-                usersData[(usersData.Count() - 1)].password = logPas.password;   //заполняем новый объект в массиве
-                usersData[(usersData.Count() -1)].userID = Convert.ToString(usersData.Count());
-                File.AppendAllText("loginPassword.txt", logPas.access + "\t" + logPas.login + "\t" + logPas.password + "\t" + logPas.userID + "\n"); //записываем строку с новым пользователев в тхт файл
+                usersLoginPasswordList.Add(new LoginPassword()); // добавляем в список еще один объект
+                currentUserLoginPassword.access = "customer"; // устанавливаем access == customer
+                currentUserLoginPassword.userID = Convert.ToString(usersLoginPasswordList.Count());
+                usersLoginPasswordList[(usersLoginPasswordList.Count() - 1)].access = "customer";            //заполняем новый объект в массиве
+                usersLoginPasswordList[(usersLoginPasswordList.Count() - 1)].login = currentUserLoginPassword.login;         //заполняем новый объект в массиве
+                usersLoginPasswordList[(usersLoginPasswordList.Count() - 1)].password = currentUserLoginPassword.password;   //заполняем новый объект в массиве
+                usersLoginPasswordList[(usersLoginPasswordList.Count() -1)].userID = Convert.ToString(usersLoginPasswordList.Count());
+                File.AppendAllText("loginPassword.txt", currentUserLoginPassword.access + "\t" + currentUserLoginPassword.login + "\t" + currentUserLoginPassword.password + "\t" + currentUserLoginPassword.userID + "\n"); //записываем строку с новым пользователев в тхт файл
 
                 return true;
             }
@@ -157,11 +161,11 @@ namespace FormMarket
         }
         #endregion
 
-        #region добавление в корзину
-        public void addToBucket(string cellValue)
-        {
-            File.AppendAllText("market_goods_korzina.txt", cellValue + logPas.access + "\n");
-        }
-        #endregion
+        //#region добавление в корзину
+        //public void addToBasket(string cellValue)
+        //{
+        //    File.AppendAllText("market_goods_korzina.txt", cellValue + currentUserLoginPassword.access + "\n");
+        //}
+        //#endregion
     }
 }

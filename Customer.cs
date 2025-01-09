@@ -10,10 +10,10 @@ namespace FormMarket
     public class Customer : FormMarket.User
     {
         private string id;
-        private List<Product> custumer_bucket_goods = new List<Product> ();
+        //private List<Product> custumer_basket_goods = new List<Product> ();
         public Customer()
         {
-            logPas.access = "";
+            currentUserLoginPassword.access = "";
         }
         public string idGetter ()
             { return id; }

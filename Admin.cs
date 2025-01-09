@@ -9,12 +9,13 @@ namespace FormMarket
 {
     public class Admin: FormMarket.User
     {
-        private List<Product> adminBucketProducts = new List<Product>();
+        //private List<Product> adminBasketProducts = new List<Product>();
+
         internal List<LoginPassword> listOfUsers = new List<LoginPassword>();
 
         public Admin ()
         {
-            logPas.access = "";
+            currentUserLoginPassword.access = "";
             usersToList();
         }
         public void usersToList()

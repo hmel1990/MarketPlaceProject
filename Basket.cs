@@ -23,7 +23,7 @@ namespace FormMarket
             addNamesToColumnsBasket(tableBasketProducts);
             fillBasket(tableBasketProducts);
         }
-        public void addProductToBasket(User user, Customer customer, DataGridView dataGridView1, string cellValue)
+        public void addProductToBasket(User user,  DataGridView dataGridView1, string cellValue/* Customer customer,*/)
         {             
             // Проверяем, что выбрана строка
             if (dataGridView1.CurrentRow != null)
@@ -33,7 +33,7 @@ namespace FormMarket
                 {
                     cellValue += dataGridView1.CurrentRow.Cells[i].Value?.ToString() + "\t";//!!!!!!! значение и которое потом запишется в тхт файл корзины)
                 }                
-                cellValue = (user.logPas.userID + "\t" + cellValue);
+                cellValue = (user.currentUserLoginPassword.userID + "\t" + cellValue);
                 MessageBox.Show($"Содержимое первой ячейки строки скопировано: {cellValue}");
                 FileManager fm = new FileManager();
                 fm.addStringToFile(pathToBasket,cellValue);

@@ -18,19 +18,19 @@ namespace FormMarket
         private string cellValue;
         internal DataTable table;
         private User user;
-        private Customer customer;
-        private Seller seller;
-        private Admin admin;
+        //private Customer customer;
+        //private Seller seller;
+        //private Admin admin;
         private Basket basket;
 
         //Конструктор
         public Form1()
         {
             InitializeComponent();
-            user = new User();// создаем объект User www
-            seller = new Seller();
-            admin = new Admin();
-            customer = new Customer();
+            user = new User();// создаем объект User
+            //seller = new Seller();
+            //admin = new Admin();
+            //customer = new Customer();
             shop = new Shop();
             basket = new Basket();
 
@@ -93,7 +93,7 @@ namespace FormMarket
             string loginUser = loginField.Text;
             string passwordUser = passwordField.Text;
 
-            if (user.Autorithation(user, loginUser, passwordUser, admin, seller, customer))
+            if (user.Autorithation(loginUser, passwordUser /*user, ,admin, seller, customer*/))
             {
                 //MessageBox.Show("Ok!!");
                 loginbutton.Hide();     //скрываем поле логин
@@ -161,7 +161,7 @@ namespace FormMarket
                 table.Rows[index][4] = Convert.ToInt32(table.Rows[index][4]) - 1;
                 FileManager fm = new FileManager();
                 fm.writeUsersGridViewToFile(table, "market_goods.txt");
-                basket.addProductToBasket(user, customer, dataGridView1, cellValue);
+                basket.addProductToBasket(user, dataGridView1, cellValue /*customer,*/);
             }
             else
             {
@@ -180,7 +180,7 @@ namespace FormMarket
         private void switchToAdminMode_Click(object sender, EventArgs e)
         {
             //user.logPas.access == "seller" 
-            if (user.logPas.access == "admin")
+            if (user.currentUserLoginPassword.access == "admin")
             {
                 // Создаем экземпляр второй формы
                 Form2 form2 = new Form2();
@@ -196,7 +196,7 @@ namespace FormMarket
         //переключиться на форму 3 для Продавца
         private void switchToSellerMode_Click(object sender, EventArgs e)
         {
-            if (user.logPas.access == "seller" | user.logPas.access == "admin")
+            if (user.currentUserLoginPassword.access == "seller" | user.currentUserLoginPassword.access == "admin")
             {
                 // Создаем экземпляр второй формы
                 Form3 form3 = new Form3();
@@ -299,10 +299,10 @@ namespace FormMarket
 
         private void logOutButton_Click(object sender, EventArgs e)
         {
-            user.logPas.access = "";
-            user.logPas.userID = "";
-            user.logPas.login = "";
-            user.logPas.password = "";
+            user.currentUserLoginPassword.access = "";
+            user.currentUserLoginPassword.userID = "";
+            user.currentUserLoginPassword.login = "";
+            user.currentUserLoginPassword.password = "";
 
             loginbutton.Show();     //скрываем поле логин
             loginField.Show();      //скрываем поле пароль

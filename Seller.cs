@@ -8,11 +8,11 @@ namespace FormMarket
 {
     public class Seller: FormMarket.User
     {
-        private List<Product> sellerBucketGoods = new List<Product>();
+        //private List<Product> sellerBasketGoods = new List<Product>();
 
         public Seller()
         {
-            logPas.access = "";
+            currentUserLoginPassword.access = "";
         }
 
 

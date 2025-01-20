@@ -34,7 +34,7 @@ namespace FormMarket
             tableProducts = shop.table;
             dataGridViewProducts.DataSource = tableProducts;
             basket = new Basket();
-            tableBasketProducts = basket.tableBasketProducts;
+            tableBasketProducts = basket.tableProductsInBasket;
             dataGridViewBasket.DataSource = tableBasketProducts;
             basket.addFilteringProducts(comboBoxFilter);
 
@@ -140,7 +140,7 @@ namespace FormMarket
             {
                 // Обновляем данные в таблице
                 tableBasketProducts.Clear();
-                basket.tableBasketProducts.Clear();
+                basket.tableProductsInBasket.Clear();
                 basket.fillBasket(tableBasketProducts);
                 //Admin admin = new Admin();
                 //admin.usersToList();

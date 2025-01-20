@@ -50,7 +50,7 @@ namespace FormMarket
             tableUsers.Columns.Add("Id", typeof(string));
 
             basket = new Basket();
-            tableBasketProducts = basket.tableBasketProducts;
+            tableBasketProducts = basket.tableProductsInBasket;
             dataGridViewBasket.DataSource = tableBasketProducts;
             basket.addFilteringProducts(comboBoxFilter);
 
@@ -226,7 +226,7 @@ namespace FormMarket
             {
                 // Обновляем данные в таблице
                 tableBasketProducts.Clear();
-                basket.tableBasketProducts.Clear();
+                basket.tableProductsInBasket.Clear();
                 basket.fillBasket(tableBasketProducts);
 
                 // Привязываем обновленную таблицу к DataGridView

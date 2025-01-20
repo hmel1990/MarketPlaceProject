@@ -14,14 +14,15 @@ namespace FormMarket
     {
         //internal DataTable tableBasketProducts;
         //private List<Product> productsInBasket;
-        internal DataTable tableBasketProducts = new DataTable();
+        internal DataTable tableProductsInBasket;
 
 
         private string pathToBasket = "market_goods_korzina.txt";
         public Basket()
         {
-            addNamesToColumnsBasket(tableBasketProducts);
-            fillBasket(tableBasketProducts);
+            tableProductsInBasket = new DataTable();
+            addNamesToColumnsBasket(tableProductsInBasket);
+            fillBasket(tableProductsInBasket);
         }
         public void addProductToBasket(User user,  DataGridView dataGridView1, string cellValue/* Customer customer,*/)
         {             
@@ -105,7 +106,7 @@ namespace FormMarket
         {
             // Добавляем элементы в ComboBox - значения брендов
             comboBoxFilter.Items.Add("         "); // Добавить опцию для сброса фильтра
-            var ids = tableBasketProducts.AsEnumerable().Select(row => row.Field<int>("Id")).Distinct().OrderBy(id => id).ToList();
+            var ids = tableProductsInBasket.AsEnumerable().Select(row => row.Field<int>("Id")).Distinct().OrderBy(id => id).ToList();
             comboBoxFilter.Items.AddRange(ids.Select(id => id.ToString()).ToArray());
             comboBoxFilter.SelectedIndex = 0; // Установить первый элемент выбранным
         }
@@ -120,7 +121,7 @@ namespace FormMarket
             if (selectedId == "         ")
             {
                 // Сбросить фильтр
-                DataView view = tableBasketProducts.DefaultView;
+                DataView view = tableProductsInBasket.DefaultView;
                 view.RowFilter = string.Empty; // Удаляем фильтр
                 dataGridViewBasket.DataSource = view; // Привязываем оригинальные данные
                 return view;
@@ -129,7 +130,7 @@ namespace FormMarket
             else
             {
                 // Создать DataView из оригинальной таблицы
-                DataView view = tableBasketProducts.DefaultView;
+                DataView view = tableProductsInBasket.DefaultView;
                 view.RowFilter = $"Convert(Id, 'System.String') LIKE '{selectedId}'";
 
                 // Привязать отфильтрованные данные к DataGridView

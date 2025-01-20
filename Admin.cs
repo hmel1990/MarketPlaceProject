@@ -10,6 +10,7 @@ namespace FormMarket
     public class Admin: FormMarket.User
     {
         //private List<Product> adminBasketProducts = new List<Product>();
+        private string pathToUsersData = "E:\\STEP\\C_sharp .Net\\MarketPlace\\MarketplaceProject\\bin\\Debug\\net9.0-windows\\loginPassword.txt";
 
         internal List<LoginPassword> listOfUsers = new List<LoginPassword>();
 
@@ -21,7 +22,7 @@ namespace FormMarket
         public void usersToList()
         {
             // Считываем все строки из файла
-            string[] lines = File.ReadAllLines("loginPassword.txt");
+            string[] lines = File.ReadAllLines(pathToUsersData);
 
             // Проверяем, есть ли строки в файле
             if (lines.Length == 0)
@@ -41,14 +42,14 @@ namespace FormMarket
         public void deleteUserFromList(int index)
         {
             // Проверяем, существует ли файл
-            if (!File.Exists("loginPassword.txt"))
+            if (!File.Exists(pathToUsersData))
             {
                 Console.WriteLine("Файл не найден.");
                 return;
             }
 
             // Читаем все строки из файла
-            var lines = File.ReadAllLines("loginPassword.txt").ToList();
+            var lines = File.ReadAllLines(pathToUsersData).ToList();
 
             // Проверяем, корректен ли номер строки
             if (index < 1 || index > lines.Count)
@@ -61,7 +62,7 @@ namespace FormMarket
             lines.RemoveAt(index);
 
             // Перезаписываем файл без удалённой строки
-            File.WriteAllLines("loginPassword.txt", lines);
+            File.WriteAllLines(pathToUsersData, lines);
 
             //Console.WriteLine($"Строка {index} успешно удалена.");
         }

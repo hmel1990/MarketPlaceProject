@@ -13,26 +13,26 @@ namespace FormMarket
     public class Shop
     {
         public List<Product> products = new List<Product>();
-        private string path = "market_goods.txt";
+        private string pathToMarketGoods = "E:\\STEP\\C_sharp .Net\\MarketPlace\\MarketplaceProject\\bin\\Debug\\net9.0-windows\\market_goods.txt";
         internal DataTable table = new DataTable();
 
-        public void setPath (string path)
-        { this.path = path; }
-        public Shop(string path)
+        public void setPath (string pathToMarketGoods)
+        { this.pathToMarketGoods = pathToMarketGoods; }
+        public Shop(string pathToMarketGoods)
         {
-            setPath(path);
-            fillTableOfProducts(path);
+            setPath(pathToMarketGoods);
+            fillTableOfProducts(pathToMarketGoods);
         }
 
         public Shop()
         {
-            fillTableOfProducts(path);
+            fillTableOfProducts(pathToMarketGoods);
         }
 
-        public List<Product> productsToShop(string path)
+        public List<Product> productsToShop(string pathToMarketGoods)
         {
             FileManager fileManager = new FileManager();
-            string [] lines = fileManager.readStringsFromFile(path);
+            string [] lines = fileManager.readStringsFromFile(pathToMarketGoods);
 
             // Заполняем массив данными из файла (i = 1 т.к. первая строка в тхт файле это шапка таблицы)
             for (int i = 1; i<lines.Length; i++)
@@ -42,9 +42,9 @@ namespace FormMarket
             return products;
         }
 
-        public void fillTableOfProducts (string path)
+        public void fillTableOfProducts (string pathToMarketGoods)
         {
-            products = productsToShop(path);
+            products = productsToShop(pathToMarketGoods);
 
             //устанавливаем значение для заголовков столбцов
             table.Columns.Add("Brand", typeof(string));

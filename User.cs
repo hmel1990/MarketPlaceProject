@@ -12,7 +12,7 @@ namespace FormMarket
 {
     public class User
     {
-        private string pathToUsersData = "loginPassword.txt";
+        private string pathToUsersData = "E:\\STEP\\C_sharp .Net\\MarketPlace\\MarketplaceProject\\bin\\Debug\\net9.0-windows\\loginPassword.txt";
 
         internal LoginPassword currentUserLoginPassword = new LoginPassword();
 
@@ -153,7 +153,7 @@ namespace FormMarket
                 usersLoginPasswordList[(usersLoginPasswordList.Count() - 1)].login = currentUserLoginPassword.login;         //заполняем новый объект в массиве
                 usersLoginPasswordList[(usersLoginPasswordList.Count() - 1)].password = currentUserLoginPassword.password;   //заполняем новый объект в массиве
                 usersLoginPasswordList[(usersLoginPasswordList.Count() -1)].userID = Convert.ToString(usersLoginPasswordList.Count());
-                File.AppendAllText("loginPassword.txt", currentUserLoginPassword.access + "\t" + currentUserLoginPassword.login + "\t" + currentUserLoginPassword.password + "\t" + currentUserLoginPassword.userID + "\n"); //записываем строку с новым пользователев в тхт файл
+                File.AppendAllText(pathToUsersData, currentUserLoginPassword.access + "\t" + currentUserLoginPassword.login + "\t" + currentUserLoginPassword.password + "\t" + currentUserLoginPassword.userID + "\n"); //записываем строку с новым пользователев в тхт файл
 
                 return true;
             }

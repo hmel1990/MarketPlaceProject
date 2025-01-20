@@ -52,12 +52,16 @@
             // 
             // switchToAdminMode
             // 
+            switchToAdminMode.BackColor = Color.Moccasin;
+            switchToAdminMode.FlatAppearance.BorderColor = Color.FromArgb(255, 128, 0);
+            switchToAdminMode.FlatAppearance.BorderSize = 2;
+            switchToAdminMode.FlatStyle = FlatStyle.Flat;
             switchToAdminMode.Location = new Point(1592, 1185);
             switchToAdminMode.Name = "switchToAdminMode";
             switchToAdminMode.Size = new Size(230, 46);
             switchToAdminMode.TabIndex = 0;
             switchToAdminMode.Text = "AdminMode";
-            switchToAdminMode.UseVisualStyleBackColor = true;
+            switchToAdminMode.UseVisualStyleBackColor = false;
             switchToAdminMode.Click += switchToAdminMode_Click;
             // 
             // loginField
@@ -71,12 +75,17 @@
             // 
             passwordField.Location = new Point(1413, 576);
             passwordField.Name = "passwordField";
+            passwordField.PasswordChar = '*';
             passwordField.Size = new Size(728, 39);
             passwordField.TabIndex = 1;
             // 
             // loginbutton
             // 
+            loginbutton.FlatAppearance.BorderColor = Color.MediumSlateBlue;
+            loginbutton.FlatAppearance.BorderSize = 2;
+            loginbutton.FlatStyle = FlatStyle.Flat;
             loginbutton.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            loginbutton.ForeColor = Color.MediumSlateBlue;
             loginbutton.Location = new Point(1413, 688);
             loginbutton.Name = "loginbutton";
             loginbutton.Size = new Size(288, 46);
@@ -97,6 +106,11 @@
             // 
             // buttonToBuy
             // 
+            buttonToBuy.FlatAppearance.BorderColor = Color.MediumSlateBlue;
+            buttonToBuy.FlatAppearance.BorderSize = 2;
+            buttonToBuy.FlatStyle = FlatStyle.Flat;
+            buttonToBuy.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            buttonToBuy.ForeColor = Color.MediumSlateBlue;
             buttonToBuy.Location = new Point(1195, 203);
             buttonToBuy.Name = "buttonToBuy";
             buttonToBuy.Size = new Size(233, 59);
@@ -107,7 +121,11 @@
             // 
             // RegistrationButton
             // 
+            RegistrationButton.FlatAppearance.BorderColor = Color.MediumSlateBlue;
+            RegistrationButton.FlatAppearance.BorderSize = 2;
+            RegistrationButton.FlatStyle = FlatStyle.Flat;
             RegistrationButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            RegistrationButton.ForeColor = Color.MediumSlateBlue;
             RegistrationButton.Location = new Point(1853, 688);
             RegistrationButton.Name = "RegistrationButton";
             RegistrationButton.Size = new Size(288, 46);
@@ -118,6 +136,7 @@
             // 
             // comboBoxFilter
             // 
+            comboBoxFilter.BackColor = SystemColors.Info;
             comboBoxFilter.FormattingEnabled = true;
             comboBoxFilter.Location = new Point(566, 698);
             comboBoxFilter.Name = "comboBoxFilter";
@@ -127,6 +146,11 @@
             // 
             // buttonSearch
             // 
+            buttonSearch.FlatAppearance.BorderColor = Color.MediumSlateBlue;
+            buttonSearch.FlatAppearance.BorderSize = 2;
+            buttonSearch.FlatStyle = FlatStyle.Flat;
+            buttonSearch.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            buttonSearch.ForeColor = Color.MediumSlateBlue;
             buttonSearch.Location = new Point(562, 452);
             buttonSearch.Name = "buttonSearch";
             buttonSearch.Size = new Size(299, 46);
@@ -137,6 +161,7 @@
             // 
             // textBoxSearch
             // 
+            textBoxSearch.BackColor = SystemColors.Info;
             textBoxSearch.Location = new Point(562, 381);
             textBoxSearch.Name = "textBoxSearch";
             textBoxSearch.PlaceholderText = "Введите текст для поиска";
@@ -145,6 +170,11 @@
             // 
             // ResetButton
             // 
+            ResetButton.FlatAppearance.BorderColor = Color.MediumSlateBlue;
+            ResetButton.FlatAppearance.BorderSize = 2;
+            ResetButton.FlatStyle = FlatStyle.Flat;
+            ResetButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            ResetButton.ForeColor = Color.MediumSlateBlue;
             ResetButton.Location = new Point(562, 547);
             ResetButton.Name = "ResetButton";
             ResetButton.Size = new Size(299, 48);
@@ -155,6 +185,7 @@
             // 
             // comboBoxSort
             // 
+            comboBoxSort.BackColor = SystemColors.Info;
             comboBoxSort.FormattingEnabled = true;
             comboBoxSort.Location = new Point(562, 814);
             comboBoxSort.Name = "comboBoxSort";
@@ -165,6 +196,7 @@
             // label1
             // 
             label1.AutoSize = true;
+            label1.ForeColor = Color.MediumSlateBlue;
             label1.Location = new Point(638, 779);
             label1.Name = "label1";
             label1.Size = new Size(146, 32);
@@ -174,6 +206,7 @@
             // label2
             // 
             label2.AutoSize = true;
+            label2.ForeColor = Color.MediumSlateBlue;
             label2.Location = new Point(566, 663);
             label2.Name = "label2";
             label2.Size = new Size(295, 32);
@@ -183,6 +216,7 @@
             // label3
             // 
             label3.AutoSize = true;
+            label3.ForeColor = Color.MediumSlateBlue;
             label3.Location = new Point(566, 333);
             label3.Name = "label3";
             label3.Size = new Size(281, 32);
@@ -191,6 +225,11 @@
             // 
             // buttonRefresh
             // 
+            buttonRefresh.FlatAppearance.BorderColor = Color.MediumSlateBlue;
+            buttonRefresh.FlatAppearance.BorderSize = 2;
+            buttonRefresh.FlatStyle = FlatStyle.Flat;
+            buttonRefresh.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            buttonRefresh.ForeColor = Color.MediumSlateBlue;
             buttonRefresh.Location = new Point(890, 206);
             buttonRefresh.Name = "buttonRefresh";
             buttonRefresh.Size = new Size(229, 56);
@@ -201,22 +240,30 @@
             // 
             // switchToSellerMode
             // 
+            switchToSellerMode.BackColor = Color.Moccasin;
+            switchToSellerMode.FlatAppearance.BorderColor = Color.FromArgb(255, 128, 0);
+            switchToSellerMode.FlatAppearance.BorderSize = 2;
+            switchToSellerMode.FlatStyle = FlatStyle.Flat;
             switchToSellerMode.Location = new Point(1855, 1185);
             switchToSellerMode.Name = "switchToSellerMode";
             switchToSellerMode.Size = new Size(230, 46);
             switchToSellerMode.TabIndex = 0;
             switchToSellerMode.Text = "SellerMode";
-            switchToSellerMode.UseVisualStyleBackColor = true;
+            switchToSellerMode.UseVisualStyleBackColor = false;
             switchToSellerMode.Click += switchToSellerMode_Click;
             // 
             // logOutButton
             // 
+            logOutButton.BackColor = Color.Moccasin;
+            logOutButton.FlatAppearance.BorderColor = Color.FromArgb(255, 128, 0);
+            logOutButton.FlatAppearance.BorderSize = 2;
+            logOutButton.FlatStyle = FlatStyle.Flat;
             logOutButton.Location = new Point(2111, 1185);
             logOutButton.Name = "logOutButton";
             logOutButton.Size = new Size(230, 46);
             logOutButton.TabIndex = 0;
             logOutButton.Text = "LogOut";
-            logOutButton.UseVisualStyleBackColor = true;
+            logOutButton.UseVisualStyleBackColor = false;
             logOutButton.Click += logOutButton_Click;
             // 
             // Form1

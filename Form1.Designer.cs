@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             switchToAdminMode = new Button();
             loginField = new TextBox();
             passwordField = new TextBox();
@@ -51,7 +52,7 @@
             // 
             // switchToAdminMode
             // 
-            switchToAdminMode.Location = new Point(25, 1727);
+            switchToAdminMode.Location = new Point(1592, 1185);
             switchToAdminMode.Name = "switchToAdminMode";
             switchToAdminMode.Size = new Size(230, 46);
             switchToAdminMode.TabIndex = 0;
@@ -61,14 +62,14 @@
             // 
             // loginField
             // 
-            loginField.Location = new Point(1409, 524);
+            loginField.Location = new Point(1413, 438);
             loginField.Name = "loginField";
             loginField.Size = new Size(728, 39);
             loginField.TabIndex = 0;
             // 
             // passwordField
             // 
-            passwordField.Location = new Point(1409, 662);
+            passwordField.Location = new Point(1413, 576);
             passwordField.Name = "passwordField";
             passwordField.Size = new Size(728, 39);
             passwordField.TabIndex = 1;
@@ -76,7 +77,7 @@
             // loginbutton
             // 
             loginbutton.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            loginbutton.Location = new Point(1409, 774);
+            loginbutton.Location = new Point(1413, 688);
             loginbutton.Name = "loginbutton";
             loginbutton.Size = new Size(288, 46);
             loginbutton.TabIndex = 3;
@@ -88,15 +89,15 @@
             // 
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.ColumnHeadersHeight = 46;
-            dataGridView1.Location = new Point(886, 384);
+            dataGridView1.Location = new Point(890, 298);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 82;
-            dataGridView1.Size = new Size(2234, 765);
+            dataGridView1.Size = new Size(2234, 849);
             dataGridView1.TabIndex = 3;
             // 
             // buttonToBuy
             // 
-            buttonToBuy.Location = new Point(1191, 289);
+            buttonToBuy.Location = new Point(1195, 203);
             buttonToBuy.Name = "buttonToBuy";
             buttonToBuy.Size = new Size(233, 59);
             buttonToBuy.TabIndex = 4;
@@ -107,7 +108,7 @@
             // RegistrationButton
             // 
             RegistrationButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            RegistrationButton.Location = new Point(1849, 774);
+            RegistrationButton.Location = new Point(1853, 688);
             RegistrationButton.Name = "RegistrationButton";
             RegistrationButton.Size = new Size(288, 46);
             RegistrationButton.TabIndex = 4;
@@ -118,7 +119,7 @@
             // comboBoxFilter
             // 
             comboBoxFilter.FormattingEnabled = true;
-            comboBoxFilter.Location = new Point(326, 889);
+            comboBoxFilter.Location = new Point(566, 698);
             comboBoxFilter.Name = "comboBoxFilter";
             comboBoxFilter.Size = new Size(295, 40);
             comboBoxFilter.TabIndex = 5;
@@ -126,7 +127,7 @@
             // 
             // buttonSearch
             // 
-            buttonSearch.Location = new Point(322, 643);
+            buttonSearch.Location = new Point(562, 452);
             buttonSearch.Name = "buttonSearch";
             buttonSearch.Size = new Size(299, 46);
             buttonSearch.TabIndex = 4;
@@ -136,7 +137,7 @@
             // 
             // textBoxSearch
             // 
-            textBoxSearch.Location = new Point(322, 572);
+            textBoxSearch.Location = new Point(562, 381);
             textBoxSearch.Name = "textBoxSearch";
             textBoxSearch.PlaceholderText = "Введите текст для поиска";
             textBoxSearch.Size = new Size(299, 39);
@@ -144,7 +145,7 @@
             // 
             // ResetButton
             // 
-            ResetButton.Location = new Point(322, 738);
+            ResetButton.Location = new Point(562, 547);
             ResetButton.Name = "ResetButton";
             ResetButton.Size = new Size(299, 48);
             ResetButton.TabIndex = 4;
@@ -155,7 +156,7 @@
             // comboBoxSort
             // 
             comboBoxSort.FormattingEnabled = true;
-            comboBoxSort.Location = new Point(322, 1005);
+            comboBoxSort.Location = new Point(562, 814);
             comboBoxSort.Name = "comboBoxSort";
             comboBoxSort.Size = new Size(295, 40);
             comboBoxSort.TabIndex = 7;
@@ -164,7 +165,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(398, 970);
+            label1.Location = new Point(638, 779);
             label1.Name = "label1";
             label1.Size = new Size(146, 32);
             label1.TabIndex = 8;
@@ -173,7 +174,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(326, 854);
+            label2.Location = new Point(566, 663);
             label2.Name = "label2";
             label2.Size = new Size(295, 32);
             label2.TabIndex = 8;
@@ -182,7 +183,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(326, 524);
+            label3.Location = new Point(566, 333);
             label3.Name = "label3";
             label3.Size = new Size(281, 32);
             label3.TabIndex = 8;
@@ -190,7 +191,7 @@
             // 
             // buttonRefresh
             // 
-            buttonRefresh.Location = new Point(886, 292);
+            buttonRefresh.Location = new Point(890, 206);
             buttonRefresh.Name = "buttonRefresh";
             buttonRefresh.Size = new Size(229, 56);
             buttonRefresh.TabIndex = 9;
@@ -200,7 +201,7 @@
             // 
             // switchToSellerMode
             // 
-            switchToSellerMode.Location = new Point(288, 1727);
+            switchToSellerMode.Location = new Point(1855, 1185);
             switchToSellerMode.Name = "switchToSellerMode";
             switchToSellerMode.Size = new Size(230, 46);
             switchToSellerMode.TabIndex = 0;
@@ -210,7 +211,7 @@
             // 
             // logOutButton
             // 
-            logOutButton.Location = new Point(544, 1727);
+            logOutButton.Location = new Point(2111, 1185);
             logOutButton.Name = "logOutButton";
             logOutButton.Size = new Size(230, 46);
             logOutButton.TabIndex = 0;
@@ -223,6 +224,8 @@
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Info;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(3154, 1785);
             Controls.Add(buttonRefresh);
             Controls.Add(label3);

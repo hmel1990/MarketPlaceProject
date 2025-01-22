@@ -46,6 +46,8 @@ namespace FormMarket
             shop.addSortingProducts(comboBoxSort);
             shop.addFilteringProducts(comboBoxFilter);
 
+
+            this.DoubleBuffered = true;
         }
 
         //загрузка формы

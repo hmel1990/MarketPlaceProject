@@ -14,13 +14,12 @@ namespace FormMarket
     {
         //internal DataTable tableBasketProducts;
         //private List<Product> productsInBasket;
-        internal DataTable tableProductsInBasket;
+        internal DataTable tableProductsInBasket = new DataTable();
 
 
-        private string pathToBasket = "market_goods_korzina.txt";
+        private string pathToBasket = "E:\\STEP\\C_sharp .Net\\MarketPlace\\MarketplaceProject\\bin\\Debug\\net9.0-windows\\market_goods_korzina.txt";
         public Basket()
         {
-            tableProductsInBasket = new DataTable();
             addNamesToColumnsBasket(tableProductsInBasket);
             fillBasket(tableProductsInBasket);
         }

@@ -25,7 +25,7 @@ namespace FormMarket
             catch (Exception ex)
             {
                 Console.WriteLine($"Ошибка при десериализации файла: {ex.Message}");
-                return new List<Product>();
+                return new List<Product>(); 
             }
 
         }

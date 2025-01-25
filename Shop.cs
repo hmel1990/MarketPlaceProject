@@ -18,7 +18,7 @@ namespace FormMarket
         internal DataTable table = new DataTable();
 
         public void setPath(string pathToMarketGoods)
-        { this.pathToMarketGoods = pathToMarketGoods; }
+        { this.pathToMarketGoods = pathToMarketGoods;}
         public Shop(string pathToMarketGoods)
         {
             setPath(pathToMarketGoods);

@@ -5,15 +5,35 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace FormMarket
 {
     internal class FileManager
     {
 
+        public List<Product> deserializationFromJson(string pathToJsonWithProducts)
+        {
+            try
+            {
+                // изначально было несколько строк, создаем List, создаем строку с содержимым, десериализуем, записываем в List, возвращаем List,
+                // решил все одной строкой записать.
+
+                return JsonSerializer.Deserialize<List<Product>>(File.ReadAllText(pathToJsonWithProducts));
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка при десериализации файла: {ex.Message}");
+                return new List<Product>();
+            }
+
+        }
+
+
         public string[] readStringsFromFile(string path)
         {
-            // Проверяем, существует ли файл////
+            // Проверяем, существует ли файл
             if (!File.Exists(path))
             {
                 throw new FileNotFoundException("Файл не найден.", path);

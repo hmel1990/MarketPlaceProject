@@ -13,10 +13,11 @@ namespace FormMarket
     public class Shop
     {
         public List<Product> products = new List<Product>();
-        private string pathToMarketGoods = "E:\\STEP\\C_sharp .Net\\MarketPlace\\MarketplaceProject\\bin\\Debug\\net9.0-windows\\market_goods.txt";
+        private string pathToMarketGoods = /*"E:\\STEP\\C_sharp .Net\\MarketPlace\\MarketplaceProject\\bin\\Debug\\net9.0-windows\\market_goods.txt"*/ "E:\\STEP\\C_sharp .Net\\MarketPlace\\MarketplaceProject\\smartphones.json";
+        private string pathToJsonWithProducts = "E:\\STEP\\C_sharp .Net\\MarketPlace\\MarketplaceProject\\smartphones.json";
         internal DataTable table = new DataTable();
 
-        public void setPath (string pathToMarketGoods)
+        public void setPath(string pathToMarketGoods)
         { this.pathToMarketGoods = pathToMarketGoods; }
         public Shop(string pathToMarketGoods)
         {
@@ -29,7 +30,9 @@ namespace FormMarket
             fillTableOfProducts(pathToMarketGoods);
         }
 
-        public List<Product> productsToShop(string pathToMarketGoods)
+        /*
+         
+                 public List<Product> productsToShop(string pathToMarketGoods)
         {
             FileManager fileManager = new FileManager();
             string [] lines = fileManager.readStringsFromFile(pathToMarketGoods);
@@ -42,7 +45,17 @@ namespace FormMarket
             return products;
         }
 
-        public void fillTableOfProducts (string pathToMarketGoods)
+         */
+        public List<Product> productsToShop(string pathToJsonWithProducts)
+        {
+            FileManager fileManager = new FileManager();
+            var products = fileManager.deserializationFromJson(pathToJsonWithProducts);
+            return products;
+        }
+
+
+
+        public void fillTableOfProducts(string pathToMarketGoods)
         {
             products = productsToShop(pathToMarketGoods);
 
@@ -62,7 +75,7 @@ namespace FormMarket
             }
             //return table;
         }
-        
+
         public void Print()
         {
             for (int i = 0; i < products.Count; i++)
@@ -83,22 +96,22 @@ namespace FormMarket
 
         public void FilteringProducts(ComboBox comboBoxFilter, DataGridView dataGridView1)
         {
-            
-        // Получить выбранное значение
-        string selectedBrand = comboBoxFilter.SelectedItem.ToString();
+
+            // Получить выбранное значение
+            string selectedBrand = comboBoxFilter.SelectedItem.ToString();
 
             if (selectedBrand == "         ")
             {
                 // Сбросить фильтр
                 DataView view = table.DefaultView;
-        view.RowFilter = string.Empty; // Удаляем фильтр
+                view.RowFilter = string.Empty; // Удаляем фильтр
                 dataGridView1.DataSource = view; // Привязываем оригинальные данные
             }
             else
             {
                 // Создать DataView из оригинальной таблицы
                 DataView view = table.DefaultView;
-    view.RowFilter = $"Brand = '{selectedBrand}'";
+                view.RowFilter = $"Brand = '{selectedBrand}'";
 
                 // Привязать отфильтрованные данные к DataGridView
                 dataGridView1.DataSource = view;
@@ -106,20 +119,20 @@ namespace FormMarket
         }
 
 
-public void addSortingProducts(ComboBox comboBoxSort)
-        { 
-           // Добавляем элементы в ComboBox
-           comboBoxSort.Items.AddRange(new string[]
-            {
+        public void addSortingProducts(ComboBox comboBoxSort)
+        {
+            // Добавляем элементы в ComboBox
+            comboBoxSort.Items.AddRange(new string[]
+             {
                 "Без сортировки",
                 "По количеству памяти (возрастание)",
                 "По количеству памяти (убывание)",
                 "По имени бренда (возрастание)",
                 "По имени бренда (убывание)"
-            });
+             });
         }
 
-        public void SortingProducts (ComboBox comboBoxSort, DataGridView dataGridView1)
+        public void SortingProducts(ComboBox comboBoxSort, DataGridView dataGridView1)
         {
             DataView dataView = new DataView(table); // DataView для сортировки
             switch (comboBoxSort.SelectedIndex)

@@ -13,7 +13,7 @@ namespace FormMarket
 
         public string[] readStringsFromFile(string path)
         {
-            // Проверяем, существует ли файл
+            // Проверяем, существует ли файл////
             if (!File.Exists(path))
             {
                 throw new FileNotFoundException("Файл не найден.", path);
